@@ -1,0 +1,35 @@
+seed: 42
+
+paths:
+  data_root: null
+  results_dir: Results/Phase3
+  dataset_dir: Results/Phase3/dataset
+  splits_dir: Results/Phase3/splits
+
+source:
+  type: raw_csv
+  file_pattern: "SP_*.csv"
+  include_groups:
+    - "阳性+"
+    - "阴性-"
+  labels:
+    "阴性-": 0
+    "阳性+": 1
+
+csv:
+  wavenumber_column: 4
+  intensity_column: 8
+  row_start: 294
+  row_end: 1025
+  expected_points: 732
+
+preprocessing:
+  normalization: snv
+  save_raw: true
+
+split:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  stratify: true
+
