@@ -19,8 +19,8 @@ function T = automaticPeakStatistics(Database, cfg)
 nGroups = numel(grpNames);
 
 %% ──── Detect peaks on every patient ───────────────────────────
-minProm = 0.01;   % lower than dashboard threshold — capture more
-minDist = 8;
+minProm = cfg.Phase2.PeakStats.MinPeakProminence;
+minDist = cfg.Phase2.PeakStats.MinPeakDistance;
 
 allPeaks = cell(nPat, 1);
 for i = 1:nPat
@@ -36,11 +36,12 @@ for i = 1:nPat
     allPos = [allPos, allPeaks{i}(:)'];  % ensure row
 end
 allPos = allPos(:);
-[counts, edges] = histcounts(allPos, round(range(wn) / 8));
+nBins = max(1, round(range(wn) / cfg.Phase2.PeakStats.HistogramBinWidth));
+[counts, edges] = histcounts(allPos, nBins);
 centers = (edges(1:end-1) + edges(2:end)) / 2;
 
 % Keep bins with ≥ 10% of patients
-minCount = nPat * 0.10;
+minCount = nPat * cfg.Phase2.PeakStats.MinPatientPrevalence;
 validBins = counts >= minCount;
 consensusPos = centers(validBins)';
 nPeaks = numel(consensusPos);
@@ -51,7 +52,7 @@ if nPeaks < 3
 end
 
 %% ──── Extract peak height per patient per consensus position ──
-tol = 10;  % ±cm⁻¹ window
+tol = cfg.Phase2.PeakStats.MatchTolerance;
 peakHeights  = zeros(nPat, nPeaks);
 peakProms    = zeros(nPat, nPeaks);
 

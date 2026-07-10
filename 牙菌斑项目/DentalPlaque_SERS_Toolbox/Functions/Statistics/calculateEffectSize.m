@@ -15,8 +15,8 @@ pairs   = nchoosek(1:nGroups, 2);
 nPairs  = size(pairs, 1);
 
 %% ──── Consensus peaks (same logic as M3) ──────────────────────
-minProm = 0.01;
-minDist = 8;
+minProm = cfg.Phase2.PeakStats.MinPeakProminence;
+minDist = cfg.Phase2.PeakStats.MinPeakDistance;
 allPeaks = cell(size(patSpec, 1), 1);
 for i = 1:size(patSpec, 1)
     [~, locs] = findpeaks(patSpec(i, :), ...
@@ -28,14 +28,15 @@ for i = 1:size(patSpec, 1)
     allPos = [allPos, allPeaks{i}(:)'];
 end
 allPos = allPos(:);
-[counts, edges] = histcounts(allPos, round(range(wn) / 8));
+nBins = max(1, round(range(wn) / cfg.Phase2.PeakStats.HistogramBinWidth));
+[counts, edges] = histcounts(allPos, nBins);
 centers = (edges(1:end-1) + edges(2:end)) / 2;
-minCount = size(patSpec, 1) * 0.10;
+minCount = size(patSpec, 1) * cfg.Phase2.PeakStats.MinPatientPrevalence;
 consensusPos = centers(counts >= minCount)';
 nPeaks = numel(consensusPos);
 
 %% ──── Peak heights ────────────────────────────────────────────
-tol = 10;
+tol = cfg.Phase2.PeakStats.MatchTolerance;
 peakHeights = zeros(size(patSpec, 1), nPeaks);
 for i = 1:size(patSpec, 1)
     [pks, locs] = findpeaks(patSpec(i, :), wn, ...
@@ -51,7 +52,7 @@ end
 
 %% ──── Compute Cohen's d for every peak × pair ─────────────────
 rows = [];
-tolD = 0.01;
+tolD = cfg.Phase2.EffectSize.MinPooledSD;
 
 for j = 1:nPeaks
     h = peakHeights(:, j);

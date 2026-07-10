@@ -2,10 +2,10 @@ function runPhase2Review()
 %% PHASE 2.5 — Scientific Review & Validation
 %  Independent reviewer: Nature Communications / ACS Sensors / Anal. Chem.
 
-projectRoot = 'E:/牙菌斑项目/DentalPlaque_SERS_Toolbox';
+reviewDir = fileparts(mfilename('fullpath'));
+projectRoot = fileparts(reviewDir);
 addpath(projectRoot);
 addpath(genpath(fullfile(projectRoot, 'Functions')));
-cd(fullfile(projectRoot, 'Review'));
 cfg = config();
 cfg.Export.ResultsDir = fullfile(projectRoot, 'Results');
 S = load(fullfile(cfg.Export.ResultsDir, 'Database_QC.mat'), 'Database');
@@ -13,7 +13,7 @@ D = S.Database;
 [P, ID, G, N, wn] = extractPatientData(D, cfg);
 nPat = size(P, 1); nPts = size(P, 2);
 
-outDir = fullfile('.', 'Phase2_Review');
+outDir = fullfile(reviewDir, 'Phase2_Review');
 if ~isfolder(outDir), mkdir(outDir); end
 
 %% ═══════════════════════════════════════════════════════════
@@ -100,31 +100,49 @@ fclose(fid);
 %% ═══════════════════════════════════════════════════════════
 %% L3: Peak Validation
 %% ═══════════════════════════════════════════════════════════
-minProm = 0.01; minDist = 8; tol = 10;
+minProm = cfg.Phase2.PeakStats.MinPeakProminence;
+minDist = cfg.Phase2.PeakStats.MinPeakDistance;
+tol = cfg.Phase2.PeakStats.MatchTolerance;
 allPeaks = cell(nPat, 1);
 for i = 1:nPat
     [~, locs] = findpeaks(P(i,:), 'MinPeakProminence', minProm, 'MinPeakDistance', minDist);
-    allPeaks{i} = locs;
+    allPeaks{i} = wn(locs);
 end
 allPos = [];
 for i = 1:nPat, allPos = [allPos, allPeaks{i}(:)']; end
 allPos = allPos(:);
-[counts, edges] = histcounts(allPos, round(range(wn) / 8));
+nBins = max(1, round(range(wn) / cfg.Phase2.PeakStats.HistogramBinWidth));
+[counts, edges] = histcounts(allPos, nBins);
 centers = (edges(1:end-1) + edges(2:end)) / 2;
-valid = counts >= nPat * 0.10;
-pkList = centers(valid)'; nPeaks = numel(pkList);
+valid = counts >= nPat * cfg.Phase2.PeakStats.MinPatientPrevalence;
+pkList = centers(valid)';
+pkCounts = counts(valid)';
+nPeaks = numel(pkList);
+
+% Audit the strongest consensus peaks first. Peak positions are Raman
+% shifts (cm^-1), not array indices.
+[~, pkOrder] = sort(pkCounts, 'descend');
+pkList = pkList(pkOrder);
+pkCounts = pkCounts(pkOrder);
 
 fid = fopen(fullfile(outDir, 'L3_Peak_Validation.md'), 'w');
 fprintf(fid, '# L3: Peak Validation\n\n');
 fprintf(fid, '- Consensus peaks: **%d** (≥10%% patient prevalence)\n', nPeaks);
-pctBio = 100 * sum(pkList >= 700 & pkList <= 1700) / nPeaks;
+if nPeaks > 0
+    pctBio = 100 * sum(pkList >= 700 & pkList <= 1700) / nPeaks;
+else
+    pctBio = 0;
+end
 fprintf(fid, '- Biologically relevant range (700–1700 cm^{-1}): **%.0f%%**\n', pctBio);
 fprintf(fid, '- Edge peaks (<500 or >1800 cm^{-1}): **%d**\n', sum(pkList < 500 | pkList > 1800));
+fprintf(fid, '- Peak positions are computed from the project wavenumber axis (`wn(locs)`).\n');
 
 fprintf(fid, '\n## Top-15 Peak Quality Audit\n\n');
-fprintf(fid, '| Pos | Detect%% | MeanH | Δ(A-B) | Quality |\n');
-fprintf(fid, '|-----|---------|-------|--------|--------|\n');
+fprintf(fid, '| Pos (cm^-1) | Detect%% | G1 n | G2 n | MeanH | Δ(A-B) | Quality |\n');
+fprintf(fid, '|-------------|---------|------|------|-------|--------|--------|\n');
 
+nShown = min(15, nPeaks);
+quality = strings(nShown, 1);
 for j = 1:min(15, nPeaks)
     h = []; gp = [];
     for i = 1:nPat
@@ -134,14 +152,43 @@ for j = 1:min(15, nPeaks)
         if md <= tol, h = [h, pks(idxMin)]; gp = [gp, G(i)]; end
     end
     detectRate = 100 * numel(h) / nPat;
-    hA = mean(h(gp == 1)); hB = mean(h(gp == 2));
-    if ~isempty(hA) && ~isempty(hB), delta = abs(hA - hB); else delta = 0; end
-    qual = 'PASS'; if detectRate < 30, qual = 'LOW_DETECT'; end
-    fprintf(fid, '| %.0f | %.0f%% | %.4f | %.4f | %s |\n', pkList(j), detectRate, mean(h), delta, qual);
+    nG1 = sum(gp == 1);
+    nG2 = sum(gp == 2);
+    hA = h(gp == 1);
+    hB = h(gp == 2);
+    if ~isempty(hA) && ~isempty(hB)
+        delta = abs(mean(hA) - mean(hB));
+    else
+        delta = NaN;
+    end
+    meanH = mean(h);
+    qual = "PASS";
+    if detectRate < 30
+        qual = "LOW_DETECT";
+    elseif nG1 == 0 || nG2 == 0
+        qual = "ONE_GROUP_ONLY";
+    end
+    quality(j) = qual;
+    fprintf(fid, '| %.0f | %.0f%% | %d | %d | %.4f | %.4f | %s |\n', ...
+        pkList(j), detectRate, nG1, nG2, meanH, delta, qual);
+end
+
+if nPeaks == 0
+    l3Status = 'FAIL';
+    l3Summary = 'No consensus Raman peaks were detected.';
+elseif any(quality == "LOW_DETECT")
+    l3Status = 'MINOR';
+    l3Summary = 'Some top consensus peaks have low patient-level detection rates.';
+elseif any(quality == "ONE_GROUP_ONLY")
+    l3Status = 'MINOR';
+    l3Summary = 'Some top consensus peaks are detected in only one group.';
+else
+    l3Status = 'PASS';
+    l3Summary = 'Top consensus peaks are valid Raman-shift features with adequate patient-level detection.';
 end
 
 fprintf(fid, '\n### VERDICT\n');
-fprintf(fid, '**PASS** — All top peaks are genuine Raman features. No noise peaks flagged.\n');
+fprintf(fid, '**%s** — %s\n', l3Status, l3Summary);
 fclose(fid);
 
 %% ═══════════════════════════════════════════════════════════
@@ -401,6 +448,14 @@ fclose(fid);
 %% ═══════════════════════════════════════════════════════════
 %% FINAL: Combined Validation Report
 %% ═══════════════════════════════════════════════════════════
+if strcmp(l3Status, 'PASS')
+    l3ResultText = '✅ PASS';
+elseif strcmp(l3Status, 'MINOR')
+    l3ResultText = '⚠️ MINOR';
+else
+    l3ResultText = '❌ FAIL';
+end
+
 fid = fopen(fullfile(outDir, 'Phase2_Validation_Report.md'), 'w');
 fprintf(fid, '# Phase 2 — Scientific Validation Report\n\n');
 fprintf(fid, '**Review Date:** %s\n\n', datestr(now, 'yyyy-mm-dd'));
@@ -410,15 +465,16 @@ fprintf(fid, '---\n\n');
 
 fprintf(fid, '## Executive Summary\n\n');
 fprintf(fid, 'Phase 2 analyses **%d patient mean spectra** (%d wavenumber points) from %d clinical groups.\n', nPat, nPts, numel(N));
-fprintf(fid, 'All 8 modules pass review. The analysis correctly implements patient-level statistics,\n');
+fprintf(fid, 'The analysis correctly implements patient-level statistics,\n');
 fprintf(fid, 'uses appropriate methods (Kruskal-Wallis, FDR, Cohen d, PCA), and produces\n');
-fprintf(fid, 'biologically interpretable results consistent with the dysbiosis hypothesis.\n\n');
+fprintf(fid, 'biologically interpretable results consistent with the dysbiosis hypothesis.\n');
+fprintf(fid, 'Peak validation status: **%s** — %s\n\n', l3Status, l3Summary);
 
 fprintf(fid, '## Review Level Summary\n\n');
 fprintf(fid, '| Level | Focus | Result |\n|-------|-------|--------|\n');
 fprintf(fid, '| L1 | Patient-level verification | ✅ PASS |\n');
 fprintf(fid, '| L2 | Statistical validation | ✅ PASS |\n');
-fprintf(fid, '| L3 | Peak validation | ✅ PASS |\n');
+fprintf(fid, '| L3 | Peak validation | %s |\n', l3ResultText);
 fprintf(fid, '| L4 | Biological plausibility | ✅ PASS |\n');
 fprintf(fid, '| L5 | Figure quality | ⚠️ MINOR |\n');
 fprintf(fid, '| L6 | Correlation review | ✅ PASS |\n');
@@ -428,6 +484,11 @@ fprintf(fid, '| L9 | Publication readiness | ⚠️ MINOR |\n');
 fprintf(fid, '| L10 | Future compatibility | ✅ PASS |\n\n');
 
 fprintf(fid, '## Key Findings\n\n');
+
+fprintf(fid, '### 0. Peak Validation\n');
+fprintf(fid, '%d consensus Raman-shift peaks were detected within %.1f–%.1f cm^{-1}; %.0f%% fall in the 700–1700 cm^{-1} fingerprint region.\n', ...
+        nPeaks, min(wn), max(wn), pctBio);
+fprintf(fid, '%s\n\n', l3Summary);
 
 fprintf(fid, '### 1. Effect Size (Cohen d)\n');
 fprintf(fid, 'Top-5 peaks show |d| > 1.2 (large effect), indicating strong group differences.\n');

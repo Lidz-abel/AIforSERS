@@ -7,7 +7,11 @@ function cfg = config()
 %   No module shall hard-code any threshold, filename, or magic number.
 
 %% ──── Data paths & CSV layout ─────────────────────────────────
-cfg.Data.DataRoot    = 'E:\牙菌斑项目\牙菌斑SERS光谱';
+toolboxRoot          = fileparts(mfilename('fullpath'));
+projectRoot          = fileparts(toolboxRoot);
+cfg.Paths.ProjectRoot = projectRoot;
+cfg.Paths.ToolboxRoot = toolboxRoot;
+cfg.Data.DataRoot    = fullfile(projectRoot, '牙菌斑SERS光谱');
 cfg.Data.Groups      = {'阳性+', '阴性-'};
 cfg.Data.FilePattern = 'SP_*.csv';
 cfg.Data.WnColumn    = 4;              % column D
@@ -62,11 +66,19 @@ cfg.Phase2.PatientRep  = 'median';      % 'median' | 'mean'
 cfg.Phase2.BandType   = 'SEM';          % 'SEM' | 'SD'
 cfg.Phase2.PeakTopN   = 10;             % top N peaks for group stats
 cfg.Phase2.PeakTopN15 = 15;
+cfg.Phase2.PeakStats.MinPeakProminence = 0.01;
+cfg.Phase2.PeakStats.MinPeakDistance   = 8;
+cfg.Phase2.PeakStats.MatchTolerance    = 10;    % +/- cm^-1
+cfg.Phase2.PeakStats.MinPatientPrevalence = 0.10;
+cfg.Phase2.PeakStats.HistogramBinWidth = 8;     % cm^-1
 cfg.Phase2.EffectSize.Threshold = 0.5;  % Cohen's d medium threshold
+cfg.Phase2.EffectSize.MinPooledSD = 0.01;
 cfg.Phase2.PCA.NComponents    = 5;
 cfg.Phase2.PCA.Confidence     = 0.95;
 cfg.Phase2.Correlation.Clusters = [];   % auto-detect if empty
 cfg.Phase2.Variability.BootstrapN   = 1000;
+cfg.Phase2.Variability.ES_BootstrapN = 400;
+cfg.Phase2.Variability.AssignmentTolerance = 15; % +/- cm^-1
 cfg.Phase2.Variability.FDR_Threshold = 0.05;
 cfg.Phase2.Variability.EffectSizeMin = 0.5;   % |Cliff's delta| > 0.5 = moderate-large effect
 cfg.Phase2.Variability.ES_Method     = 'CliffsDelta';

@@ -3,11 +3,13 @@
 """Generate standalone PatientRegistry for clinician fill-out.  3 groups."""
 
 import openpyxl
+from pathlib import Path
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
-OUT = r"E:\牙菌斑项目\PatientRegistry_医生填写版.xlsx"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUT = PROJECT_ROOT / "PatientRegistry_医生填写版.xlsx"
 
 wb = openpyxl.Workbook()
 ws = wb.active

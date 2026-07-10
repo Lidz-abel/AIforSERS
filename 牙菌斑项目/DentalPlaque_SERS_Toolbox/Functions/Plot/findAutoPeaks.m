@@ -24,7 +24,7 @@ minProm  = cfg.PeakDetection.MinPeakProminence;
 minDist  = cfg.PeakDetection.MinPeakDistance;
 minH     = cfg.PeakDetection.MinPeakHeight;
 topN     = cfg.PeakDetection.TopN;
-tolerance = 12;  % ±cm⁻¹ tolerance for matching library peaks
+tolerance = cfg.PeakDetection.MatchTolerance;
 
 % Positive peaks only (no negative/dip search in Raman)
 [pks, locs, ~, prom] = findpeaks(y, x, ...

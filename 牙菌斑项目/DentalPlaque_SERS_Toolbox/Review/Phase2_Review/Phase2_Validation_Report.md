@@ -1,6 +1,6 @@
 # Phase 2 — Scientific Validation Report
 
-**Review Date:** 2026-07-09
+**Review Date:** 2026-07-10
 
 **Reviewer Role:** Nature Communications / ACS Sensors Reviewer
 **Scope:** Phase 2 — Patient-level Biological Spectral Characterization
@@ -10,9 +10,11 @@
 ## Executive Summary
 
 Phase 2 analyses **52 patient mean spectra** (732 wavenumber points) from 2 clinical groups.
-All 8 modules pass review. The analysis correctly implements patient-level statistics,
+The analysis correctly implements patient-level statistics,
 uses appropriate methods (Kruskal-Wallis, FDR, Cohen d, PCA), and produces
 biologically interpretable results consistent with the dysbiosis hypothesis.
+Peak validation has been corrected to use Raman shifts from the project wavenumber axis
+instead of array indices.
 
 ## Review Level Summary
 
@@ -30,6 +32,12 @@ biologically interpretable results consistent with the dysbiosis hypothesis.
 | L10 | Future compatibility | ✅ PASS |
 
 ## Key Findings
+
+### 0. Peak Validation
+Corrected peak validation identifies **102 consensus Raman-shift peaks** from
+`PeakStatistics.xlsx`, spanning **412-1836 cm^{-1}**. Of these, **68/102 (67%)**
+fall in the 700-1700 cm^{-1} fingerprint region. The previous L3 report contained
+array-index artifacts such as 10, 14, and 18 cm^{-1}; those artifacts have been removed.
 
 ### 1. Effect Size (Cohen d)
 Top-5 peaks show |d| > 1.2 (large effect), indicating strong group differences.
@@ -79,6 +87,7 @@ between groups. This justifies proceeding to classification and SHAP interpretat
 - **NONE.** Matrix dimensions are correct. Patient-level is maintained.
 - FDR is correctly applied. Cohen d uses pooled SD. PCA is centered.
 - No pseudoreplication detected.
+- Review-only issue corrected: L3 peak validation now uses `wn(locs)` instead of raw `locs` indices.
 
 ---
 

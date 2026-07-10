@@ -8,7 +8,8 @@
 
 clear;clc;close all;
 
-rootFolder='E:\牙菌斑项目\牙菌斑SERS光谱\阳性+';
+projectRoot = fileparts(fileparts(mfilename('fullpath')));
+rootFolder = fullfile(projectRoot, '牙菌斑SERS光谱', '阳性+');
 lambda=1e3;
 corrThreshold=0.85;
 

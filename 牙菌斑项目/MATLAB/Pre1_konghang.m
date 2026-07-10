@@ -4,7 +4,8 @@ clear; clc;
 % =========================================================
 
 % 1. 设置文件夹路径 (请根据实际情况修改)
-folderPath = "E:\牙菌斑项目\牙菌斑SERS光谱\阳性+\1-20"; 
+projectRoot = fileparts(fileparts(mfilename('fullpath')));
+folderPath = fullfile(projectRoot, "牙菌斑SERS光谱", "阳性+", "1-20");
 
 % 2. 递归获取该文件夹及所有子文件夹下，所有以 'SP_' 开头的 csv 文件
 % ** 通配符表示匹配任意层级的子目录，包含当前文件夹本身

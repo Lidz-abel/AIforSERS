@@ -2,7 +2,8 @@
 % First Edition - Patient-level mean spectrum visualization
 clear; clc; close all;
 
-rootFolder = 'E:\牙菌斑项目\牙菌斑SERS光谱\阳性+';
+projectRoot = fileparts(fileparts(mfilename('fullpath')));
+rootFolder = fullfile(projectRoot, '牙菌斑SERS光谱', '阳性+');
 lambda = 1e3;
 
 csvFiles = dir(fullfile(rootFolder,'**','SP_*.csv'));

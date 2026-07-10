@@ -88,7 +88,7 @@ for b = 1:nBands
     center = mean(wn(sigBands(b, 1):sigBands(b, 2)));
     d = abs(dbPos - center);
     [md, idx] = min(d);
-    if md <= 15
+    if md <= cfg.Phase2.Variability.AssignmentTolerance
         bandAssign(b) = string(db(idx).Assignment);
         bandCat(b)    = string(db(idx).Category);
     else
@@ -126,7 +126,7 @@ end
 cliffsD_lo = cliffsD * 0;
 cliffsD_hi = cliffsD * 0;
 if nBands > 0
-    nBootES = 400;
+    nBootES = cfg.Phase2.Variability.ES_BootstrapN;
     for b = 1:nBands
         % Use centre point of each band to bootstrap
         jCenter = round(mean(sigBands(b, 1):sigBands(b, 2)));

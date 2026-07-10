@@ -1,7 +1,13 @@
 function [QC, Patient] = detectOutliers(Patient, cfg)
-% DETECTOUTLIERS  Identify outlier spectra using correlation + MAD dual strategy.
+% DETECTOUTLIERS  LEGACY QC helper using correlation + MAD dual strategy.
 %
 %   [QC, Patient] = detectOutliers(Patient, cfg)
+%
+%   NOTE
+%   ----
+%   This function is retained for historical comparison only. The supported
+%   QC pipeline is RUNQC -> TECHNICALQC -> STRUCTURALQC. detectOutliers is
+%   not called by main.m and expects legacy cfg.QC fields.
 %
 %   Algorithm (iterative, max 3 rounds):
 %     1. Compute patient mean spectrum from current kept spectra
@@ -24,6 +30,16 @@ function [QC, Patient] = detectOutliers(Patient, cfg)
 %       .NKept        spectra remaining after QC
 %       .NRemoved     spectra removed
 %   Patient : updated with .SNR, .Correlation, .QC fields populated
+
+requiredFields = {'EnableCorrelation', 'CorrThreshold', 'EnableMAD', ...
+                  'MADMultiplier', 'EnableSNR'};
+missing = requiredFields(~cellfun(@(f) isfield(cfg.QC, f), requiredFields));
+if ~isempty(missing)
+    error('detectOutliers:LegacyConfig', ...
+          ['detectOutliers is a legacy helper and is not part of the ', ...
+           'supported QC pipeline. Missing legacy cfg.QC fields: %s. ', ...
+           'Use runQC() for current analyses.'], strjoin(missing, ', '));
+end
 
 MAX_ITER  = 3;
 spectra   = Patient.ProcessedSpectra;
