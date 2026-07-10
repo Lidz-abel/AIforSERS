@@ -1,0 +1,5 @@
+L1: PATIENT-LEVEL VERIFICATION
+==============================
+Total independent samples (patients): 52
+Total wavenumber points: 732 [395.1 - 1840.6 cm-1]
+Groups:

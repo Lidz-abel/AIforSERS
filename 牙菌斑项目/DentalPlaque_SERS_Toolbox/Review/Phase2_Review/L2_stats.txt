@@ -1,0 +1,27 @@
+L2: STATISTICAL VALIDATION
+==========================
+
+Group sizes for Kruskal-Wallis:
+  阳性+: n=31
+  阴性-: n=21
+Kruskal-Wallis adequate? true
+
+PCA Variance Explained:
+  PC1: 41.31%
+  PC2: 23.79%
+  PC3: 9.29%
+  Cumul(PC1-2): 65.11%
+  Cumul(PC1-5): 85.88%
+
+Pearson Patient Correlation:
+  Matrix: [52x52]
+  Diag-min: 1.000000 (should be 1.0)
+  Range: [0.0239, 1.0000]
+
+  阳性+: within r=0.8477±0.2037, between r=0.7386±0.2925
+  阴性-: within r=0.6964±0.3056, between r=0.7386±0.2925
+
+CV/SD computation:
+  CV computed per patient from QC-passed spectra.
+  SD = std(spectra,0,1); CV = SD./(|mean|+eps).
+  Variability Score = median(CV).

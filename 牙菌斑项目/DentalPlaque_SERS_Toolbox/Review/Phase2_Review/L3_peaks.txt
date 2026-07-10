@@ -1,0 +1,26 @@
+L3: PEAK VALIDATION
+====================
+
+Consensus peaks: 109 (from 52 patients, >=10% presence)
+Peak positions: [10;14;18;22;38;42;46;51;63;67;75;87;91;99;103;115;127;135;147;152;164;168;172;176;184;188;196;200;204;208;216;224;228;236;240;244;261;277;281;285;293;297;305;309;313;321;325;337;341;358;362;366;370;378;382;398;402;410;414;418;422;426;434;438;446;450;459;463;467;471;479;483;511;515;535;539;543;556;560;564;568;580;584;592;600;604;612;616;624;628;648;652;657;661;673;677;681;685;689;693;697;701;705;709;713;717;721;725;729]
+
+Peaks in 700-1700 cm-1 (biologically relevant): 7%
+Edge peaks (<500 or >1800 cm-1): 72
+
+Top15 Peak Quality Audit:
+Pos      Detect%    MeanH      SNR       
+10       0.0        NaN        NaN        LOW_DETECT
+14       0.0        NaN        NaN        LOW_DETECT
+18       0.0        NaN        NaN        LOW_DETECT
+22       0.0        NaN        NaN        LOW_DETECT
+38       0.0        NaN        NaN        LOW_DETECT
+42       0.0        NaN        NaN        LOW_DETECT
+46       0.0        NaN        NaN        LOW_DETECT
+50       0.0        NaN        NaN        LOW_DETECT
+63       0.0        NaN        NaN        LOW_DETECT
+67       0.0        NaN        NaN        LOW_DETECT
+75       0.0        NaN        NaN        LOW_DETECT
+87       0.0        NaN        NaN        LOW_DETECT
+91       0.0        NaN        NaN        LOW_DETECT
+99       0.0        NaN        NaN        LOW_DETECT
+103      0.0        NaN        NaN        LOW_DETECT
