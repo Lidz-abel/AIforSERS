@@ -1,0 +1,13 @@
+model_combo,zone,n_patients,roc_auc,accuracy,sensitivity,specificity,brier_score,ece
+patient_median__logistic_regression,confident,11,0.9286,0.8182,1.0000,0.5000,0.1010,0.0606
+patient_median__logistic_regression,review,0,NA,NA,NA,NA,NA,NA
+patient_median__logistic_regression,ct_recommended,0,NA,NA,NA,NA,NA,NA
+patient_median__xgboost,confident,11,0.9286,0.7273,0.7143,0.7500,0.1467,0.1899
+patient_median__xgboost,review,0,NA,NA,NA,NA,NA,NA
+patient_median__xgboost,ct_recommended,0,NA,NA,NA,NA,NA,NA
+spectrum_level__logistic_regression,confident,11,0.9643,0.8182,0.8571,0.7500,0.1026,0.1744
+spectrum_level__logistic_regression,review,0,NA,NA,NA,NA,NA,NA
+spectrum_level__logistic_regression,ct_recommended,0,NA,NA,NA,NA,NA,NA
+spectrum_level__xgboost,confident,10,1.0000,1.0000,1.0000,1.0000,0.0401,0.1320
+spectrum_level__xgboost,review,0,NA,NA,NA,NA,NA,NA
+spectrum_level__xgboost,ct_recommended,1,NA,0.0000,NA,0.0000,0.3584,0.5987

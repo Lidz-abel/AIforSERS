@@ -1,0 +1,12 @@
+patient_uid,true_label,split,patient_median__logistic_regression__prob,patient_median__logistic_regression__uncertainty,patient_median__logistic_regression__triage_zone,patient_median__xgboost__prob,patient_median__xgboost__uncertainty,patient_median__xgboost__triage_zone,spectrum_level__logistic_regression__prob,spectrum_level__logistic_regression__uncertainty,spectrum_level__logistic_regression__triage_zone,spectrum_level__xgboost__prob,spectrum_level__xgboost__uncertainty,spectrum_level__xgboost__triage_zone
+阳性+_2,1,test,1.0,0.4,confident,0.848445,0.35,confident,1.0,0.0,confident,0.957059,0.3,confident
+阳性+_12强,1,test,1.0,0.4,confident,0.853166,0.21,confident,0.99881,0.0,confident,0.980072,0.13,confident
+阳性+_15强,1,test,1.0,0.4,confident,0.848445,0.35,confident,1.0,0.0,confident,0.975912,0.23,confident
+阳性+_20强,1,test,1.0,0.4,confident,0.853166,0.21,confident,1.0,0.0,confident,0.994958,0.0,confident
+阳性+_21,1,test,0.666667,0.7,confident,0.295555,0.56,confident,0.936105,0.43,confident,0.511387,0.85,confident
+阳性+_27,1,test,0.666667,0.7,confident,0.357983,0.63,confident,0.722347,0.8,confident,0.819596,0.5,confident
+阳性+_28,1,test,1.0,0.4,confident,0.853166,0.21,confident,0.224781,0.77,confident,0.980636,0.13,confident
+阴性-_5,0,test,0.0,0.49,confident,0.275232,0.49,confident,0.0,0.0,confident,0.128993,0.46,confident
+阴性-_7,0,test,0.0,0.49,confident,0.251677,0.35,confident,0.006353,0.1,confident,0.0916,0.3,confident
+阴性-_11,0,test,0.666667,0.7,confident,0.624445,0.7,confident,0.142002,0.7,confident,0.598698,0.97,ct_recommended
+阴性-_21,0,test,0.666667,0.7,confident,0.256789,0.35,confident,0.652575,0.86,confident,0.319194,0.78,confident

@@ -1,0 +1,99 @@
+# Phase 3B: Machine Learning Baseline Configuration
+# All tunable parameters for the baseline pipeline.
+
+seed: 42
+
+# ── Paths ──────────────────────────────────────────────
+paths:
+  dataset_dir: Results/Phase3/dataset
+  splits_dir: Results/Phase3/splits
+  results_dir: Results/Phase3/baseline
+  figures_dir: Results/Phase3/baseline/figures
+
+  # Split file to use
+  split_file: split_seed42.json
+
+  # Feature matrix outputs
+  features_patient_median: Results/Phase3/baseline/features_patient_median.npz
+  features_spectrum_level: Results/Phase3/baseline/features_spectrum_level.npz
+
+# ── Feature Strategies ─────────────────────────────────
+features:
+  # Strategy A: collapse each patient to median spectrum
+  patient_median:
+    enabled: true
+    aggregation: median  # median or mean
+
+  # Strategy B: keep individual spectra, aggregate predictions later
+  spectrum_level:
+    enabled: true
+
+# ── Models ─────────────────────────────────────────────
+models:
+  logistic_regression:
+    enabled: true
+    param_grid:
+      C: [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
+    penalty: l2
+    solver: liblinear
+    class_weight: balanced
+    max_iter: 5000
+    calibration: isotonic  # isotonic | platt | none
+
+  xgboost:
+    enabled: true
+    param_grid:
+      n_estimators: [50, 100, 200]
+      max_depth: [2, 3, 4, 5]
+      learning_rate: [0.01, 0.05, 0.1]
+      subsample: [0.7, 0.8, 1.0]
+      colsample_bytree: [0.7, 0.8, 1.0]
+    scale_pos_weight: auto  # auto = n_neg / n_pos
+    early_stopping_rounds: 20
+    calibration: platt  # isotonic | platt | none
+    eval_metric: logloss
+
+# ── Cross-validation for Hyperparameter Tuning ──────────
+cv:
+  strategy: group_kfold  # preserves patient structure
+  n_splits: 5
+  scoring: roc_auc
+
+# ── Uncertainty Scoring ────────────────────────────────
+uncertainty:
+  # Weights for three uncertainty components
+  prob_confidence_weight: 0.4    # 1 - 2*|P - 0.5|
+  variance_weight: 0.3           # variance of P across spectra (Strategy B only)
+  boundary_distance_weight: 0.3  # standardized |decision_function| for LR, tree-variance for XGBoost
+
+  # Normalization: use validation set percentiles to map raw scores to [0,1]
+  # Each component is percentile-normalized before weighted sum.
+
+# ── Triage Thresholds ──────────────────────────────────
+triage:
+  method: percentile  # percentile-based calibration on validation set
+  target_coverage: 0.95  # fraction of true positives (correctly classified) in confident zone
+  # threshold_1: max U that covers ≥ target_coverage of model's true positives
+  # threshold_2: 80th percentile of all uncertainties (top ~20% → CT)
+
+# ── Evaluation ─────────────────────────────────────────
+evaluation:
+  n_bootstrap: 2000
+  ci_alpha: 0.05  # 95% CI
+  metrics:
+    - roc_auc
+    - accuracy
+    - sensitivity
+    - specificity
+    - brier_score
+    - ece  # expected calibration error
+
+# ── Output Files ───────────────────────────────────────
+outputs:
+  training_results: Results/Phase3/baseline/training_results.json
+  triage_thresholds: Results/Phase3/baseline/triage_thresholds.json
+  predictions: Results/Phase3/baseline/predictions.csv
+  metrics: Results/Phase3/baseline/metrics.json
+  triage_report: Results/Phase3/baseline/triage_report.csv
+  calibration_curve: Results/Phase3/baseline/figures/calibration_curve.png
+  uncertainty_histogram: Results/Phase3/baseline/figures/uncertainty_histogram.png

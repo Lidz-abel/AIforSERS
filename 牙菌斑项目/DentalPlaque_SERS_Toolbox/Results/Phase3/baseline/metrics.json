@@ -1,0 +1,254 @@
+{
+  "patient_median__logistic_regression": {
+    "metrics": {
+      "roc_auc": {
+        "value": 0.9285714285714286,
+        "ci_lower": 0.7777777777777778,
+        "ci_upper": 1.0
+      },
+      "accuracy": {
+        "value": 0.8181818181818182,
+        "ci_lower": 0.5454545454545454,
+        "ci_upper": 1.0
+      },
+      "sensitivity": {
+        "value": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0
+      },
+      "specificity": {
+        "value": 0.5,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0
+      },
+      "brier_score": {
+        "value": 0.10101010101010101,
+        "ci_lower": 0.010101010101010104,
+        "ci_upper": 0.20227272727272588
+      },
+      "ece": {
+        "value": 0.060606060606060594,
+        "ci_lower": 0.0,
+        "ci_upper": 0.24242424242424243
+      }
+    },
+    "zone_metrics": {
+      "confident": {
+        "roc_auc": 0.9285714285714286,
+        "accuracy": 0.8181818181818182,
+        "sensitivity": 1.0,
+        "specificity": 0.5,
+        "brier_score": 0.10101010101010101,
+        "ece": 0.060606060606060594,
+        "n_patients": 11
+      },
+      "review": {
+        "n_patients": 0,
+        "roc_auc": null,
+        "accuracy": null,
+        "sensitivity": null,
+        "specificity": null,
+        "brier_score": null,
+        "ece": null
+      },
+      "ct_recommended": {
+        "n_patients": 0,
+        "roc_auc": null,
+        "accuracy": null,
+        "sensitivity": null,
+        "specificity": null,
+        "brier_score": null,
+        "ece": null
+      }
+    }
+  },
+  "patient_median__xgboost": {
+    "metrics": {
+      "roc_auc": {
+        "value": 0.9285714285714286,
+        "ci_lower": 0.6930357142857143,
+        "ci_upper": 1.0
+      },
+      "accuracy": {
+        "value": 0.7272727272727273,
+        "ci_lower": 0.45454545454545453,
+        "ci_upper": 1.0
+      },
+      "sensitivity": {
+        "value": 0.7142857142857143,
+        "ci_lower": 0.3333333333333333,
+        "ci_upper": 1.0
+      },
+      "specificity": {
+        "value": 0.75,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0
+      },
+      "brier_score": {
+        "value": 0.14672833163103988,
+        "ci_lower": 0.051005330795032534,
+        "ci_upper": 0.25788380227054547
+      },
+      "ece": {
+        "value": 0.18993864203341576,
+        "ci_lower": 0.10605185629455019,
+        "ci_upper": 0.3950065822957736
+      }
+    },
+    "zone_metrics": {
+      "confident": {
+        "roc_auc": 0.9285714285714286,
+        "accuracy": 0.7272727272727273,
+        "sensitivity": 0.7142857142857143,
+        "specificity": 0.75,
+        "brier_score": 0.14672833163103988,
+        "ece": 0.18993864203341576,
+        "n_patients": 11
+      },
+      "review": {
+        "n_patients": 0,
+        "roc_auc": null,
+        "accuracy": null,
+        "sensitivity": null,
+        "specificity": null,
+        "brier_score": null,
+        "ece": null
+      },
+      "ct_recommended": {
+        "n_patients": 0,
+        "roc_auc": null,
+        "accuracy": null,
+        "sensitivity": null,
+        "specificity": null,
+        "brier_score": null,
+        "ece": null
+      }
+    }
+  },
+  "spectrum_level__logistic_regression": {
+    "metrics": {
+      "roc_auc": {
+        "value": 0.9642857142857143,
+        "ci_lower": 0.8,
+        "ci_upper": 1.0
+      },
+      "accuracy": {
+        "value": 0.8181818181818182,
+        "ci_lower": 0.5454545454545454,
+        "ci_upper": 1.0
+      },
+      "sensitivity": {
+        "value": 0.8571428571428571,
+        "ci_lower": 0.5555555555555556,
+        "ci_upper": 1.0
+      },
+      "specificity": {
+        "value": 0.75,
+        "ci_lower": 0.25,
+        "ci_upper": 1.0
+      },
+      "brier_score": {
+        "value": 0.10256349866341265,
+        "ci_lower": 0.004794010689844405,
+        "ci_upper": 0.22578628628538966
+      },
+      "ece": {
+        "value": 0.17444429096137506,
+        "ci_lower": 0.03162737897097449,
+        "ci_upper": 0.33765814812918105
+      }
+    },
+    "zone_metrics": {
+      "confident": {
+        "roc_auc": 0.9642857142857143,
+        "accuracy": 0.8181818181818182,
+        "sensitivity": 0.8571428571428571,
+        "specificity": 0.75,
+        "brier_score": 0.10256349866341265,
+        "ece": 0.17444429096137506,
+        "n_patients": 11
+      },
+      "review": {
+        "n_patients": 0,
+        "roc_auc": null,
+        "accuracy": null,
+        "sensitivity": null,
+        "specificity": null,
+        "brier_score": null,
+        "ece": null
+      },
+      "ct_recommended": {
+        "n_patients": 0,
+        "roc_auc": null,
+        "accuracy": null,
+        "sensitivity": null,
+        "specificity": null,
+        "brier_score": null,
+        "ece": null
+      }
+    }
+  },
+  "spectrum_level__xgboost": {
+    "metrics": {
+      "roc_auc": {
+        "value": 0.9642857142857143,
+        "ci_lower": 0.8,
+        "ci_upper": 1.0
+      },
+      "accuracy": {
+        "value": 0.9090909090909091,
+        "ci_lower": 0.7272727272727273,
+        "ci_upper": 1.0
+      },
+      "sensitivity": {
+        "value": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0
+      },
+      "specificity": {
+        "value": 0.75,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0
+      },
+      "brier_score": {
+        "value": 0.06907843098991634,
+        "ci_lower": 0.011054093251725332,
+        "ci_upper": 0.14501649875807046
+      },
+      "ece": {
+        "value": 0.08560350486216711,
+        "ci_lower": 0.05195668375841253,
+        "ci_upper": 0.2420679929256435
+      }
+    },
+    "zone_metrics": {
+      "confident": {
+        "roc_auc": 1.0,
+        "accuracy": 1.0,
+        "sensitivity": 1.0,
+        "specificity": 1.0,
+        "brier_score": 0.04014240258343822,
+        "ece": 0.13201660754594435,
+        "n_patients": 10
+      },
+      "review": {
+        "n_patients": 0,
+        "roc_auc": null,
+        "accuracy": null,
+        "sensitivity": null,
+        "specificity": null,
+        "brier_score": null,
+        "ece": null
+      },
+      "ct_recommended": {
+        "roc_auc": NaN,
+        "accuracy": 0.0,
+        "sensitivity": NaN,
+        "specificity": 0.0,
+        "brier_score": 0.35843871505469754,
+        "ece": 0.5986975154906671,
+        "n_patients": 1
+      }
+    }
+  }
+}

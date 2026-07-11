@@ -1,0 +1,103 @@
+{
+  "results": [
+    {
+      "strategy": "patient_median",
+      "model": "logistic_regression",
+      "best_params": {
+        "C": 1.0
+      },
+      "calibration": "isotonic",
+      "val_metrics": {
+        "roc_auc": 0.9583333333333333,
+        "accuracy": 0.9,
+        "sensitivity": 1.0,
+        "specificity": 0.75,
+        "brier_score": 0.06666666666666668,
+        "ece": 0.0
+      },
+      "triage_thresholds": {
+        "threshold_1": 0.7,
+        "threshold_2": 0.75
+      },
+      "model_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\patient_median__logistic_regression.joblib",
+      "ref_stats_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\patient_median__logistic_regression__ref_stats.npz"
+    },
+    {
+      "strategy": "patient_median",
+      "model": "xgboost",
+      "best_params": {
+        "n_estimators": 50,
+        "max_depth": 2,
+        "learning_rate": 0.05,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8
+      },
+      "calibration": "platt",
+      "scale_pos_weight": 0.7222222222222222,
+      "val_metrics": {
+        "roc_auc": 0.8958333333333333,
+        "accuracy": 0.8,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.75,
+        "brier_score": 0.1649094705501205,
+        "ece": 0.21348500424507766
+      },
+      "triage_thresholds": {
+        "threshold_1": 0.7,
+        "threshold_2": 0.75
+      },
+      "model_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\patient_median__xgboost.joblib",
+      "ref_stats_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\patient_median__xgboost__ref_stats.npz"
+    },
+    {
+      "strategy": "spectrum_level",
+      "model": "logistic_regression",
+      "best_params": {
+        "C": 1.0
+      },
+      "calibration": "isotonic",
+      "val_metrics": {
+        "roc_auc": 1.0,
+        "accuracy": 0.9,
+        "sensitivity": 1.0,
+        "specificity": 0.75,
+        "brier_score": 0.045913938749703086,
+        "ece": 0.14481757214987234
+      },
+      "triage_thresholds": {
+        "threshold_1": 0.8700000000000001,
+        "threshold_2": 0.9200000000000002
+      },
+      "model_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\spectrum_level__logistic_regression.joblib",
+      "ref_stats_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\spectrum_level__logistic_regression__ref_stats.npz"
+    },
+    {
+      "strategy": "spectrum_level",
+      "model": "xgboost",
+      "best_params": {
+        "n_estimators": 200,
+        "max_depth": 2,
+        "learning_rate": 0.05,
+        "subsample": 0.7,
+        "colsample_bytree": 0.7
+      },
+      "calibration": "platt",
+      "scale_pos_weight": 0.27748132337246534,
+      "val_metrics": {
+        "roc_auc": 0.9166666666666666,
+        "accuracy": 0.9,
+        "sensitivity": 1.0,
+        "specificity": 0.75,
+        "brier_score": 0.09731509936264364,
+        "ece": 0.16815237105642714
+      },
+      "triage_thresholds": {
+        "threshold_1": 0.8500000000000001,
+        "threshold_2": 0.9000000000000001
+      },
+      "model_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\spectrum_level__xgboost.joblib",
+      "ref_stats_path": "D:\\牙菌斑项目\\牙菌斑项目\\DentalPlaque_SERS_Toolbox\\Results\\Phase3\\baseline\\models\\spectrum_level__xgboost__ref_stats.npz"
+    }
+  ],
+  "seed": 42
+}

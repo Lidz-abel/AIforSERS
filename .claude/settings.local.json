@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \":*)",
+      "Bash(python3 -c \"import numpy as np; d=np.load\\(''D:/牙菌斑项目/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase3/dataset/wavenumber.npy''\\); print\\(''shape:'', d.shape\\); print\\(''first:'', d[0]\\); print\\(''last:'', d[-1]\\)\")",
+      "Bash(python -c \"import numpy as np; d=np.load\\(''D:/牙菌斑项目/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase3/dataset/wavenumber.npy''\\); print\\(''shape:'', d.shape\\); print\\(''first:'', d[0]\\); print\\(''last:'', d[-1]\\)\")",
+      "Bash(python3 -c \"import numpy as np; d=np.load\\(''D:/牙菌斑项目/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase3/dataset/spectra.npz''\\); print\\(list\\(d.keys\\(\\)\\)\\); print\\(d[''X_spectra''].shape\\); print\\(d[''X_raw_spectra''].shape\\); print\\(d[''labels''].shape\\); print\\(d[''labels''][:5]\\)\")",
+      "Bash(python -c \"import numpy as np; d=np.load\\(''D:/牙菌斑项目/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase3/dataset/spectra.npz''\\); print\\(list\\(d.keys\\(\\)\\)\\); print\\(d[''X_spectra''].shape\\); print\\(d[''X_raw_spectra''].shape\\); print\\(d[''labels''].shape\\); print\\(d[''labels''][:5]\\)\")",
+      "Bash(python -c \"import numpy as np; d = np.load\\(''Results/Phase3/dataset/spectra.npz'', allow_pickle=True\\); print\\(''Keys:'', list\\(d.keys\\(\\)\\)\\); [print\\(f''{k}: {d[k].shape} {d[k].dtype}''\\) for k in d.keys\\(\\)]; print\\(''patient_uids[:5]:'', d[''patient_uids''][:5]\\); print\\(''labels[:5]:'', d[''labels''][:5]\\); print\\(''patient_index[:5]:'', d[''patient_index''][:5]\\)\")",
+      "Bash(python build_features.py)",
+      "Bash(pip install:*)",
+      "Bash(python train_baseline.py)",
+      "Bash(python:*)"
+    ]
+  }
+}

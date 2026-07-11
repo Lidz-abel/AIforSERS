@@ -1,0 +1,18 @@
+{
+  "patient_median__logistic_regression": {
+    "threshold_1": 0.7,
+    "threshold_2": 0.75
+  },
+  "patient_median__xgboost": {
+    "threshold_1": 0.7,
+    "threshold_2": 0.75
+  },
+  "spectrum_level__logistic_regression": {
+    "threshold_1": 0.8700000000000001,
+    "threshold_2": 0.9200000000000002
+  },
+  "spectrum_level__xgboost": {
+    "threshold_1": 0.8500000000000001,
+    "threshold_2": 0.9000000000000001
+  }
+}
