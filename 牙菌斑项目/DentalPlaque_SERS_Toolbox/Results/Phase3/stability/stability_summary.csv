@@ -1,0 +1,5 @@
+combo,strategy,model,roc_auc_mean,roc_auc_std,accuracy_mean,accuracy_std,sensitivity_mean,sensitivity_std,specificity_mean,specificity_std,brier_score_mean,brier_score_std,ece_mean,ece_std
+patient_median__logistic_regression,patient_median,logistic_regression,0.9018,0.0731,0.8455,0.1223,0.8500,0.1888,0.8375,0.1816,0.1036,0.0583,0.1240,0.0826
+patient_median__xgboost,patient_median,xgboost,0.8679,0.1477,0.7636,0.1330,0.8143,0.2124,0.6750,0.2107,0.1779,0.0907,0.2238,0.0992
+spectrum_level__logistic_regression,spectrum_level,logistic_regression,0.9750,0.0376,0.9273,0.0617,0.9786,0.0510,0.8375,0.1635,0.0612,0.0374,0.1100,0.0490
+spectrum_level__xgboost,spectrum_level,xgboost,0.9536,0.0883,0.8818,0.1117,0.9643,0.0766,0.7375,0.2559,0.0865,0.0511,0.1605,0.0445

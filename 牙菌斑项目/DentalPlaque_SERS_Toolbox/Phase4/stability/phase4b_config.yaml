@@ -1,0 +1,132 @@
+# Phase 4B: Stability Validation + Ablation Study
+# 20 repeated patient-level splits × 5 experiment configs
+# Goal: optimize patient-level accuracy without sacrificing sensitivity
+
+seed: 42
+n_repeats: 20
+
+# ── Paths ──────────────────────────────────────────────
+paths:
+  dataset_dir: Results/Phase3/dataset
+  splits_dir: Results/Phase3/splits
+  split_file: split_seed42.json  # required by load_phase4_dataset; splits re-created
+  results_dir: Results/Phase4/stability
+  figures_dir: Results/Phase4/stability/figures
+
+# ── Model (fixed, from Phase4A v1.1) ───────────────────
+model:
+  name: CC-SERSNet-v1
+  in_channels: 1
+  n_wavenumber: 732
+  n_classes: 2
+  kernel_sizes: [3, 7, 15]
+  base_channels: 32
+  n_res_blocks: 2
+  dropout_rate: 0.3
+  group_norm_groups: 4
+
+# ── Training (fixed) ───────────────────────────────────
+training:
+  batch_size: 64
+  epochs: 100
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  scheduler: reduce_on_plateau
+  scheduler_factor: 0.5
+  scheduler_patience: 10
+  early_stopping_patience: 20
+
+# ── MC Dropout (fixed) ─────────────────────────────────
+mc_dropout:
+  n_samples: 50
+  enabled: true
+
+# ── Calibration (fixed) ────────────────────────────────
+calibration:
+  method: temperature_scaling
+
+# ── Split params ────────────────────────────────────────
+split:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  stratify: true
+
+# ── Experiment Matrix ──────────────────────────────────
+#  B0: patient-balanced CE, mean agg, threshold=0.5,  selection=val AUC
+#  B1: patient-balanced CE, mean agg, threshold=opt,    selection=val bal_acc + sens>=0.90
+#  B2: patient-balanced CE, median agg, threshold=opt,  selection=val bal_acc + sens>=0.90
+#  B3: patient+class-balanced CE, mean agg, threshold=opt, selection=val bal_acc + sens>=0.90
+#  B4: patient-balanced CE + label_smoothing, mean agg, threshold=opt, selection=val bal_acc + sens>=0.90
+
+experiments:
+  B0:
+    loss: patient_balanced_ce
+    label_smoothing: 0.0
+    class_balance_weight: false
+    aggregation: mean
+    threshold_strategy: fixed_0.5
+    threshold_sens_constraint: null
+    selection_metric: val_auc
+    selection_sens_constraint: null
+
+  B1:
+    loss: patient_balanced_ce
+    label_smoothing: 0.0
+    class_balance_weight: false
+    aggregation: mean
+    threshold_strategy: max_balanced_accuracy
+    threshold_sens_constraint: 0.90
+    selection_metric: val_balanced_accuracy
+    selection_sens_constraint: 0.90
+
+  B2:
+    loss: patient_balanced_ce
+    label_smoothing: 0.0
+    class_balance_weight: false
+    aggregation: median
+    threshold_strategy: max_balanced_accuracy
+    threshold_sens_constraint: 0.90
+    selection_metric: val_balanced_accuracy
+    selection_sens_constraint: 0.90
+
+  B3:
+    loss: patient_balanced_ce
+    label_smoothing: 0.0
+    class_balance_weight: true
+    aggregation: mean
+    threshold_strategy: max_balanced_accuracy
+    threshold_sens_constraint: 0.90
+    selection_metric: val_balanced_accuracy
+    selection_sens_constraint: 0.90
+
+  B4:
+    loss: patient_balanced_ce
+    label_smoothing: 0.1
+    class_balance_weight: false
+    aggregation: mean
+    threshold_strategy: max_balanced_accuracy
+    threshold_sens_constraint: 0.90
+    selection_metric: val_balanced_accuracy
+    selection_sens_constraint: 0.90
+
+# ── Evaluation ─────────────────────────────────────────
+evaluation:
+  n_bootstrap: 2000
+  ci_alpha: 0.05
+  metrics:
+    - roc_auc
+    - accuracy
+    - balanced_accuracy
+    - sensitivity
+    - specificity
+    - brier_score
+    - ece
+
+# ── Outputs ────────────────────────────────────────────
+outputs:
+  results_json: Results/Phase4/stability/phase4b_results.json
+  summary_csv: Results/Phase4/stability/phase4b_summary.csv
+  boxplot: Results/Phase4/stability/figures/phase4b_boxplot.png
+  report: Results/Phase4/stability/PHASE4B_REPORT.md

@@ -7,11 +7,13 @@ and handles triage threshold calibration.
 from __future__ import annotations
 
 import json
+from math import sqrt
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 import yaml
+from scipy.stats import norm
 from sklearn.calibration import calibration_curve
 from sklearn.isotonic import IsotonicRegression
 from sklearn.linear_model import LogisticRegression
@@ -208,6 +210,38 @@ def compute_metrics(
     }
 
 
+def binomial_ci(
+    k: int, n: int, alpha: float = 0.05, method: str = "wilson"
+) -> dict[str, float]:
+    """Binomial confidence interval for a proportion k/n.
+
+    Uses Wilson score interval (well-behaved for k=0, k=n, and small n).
+    Returns {value, ci_lower, ci_upper}.
+
+    Args:
+        k: number of successes.
+        n: number of trials.
+        alpha: significance level (default 0.05 for 95% CI).
+        method: "wilson" (default).
+    """
+    if n == 0:
+        return {"value": float("nan"), "ci_lower": float("nan"), "ci_upper": float("nan")}
+
+    p_hat = k / n
+
+    if method == "wilson":
+        z = norm.ppf(1.0 - alpha / 2.0)
+        denom = 1.0 + z * z / n
+        center = (p_hat + z * z / (2.0 * n)) / denom
+        margin = z * sqrt((p_hat * (1.0 - p_hat) + z * z / (4.0 * n)) / n) / denom
+        lo = max(0.0, center - margin)
+        hi = min(1.0, center + margin)
+    else:
+        raise ValueError(f"Unknown method: {method}")
+
+    return {"value": p_hat, "ci_lower": lo, "ci_upper": hi}
+
+
 def bootstrap_metric_ci(
     y_true: np.ndarray,
     y_prob: np.ndarray,
@@ -279,7 +313,7 @@ def compute_uncertainty(
     prob_variance : shape (n_patients,) variance of P across spectra, or None
     decision_values : shape (n_patients,) raw decision function values, or None
     weights : (w_prob, w_var, w_boundary)
-    ref_stats : dict with keys 'prob_conf', 'prob_var', 'boundary_dist'
+    ref_stats : dict with keys 'prob_certainty', 'prob_var', 'boundary_dist'
                 each mapping to sorted validation values for percentile lookup.
                 If None, min-max normalization is used as fallback.
 

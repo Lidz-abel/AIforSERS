@@ -1,0 +1,12 @@
+patient_uid,true_label,pred_label,prob_negative,prob_positive,predictive_entropy,expected_entropy,mutual_information,margin,patient_agreement,prob_variance,clinical_confidence,confidence_group,recommendation,correct,split
+阳性+_2,1,1,0.355709,0.644291,0.650761,0.647906,0.002855,0.288582,1.0,6.8e-05,0.551039,medium,Doctor Review,1,test
+阳性+_12强,1,1,0.355071,0.644929,0.650442,0.647627,0.002815,0.289858,1.0,4e-05,0.551548,medium,Doctor Review,1,test
+阳性+_15强,1,1,0.354644,0.645356,0.650167,0.647432,0.002735,0.290713,1.0,4.9e-05,0.551927,medium,Doctor Review,1,test
+阳性+_20强,1,1,0.351222,0.648778,0.648121,0.645183,0.002937,0.297556,1.0,3.6e-05,0.554659,medium,Doctor Review,1,test
+阳性+_21,1,1,0.360186,0.639814,0.653497,0.650983,0.002514,0.279629,1.0,1.3e-05,0.547464,medium,Doctor Review,1,test
+阳性+_27,1,1,0.358766,0.641234,0.652639,0.649864,0.002775,0.282469,1.0,3e-05,0.54855,medium,Doctor Review,1,test
+阳性+_28,1,1,0.343642,0.656358,0.643354,0.64005,0.003305,0.312716,1.0,3e-05,0.56082,medium,Doctor Review,1,test
+阴性-_5,0,1,0.354059,0.645941,0.649887,0.647061,0.002826,0.291883,1.0,1.6e-05,0.552352,medium,Doctor Review,0,test
+阴性-_7,0,1,0.357831,0.642169,0.65208,0.649324,0.002756,0.284338,1.0,3.7e-05,0.549318,medium,Doctor Review,0,test
+阴性-_11,0,1,0.35993,0.64007,0.6533,0.650579,0.002721,0.280139,1.0,3.6e-05,0.547629,medium,Doctor Review,0,test
+阴性-_21,0,1,0.360564,0.639436,0.65368,0.650898,0.002782,0.278873,1.0,2.8e-05,0.547094,medium,Doctor Review,0,test

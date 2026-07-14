@@ -1,0 +1,58 @@
+# Phase 3C: Stability Validation Configuration
+
+seed: 42
+n_repeats: 20  # number of random patient-level splits
+
+# ── Paths ──────────────────────────────────────────────
+paths:
+  dataset_dir: Results/Phase3/dataset
+  splits_dir: Results/Phase3/splits
+  results_dir: Results/Phase3/stability
+  figures_dir: Results/Phase3/stability/figures
+
+# ── Fixed best hyperparameters (from Phase3B) ──────────
+# We fix hyperparameters to test data-split stability,
+# not hyperparameter stability.
+models:
+  logistic_regression:
+    C: 1.0
+    penalty: l2
+    solver: liblinear
+    class_weight: balanced
+    max_iter: 5000
+    calibration: isotonic
+
+  xgboost:
+    n_estimators: 200
+    max_depth: 2
+    learning_rate: 0.05
+    subsample: 0.7
+    colsample_bytree: 0.7
+    early_stopping_rounds: 20
+    calibration: platt
+    eval_metric: logloss
+
+# ── Split params ────────────────────────────────────────
+split:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  stratify: true
+
+# ── Evaluation ─────────────────────────────────────────
+evaluation:
+  n_bootstrap: 2000
+  ci_alpha: 0.05
+  metrics:
+    - roc_auc
+    - accuracy
+    - sensitivity
+    - specificity
+    - brier_score
+    - ece
+
+# ── Outputs ────────────────────────────────────────────
+outputs:
+  stability_results: Results/Phase3/stability/stability_results.json
+  stability_summary: Results/Phase3/stability/stability_summary.csv
+  stability_boxplot: Results/Phase3/stability/figures/stability_boxplot.png

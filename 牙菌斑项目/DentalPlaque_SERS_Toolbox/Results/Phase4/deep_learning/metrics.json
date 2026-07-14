@@ -1,0 +1,58 @@
+{
+  "model": "CC-SERSNet-v1",
+  "seed": 42,
+  "best_val_auc": 1.0,
+  "best_epoch": 23,
+  "n_parameters": 57474,
+  "calibrated": true,
+  "temperature": 0.60280841588974,
+  "test_metrics": {
+    "roc_auc": {
+      "value": 0.9642857142857143,
+      "ci_lower": 0.8,
+      "ci_upper": 1.0
+    },
+    "accuracy": {
+      "value": 0.9090909090909091,
+      "ci_lower": 0.7272727272727273,
+      "ci_upper": 1.0
+    },
+    "brier_score": {
+      "value": 0.08227631449699402,
+      "ci_lower": 0.008045166521333158,
+      "ci_upper": 0.17561334036290638
+    },
+    "ece": {
+      "value": 0.1810263249684464,
+      "ci_lower": 0.06218476850878109,
+      "ci_upper": 0.31100262920795513
+    },
+    "sensitivity": {
+      "value": 1.0,
+      "ci_lower": 0.6456695649333126,
+      "ci_upper": 1.0
+    },
+    "specificity": {
+      "value": 0.75,
+      "ci_lower": 0.30064184258240184,
+      "ci_upper": 0.9544127391902995
+    }
+  },
+  "confidence_metrics": {
+    "high": {
+      "roc_auc": 1.0,
+      "accuracy": 1.0,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "brier_score": 0.003709047334268689,
+      "ece": 0.04147683988724436,
+      "n_patients": 7.0
+    },
+    "medium": {
+      "n_patients": 3.0
+    },
+    "low": {
+      "n_patients": 1.0
+    }
+  }
+}

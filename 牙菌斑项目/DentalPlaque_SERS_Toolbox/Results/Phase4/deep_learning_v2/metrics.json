@@ -1,0 +1,40 @@
+{
+  "model": "CC-SERSNet-v2",
+  "seed": 42,
+  "best_val_auc": 0.7916666666666666,
+  "best_epoch": 20,
+  "n_parameters": 8578,
+  "calibrated": true,
+  "test_metrics": {
+    "roc_auc": {
+      "value": 0.7142857142857143,
+      "ci_lower": 0.2857142857142857,
+      "ci_upper": 1.0
+    },
+    "accuracy": {
+      "value": 0.6363636363636364,
+      "ci_lower": 0.36363636363636365,
+      "ci_upper": 0.9090909090909091
+    },
+    "sensitivity": {
+      "value": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0
+    },
+    "specificity": {
+      "value": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0
+    },
+    "brier_score": {
+      "value": 0.22967810928821564,
+      "ci_lower": 0.1512640852481127,
+      "ci_upper": 0.30848766714334486
+    },
+    "ece": {
+      "value": 0.008034278046001098,
+      "ci_lower": 0.0063123087991367784,
+      "ci_upper": 0.2811794866215099
+    }
+  }
+}

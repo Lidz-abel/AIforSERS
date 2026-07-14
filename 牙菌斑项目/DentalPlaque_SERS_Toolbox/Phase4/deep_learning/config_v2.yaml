@@ -1,0 +1,91 @@
+# ===================================================================
+# STATUS: FAILED EXPERIMENT — DO NOT USE
+# ===================================================================
+# Phase 4A v2: Smaller model, full-batch SGD, strong regularization
+# Designed to address training instability on 52-patient dataset.
+#
+# RESULT: Model failed to learn (val AUC=0.792, all test patients predicted
+# positive).  weight_decay=0.01 was too strong for full-batch SGD on 1197
+# training spectra.  LOPO-CV never completed.
+#
+# This config is retained for documentation only.  Use config.yaml (v1).
+# ===================================================================
+
+seed: 42
+
+paths:
+  dataset_dir: Results/Phase3/dataset
+  splits_dir: Results/Phase3/splits
+  results_dir: Results/Phase4/deep_learning_v2
+  figures_dir: Results/Phase4/deep_learning_v2/figures
+  split_file: split_seed42.json
+
+# ── Smaller model (~10K params instead of 57K) ──────────
+model:
+  name: CC-SERSNet-v2
+  in_channels: 1
+  n_wavenumber: 732
+  n_classes: 2
+  kernel_sizes: [3, 7, 15]
+  base_channels: 16       # was 32
+  n_res_blocks: 1          # was 2
+  dropout_rate: 0.3
+  norm: group_norm
+  group_norm_groups: 4
+
+# ── Full-batch SGD ─────────────────────────────────────
+training:
+  batch_size: 0            # 0 = use full training set (exact gradients)
+  epochs: 200              # more epochs, each has 1 update
+  optimizer: sgd
+  learning_rate: 0.01
+  momentum: 0.9
+  weight_decay: 0.01       # was 0.0001 (100x stronger L2)
+  scheduler: cosine        # cosine annealing (no noise-triggered drops)
+  scheduler_T_max: 200
+  scheduler_eta_min: 0.0001
+  early_stopping_patience: 50  # wider patience for smoother curve
+  selection_metric: val_patient_auc
+  selection_mode: max
+
+# ── MC Dropout (unchanged) ─────────────────────────────
+mc_dropout:
+  n_samples: 50
+  enabled: true
+
+# ── Calibration ────────────────────────────────────────
+calibration:
+  method: temperature_scaling
+
+# ── Clinical ───────────────────────────────────────────
+clinical:
+  prob_margin_weight: 0.30
+  entropy_norm_weight: 0.25
+  mi_norm_weight: 0.20
+  patient_agreement_weight: 0.25
+  high_confidence_threshold: 0.75
+  medium_confidence_threshold: 0.50
+
+# ── Evaluation ─────────────────────────────────────────
+evaluation:
+  n_bootstrap: 2000
+  ci_alpha: 0.05
+  metrics:
+    - roc_auc
+    - accuracy
+    - sensitivity
+    - specificity
+    - brier_score
+    - ece
+
+# ── Outputs ────────────────────────────────────────────
+outputs:
+  model_weights: Results/Phase4/deep_learning_v2/model.pt
+  training_log: Results/Phase4/deep_learning_v2/training_log.csv
+  predictions: Results/Phase4/deep_learning_v2/predictions.csv
+  metrics: Results/Phase4/deep_learning_v2/metrics.json
+  reliability_patient: Results/Phase4/deep_learning_v2/reliability_patient.csv
+  report: Results/Phase4/deep_learning_v2/PHASE4A_V2_REPORT.md
+  training_curve: Results/Phase4/deep_learning_v2/figures/training_curve.png
+  calibration_curve: Results/Phase4/deep_learning_v2/figures/calibration_curve.png
+  confidence_dist: Results/Phase4/deep_learning_v2/figures/confidence_distribution.png

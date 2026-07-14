@@ -1,0 +1,89 @@
+# Phase 4A: CC-SERSNet v1 (MC Dropout Softmax)
+# Multi-scale 1D CNN + MC Dropout + Clinical Decision
+
+seed: 42
+
+# ── Paths ──────────────────────────────────────────────
+paths:
+  dataset_dir: Results/Phase3/dataset
+  splits_dir: Results/Phase3/splits
+  results_dir: Results/Phase4/deep_learning
+  figures_dir: Results/Phase4/deep_learning/figures
+  split_file: split_seed42.json
+
+# ── Model Architecture ─────────────────────────────────
+model:
+  name: CC-SERSNet-v1
+  in_channels: 1
+  n_wavenumber: 732
+  n_classes: 2
+  # Multi-scale branches
+  kernel_sizes: [3, 7, 15]
+  base_channels: 32
+  # Residual blocks
+  n_res_blocks: 2
+  # Dropout
+  dropout_rate: 0.3
+  # Normalization: GroupNorm avoids BatchNorm issues in MC Dropout
+  norm: group_norm
+  group_norm_groups: 4
+
+# ── Training ───────────────────────────────────────────
+training:
+  batch_size: 64
+  epochs: 100
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  scheduler: reduce_on_plateau
+  scheduler_factor: 0.5
+  scheduler_patience: 10
+  early_stopping_patience: 20
+  # Model selection metric (patient-level)
+  selection_metric: val_patient_auc
+  selection_mode: max
+
+# ── MC Dropout Inference ───────────────────────────────
+mc_dropout:
+  n_samples: 50  # T forward passes
+  enabled: true
+
+# ── Calibration ────────────────────────────────────────
+calibration:
+  method: temperature_scaling  # temperature_scaling | none
+  # Temperature fit on validation patient-level logits
+
+# ── Clinical Confidence (Rule-based) ───────────────────
+clinical:
+  # Weights for confidence components
+  prob_margin_weight: 0.30
+  entropy_norm_weight: 0.25
+  mi_norm_weight: 0.20
+  patient_agreement_weight: 0.25
+  # Thresholds
+  high_confidence_threshold: 0.75
+  medium_confidence_threshold: 0.50
+
+# ── Evaluation ─────────────────────────────────────────
+evaluation:
+  n_bootstrap: 2000
+  ci_alpha: 0.05
+  metrics:
+    - roc_auc
+    - accuracy
+    - sensitivity
+    - specificity
+    - brier_score
+    - ece
+
+# ── Outputs ────────────────────────────────────────────
+outputs:
+  model_weights: Results/Phase4/deep_learning/model.pt
+  training_log: Results/Phase4/deep_learning/training_log.csv
+  predictions: Results/Phase4/deep_learning/predictions.csv
+  metrics: Results/Phase4/deep_learning/metrics.json
+  reliability_patient: Results/Phase4/deep_learning/reliability_patient.csv
+  report: Results/Phase4/deep_learning/PHASE4A_REPORT.md
+  training_curve: Results/Phase4/deep_learning/figures/training_curve.png
+  calibration_curve: Results/Phase4/deep_learning/figures/calibration_curve.png
+  confidence_dist: Results/Phase4/deep_learning/figures/confidence_distribution.png
