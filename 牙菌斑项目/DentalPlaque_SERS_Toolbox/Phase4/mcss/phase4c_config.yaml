@@ -1,0 +1,62 @@
+# Phase 4C: MCSS bag-level deep learning prototype
+# This file intentionally defines one default experiment only.
+# A repeated-split experiment matrix should be added later by the user.
+
+seed: 42
+
+paths:
+  dataset_dir: Results/Phase3/dataset
+  results_dir: Results/Phase4/mcss
+
+split:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  stratify: true
+
+mcss:
+  bag_size: 10
+  train_bags_per_patient: 30
+  eval_bags_per_patient: 50
+  sample_with_replacement: false
+  dynamic_train_bags: true
+
+model:
+  name: MCSS-GatedAttention-MIL
+  in_channels: 1
+  n_wavenumber: 732
+  n_classes: 2
+  kernel_sizes: [3, 7, 15]
+  base_channels: 32
+  n_res_blocks: 2
+  embedding_dim: 96
+  dropout_rate: 0.35
+  group_norm_groups: 4
+  pooling: gated_attention
+  attention_hidden: 64
+
+training:
+  batch_size: 16
+  epochs: 120
+  learning_rate: 0.0007
+  weight_decay: 0.0001
+  early_stopping_patience: 25
+  scheduler_factor: 0.5
+  scheduler_patience: 10
+  label_smoothing: 0.0
+  class_balance_weight: false
+  selection_metric: val_balanced_accuracy
+
+mc_dropout:
+  enabled: true
+  train_eval_samples: 10
+  final_samples: 50
+
+calibration:
+  enabled: true
+  method: temperature_scaling
+
+threshold:
+  strategy: max_balanced_accuracy
+  sens_constraint: null
+  spec_constraint: null
