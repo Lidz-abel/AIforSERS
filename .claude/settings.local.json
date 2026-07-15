@@ -12,7 +12,8 @@
       "Bash(python train_baseline.py)",
       "Bash(python:*)",
       "Bash(rm:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(taskkill /F /IM python.exe)"
     ]
   }
 }
