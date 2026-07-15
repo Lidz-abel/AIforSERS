@@ -10,7 +10,9 @@
       "Bash(python build_features.py)",
       "Bash(pip install:*)",
       "Bash(python train_baseline.py)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(rm:*)",
+      "Bash(cd:*)"
     ]
   }
 }

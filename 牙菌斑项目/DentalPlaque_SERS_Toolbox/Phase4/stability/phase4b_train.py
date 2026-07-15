@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import io
+import random
 import sys
 import time
 import warnings
@@ -161,14 +162,21 @@ def patient_auc_from_model(model, dataloader, patient_index, patient_mask, devic
 
 
 # ── Patient-level metrics on val set (for model selection) ─────────────────
+#
+# DEPRECATED — use mc_val_inference() instead.
+# This function uses deterministic softmax (no MC Dropout), which is
+# inconsistent with the MC-based test pipeline.  Kept only for reference;
+# all model selection now goes through mc_val_inference().
 
 
 def compute_val_patient_metrics(
     model, dataloader, patient_index, patient_mask, device, agg_method="mean"
 ):
-    """Compute patient-level metrics on validation set.
+    """DEPRECATED: use mc_val_inference() for MC Dropout-compatible evaluation.
 
-    Returns dict with: prob_positive, true_label, pred_class (at 0.5), auc, bal_acc, sens, spec.
+    Computes patient-level metrics using deterministic (non-MC) softmax.
+    This is NOT consistent with the test pipeline which uses MC Dropout +
+    temperature scaling.  Do NOT use for model selection or evaluation.
     """
     from sklearn.metrics import roc_auc_score
 
@@ -224,14 +232,18 @@ def compute_val_patient_metrics(
 
 def mc_val_inference(
     model, dataloader, patient_index, patient_mask, device, cfg, temp_scaler,
-    agg_method="mean",
+    agg_method="mean", n_samples_override=None,
 ):
     """MC Dropout inference on validation set — same pipeline as test.
 
     Uses MC Dropout + temperature scaling + patient aggregation.
     Returns patient-level prob_positive, true_label, pred_class_05.
+
+    Args:
+        n_samples_override: if set, use this many MC samples instead of cfg value.
+                            Use for faster training-time evaluation.
     """
-    n_samples = cfg["mc_dropout"]["n_samples"]
+    n_samples = n_samples_override if n_samples_override is not None else cfg["mc_dropout"]["n_samples"]
 
     all_mc_probs = []
     all_pidx = []
@@ -378,14 +390,20 @@ def calibrate_on_val_mc(model, val_loader, patient_index, val_patient_mask, devi
 # ── Main: train & evaluate one split ───────────────────────────────────────
 
 
-def run_one_split(cfg: dict, exp_id: str, split_seed: int) -> dict:
+def run_one_split(cfg: dict, exp_id: str, split_seed: int, model_seed: int | None = None) -> dict:
     """Train and evaluate one experiment on one split. Returns results dict."""
     exp_cfg = cfg["experiments"][exp_id]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Reproducibility
-    torch.manual_seed(split_seed)
-    np.random.seed(split_seed)
+    if model_seed is None:
+        model_seed = split_seed + 1000
+    random.seed(model_seed)
+    torch.manual_seed(model_seed)
+    np.random.seed(model_seed)
+    if torch.cuda.is_available():
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
     # ── Load data ──────────────────────────────────────
     data = load_phase4_dataset({"paths": cfg["paths"]})
@@ -429,7 +447,7 @@ def run_one_split(cfg: dict, exp_id: str, split_seed: int) -> dict:
     test_ds = SpectrumDataset(X[test_spec], y[test_spec])
 
     batch_size = cfg["training"]["batch_size"]
-    g = torch.Generator().manual_seed(split_seed)
+    g = torch.Generator().manual_seed(model_seed)
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, generator=g)
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False)
@@ -473,11 +491,11 @@ def run_one_split(cfg: dict, exp_id: str, split_seed: int) -> dict:
         v_loss = val_loss_weighted(model, val_loader, device)
 
         # Compute val patient metrics using MC Dropout (same stochastic process as test).
-        # No temperature scaling yet (fitted after training), but MC ensures the relative
-        # ranking across epochs is consistent with the final evaluation pipeline.
+        # Use fewer MC samples during training for speed (n=10 vs 50); final threshold
+        # optimization uses the full 50-sample posterior.
         val_metrics = mc_val_inference(
             model, val_loader, pidx_all[val_spec], val_mask, device, cfg,
-            temp_scaler=None, agg_method=agg_method,
+            temp_scaler=None, agg_method=agg_method, n_samples_override=10,
         )
 
         # Determine score for model selection
@@ -538,6 +556,7 @@ def run_one_split(cfg: dict, exp_id: str, split_seed: int) -> dict:
         val_final["prob_positive"],
         strategy=exp_cfg["threshold_strategy"],
         sens_constraint=exp_cfg.get("threshold_sens_constraint"),
+        spec_constraint=exp_cfg.get("threshold_spec_constraint"),
     )
     best_threshold = thresh_result["threshold"]
 
@@ -594,16 +613,17 @@ def run_one_split(cfg: dict, exp_id: str, split_seed: int) -> dict:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--exp", type=str, required=True, help="Experiment ID (B0-B4)")
+    parser.add_argument("--exp", type=str, required=True, help="Experiment ID (B0-B7)")
     parser.add_argument("--split_seed", type=int, required=True, help="Split seed (0-19)")
+    parser.add_argument("--model_seed", type=int, default=None, help="Model seed (default: split_seed+1000)")
     parser.add_argument("--output", type=str, default=None, help="Output JSON path")
     args = parser.parse_args()
 
     cfg = load_phase4b_config()
 
-    print(f"Phase4B: exp={args.exp} split_seed={args.split_seed}")
+    print(f"Phase4B: exp={args.exp} split_seed={args.split_seed} model_seed={args.model_seed or args.split_seed + 1000}")
     t0 = time.time()
-    result = run_one_split(cfg, args.exp, args.split_seed)
+    result = run_one_split(cfg, args.exp, args.split_seed, args.model_seed)
     elapsed = time.time() - t0
     print(f"  Completed in {elapsed:.1f}s")
     print(f"  Test AUC={result['test_metrics']['roc_auc']:.4f}, "

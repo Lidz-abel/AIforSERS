@@ -148,10 +148,17 @@ class TemperatureScaling:
 
     Fit a single temperature parameter T on validation logits/labels.
     calibrated_logit = raw_logit / T
+
+    T is parameterized as log_temperature internally (T = exp(log_T)),
+    guaranteeing T > 0 regardless of optimizer step direction.
     """
 
     def __init__(self):
-        self.temperature = torch.nn.Parameter(torch.ones(1))
+        self.log_temperature = torch.nn.Parameter(torch.zeros(1))  # log(1) = 0
+
+    @property
+    def temperature(self) -> torch.Tensor:
+        return torch.exp(self.log_temperature)
 
     def fit(
         self,
@@ -162,18 +169,25 @@ class TemperatureScaling:
     ) -> float:
         """Fit temperature on validation data (patient-level logits & labels).
 
-        Returns the optimized temperature value.
+        Returns the optimized temperature value (guaranteed > 0).
         """
-        self.temperature.data = torch.ones(1)
-        optimizer = torch.optim.LBFGS([self.temperature], lr=lr, max_iter=max_iter)
+        self.log_temperature.data = torch.zeros(1)
+        optimizer = torch.optim.LBFGS([self.log_temperature], lr=lr, max_iter=max_iter)
 
         def _eval():
             optimizer.zero_grad()
-            loss = F.cross_entropy(logits / self.temperature, labels)
+            T = torch.exp(self.log_temperature)
+            loss = F.cross_entropy(logits / T, labels)
             loss.backward()
             return loss
 
         optimizer.step(_eval)
+
+        # Clamp T to [0.05, 10] to prevent extreme values from small validation sets.
+        # T outside this range is almost certainly an artifact of the 10-patient val split.
+        with torch.no_grad():
+            self.log_temperature.data.clamp_(min=np.log(0.05), max=np.log(10.0))
+
         return self.temperature.item()
 
     def calibrate(self, logits: torch.Tensor) -> torch.Tensor:

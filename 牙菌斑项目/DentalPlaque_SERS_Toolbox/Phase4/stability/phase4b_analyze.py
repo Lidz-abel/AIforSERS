@@ -42,7 +42,7 @@ def load_config():
 
 def load_all_results() -> dict[str, list[dict]]:
     """Load all per-split JSON files.  Returns {exp_id: [result_dict, ...]}."""
-    splits_dir = _toolbox / "Results" / "Phase4" / "stability" / "splits"
+    splits_dir = _toolbox / "Results" / "Phase4" / "stability_v2" / "splits"
     results: dict[str, list] = {}
     for exp_dir in sorted(splits_dir.iterdir()):
         if not exp_dir.is_dir():
@@ -124,7 +124,7 @@ def plot_boxplots(all_results: dict, cfg: dict):
                  fontsize=12, fontweight="bold")
     fig.tight_layout()
 
-    out_path = _toolbox / "Results" / "Phase4" / "stability" / "figures" / "phase4b_boxplot.png"
+    out_path = _toolbox / "Results" / "Phase4" / "stability_v2" / "figures" / "phase4b_boxplot.png"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
@@ -225,19 +225,20 @@ def write_report(all_results, paired_stats, win_counts, cfg):
     lines = []
     lines.append("# Phase 4B: Stability Validation & Ablation Study")
     lines.append("")
-    lines.append(f"**日期**: 2026-07-13")
-    lines.append(f"**状态**: 探索性内部验证")
+    lines.append(f"**日期**: 2026-07-15")
+    lines.append(f"**状态**: 探索性内部验证 (Phase4B v2 — accuracy-oriented, no forced sensitivity)")
     lines.append("")
     lines.append("## 1. 概述")
     lines.append("")
-    lines.append(f"Phase4B 在 {cfg['n_repeats']} 次 repeated patient-level split 上验证 CC-SERSNet v1 的稳定性，")
-    lines.append(f"并对损失函数、患者聚合方法、决策阈值和模型选择标准进行系统消融实验。")
+    lines.append(f"Phase4B v2 在 {cfg['n_repeats']} 次 repeated patient-level split 上验证 CC-SERSNet v1 的稳定性。")
+    lines.append(f"v2 重新设计实验矩阵，移除 sensitivity ≥ 0.90 强制约束，")
+    lines.append(f"改为以 accuracy/balanced accuracy 为导向的阈值策略和模型选择标准。")
     lines.append("")
 
     lines.append("## 2. 实验矩阵")
     lines.append("")
-    lines.append("| ID | Loss | Aggregation | Threshold | Selection |")
-    lines.append("|----|------|------------|-----------|-----------|")
+    lines.append("| ID | Loss | Aggregation | Threshold | Selection | Constraint |")
+    lines.append("|----|------|------------|-----------|-----------|------------|")
     for eid in exp_ids:
         ec = cfg["experiments"][eid]
         loss_desc = {
@@ -251,17 +252,31 @@ def write_report(all_results, paired_stats, win_counts, cfg):
 
         thresh_desc = {
             "fixed_0.5": "0.5 (fixed)",
-            "max_balanced_accuracy": "max BalAcc (sens≥0.90)",
+            "max_balanced_accuracy": "max BalAcc",
+            "max_accuracy": "max Accuracy",
+            "max_youden": "max Youden",
+            "max_specificity": "max Specificity",
         }
         thresh_name = thresh_desc.get(ec["threshold_strategy"], ec["threshold_strategy"])
 
         sel_desc = {
             "val_auc": "val AUC",
-            "val_balanced_accuracy": "val BalAcc (sens≥0.90)",
+            "val_balanced_accuracy": "val BalAcc",
+            "val_accuracy": "val Accuracy",
         }
         sel_name = sel_desc.get(ec["selection_metric"], ec["selection_metric"])
 
-        lines.append(f"| {eid} | {loss_name} | {ec['aggregation']} | {thresh_name} | {sel_name} |")
+        # Build constraint description
+        constraint_parts = []
+        if ec.get("threshold_sens_constraint") is not None:
+            constraint_parts.append(f"sen≥{ec['threshold_sens_constraint']}")
+        if ec.get("threshold_spec_constraint") is not None:
+            constraint_parts.append(f"spec≥{ec['threshold_spec_constraint']}")
+        if ec.get("selection_sens_constraint") is not None:
+            constraint_parts.append(f"sel:sen≥{ec['selection_sens_constraint']}")
+        constraint_name = ", ".join(constraint_parts) if constraint_parts else "none"
+
+        lines.append(f"| {eid} | {loss_name} | {ec['aggregation']} | {thresh_name} | {sel_name} | {constraint_name} |")
 
     lines.append("")
     lines.append("## 3. 总体结果 (mean ± std across {n} splits)".format(n=cfg["n_repeats"]))
@@ -333,9 +348,9 @@ def write_report(all_results, paired_stats, win_counts, cfg):
     lines.append("")
     lines.append("**This is an exploratory internal validation. No external clinical validation yet.**")
 
-    report_path = _toolbox / "Results" / "Phase4" / "stability" / "PHASE4B_REPORT.md"
+    report_path = _toolbox / "Results" / "Phase4" / "stability_v2" / "PHASE4B_REPORT.md"
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(report_path, "w", encoding="utf-8") as f:
+    with open(report_path, "w", encoding="utf-8-sig") as f:
         f.write("\n".join(lines))
     print(f"Report saved: {report_path}")
 

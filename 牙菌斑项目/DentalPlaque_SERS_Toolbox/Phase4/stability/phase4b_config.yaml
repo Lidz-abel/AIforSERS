@@ -1,6 +1,6 @@
-# Phase 4B: Stability Validation + Ablation Study
-# 20 repeated patient-level splits × 5 experiment configs
-# Goal: optimize patient-level accuracy without sacrificing sensitivity
+# Phase 4B v2: Stability Validation + Ablation Study
+# 20 repeated patient-level splits × 8 experiment configs
+# Goal: optimize patient-level accuracy (no forced sensitivity >= 0.90)
 
 seed: 42
 n_repeats: 20
@@ -10,8 +10,8 @@ paths:
   dataset_dir: Results/Phase3/dataset
   splits_dir: Results/Phase3/splits
   split_file: split_seed42.json  # required by load_phase4_dataset; splits re-created
-  results_dir: Results/Phase4/stability
-  figures_dir: Results/Phase4/stability/figures
+  results_dir: Results/Phase4/stability_v2
+  figures_dir: Results/Phase4/stability_v2/figures
 
 # ── Model (fixed, from Phase4A v1.1) ───────────────────
 model:
@@ -54,11 +54,17 @@ split:
   stratify: true
 
 # ── Experiment Matrix ──────────────────────────────────
-#  B0: patient-balanced CE, mean agg, threshold=0.5,  selection=val AUC
-#  B1: patient-balanced CE, mean agg, threshold=opt,    selection=val bal_acc + sens>=0.90
-#  B2: patient-balanced CE, median agg, threshold=opt,  selection=val bal_acc + sens>=0.90
-#  B3: patient+class-balanced CE, mean agg, threshold=opt, selection=val bal_acc + sens>=0.90
-#  B4: patient-balanced CE + label_smoothing, mean agg, threshold=opt, selection=val bal_acc + sens>=0.90
+#  Accuracy-oriented redesign (Phase4B v2).
+#  NO sensitivity >= 0.90 constraint on any experiment.
+#
+#  B0: patient-balanced CE, mean agg, threshold=0.5,      selection=val AUC           (baseline)
+#  B1: patient-balanced CE, mean agg, threshold=max_bal_acc,   selection=val bal_acc
+#  B2: patient-balanced CE, mean agg, threshold=max_accuracy,  selection=val accuracy
+#  B3: patient-balanced CE, mean agg, threshold=max_youden,    selection=val AUC
+#  B4: patient-balanced CE, mean agg, threshold=max_bal_acc+spec≥0.50, selection=val bal_acc
+#  B5: patient-balanced CE, median agg, threshold=max_bal_acc, selection=val bal_acc
+#  B6: patient+class-balanced CE, mean agg, threshold=max_bal_acc, selection=val bal_acc
+#  B7: patient-balanced CE + label_smoothing, mean agg, threshold=max_bal_acc, selection=val bal_acc
 
 experiments:
   B0:
@@ -77,39 +83,70 @@ experiments:
     class_balance_weight: false
     aggregation: mean
     threshold_strategy: max_balanced_accuracy
-    threshold_sens_constraint: 0.90
+    threshold_sens_constraint: null
     selection_metric: val_balanced_accuracy
-    selection_sens_constraint: 0.90
+    selection_sens_constraint: null
 
   B2:
     loss: patient_balanced_ce
     label_smoothing: 0.0
     class_balance_weight: false
-    aggregation: median
-    threshold_strategy: max_balanced_accuracy
-    threshold_sens_constraint: 0.90
-    selection_metric: val_balanced_accuracy
-    selection_sens_constraint: 0.90
+    aggregation: mean
+    threshold_strategy: max_accuracy
+    threshold_sens_constraint: null
+    selection_metric: val_accuracy
+    selection_sens_constraint: null
 
   B3:
+    loss: patient_balanced_ce
+    label_smoothing: 0.0
+    class_balance_weight: false
+    aggregation: mean
+    threshold_strategy: max_youden
+    threshold_sens_constraint: null
+    selection_metric: val_auc
+    selection_sens_constraint: null
+
+  B4:
+    loss: patient_balanced_ce
+    label_smoothing: 0.0
+    class_balance_weight: false
+    aggregation: mean
+    threshold_strategy: max_balanced_accuracy
+    threshold_sens_constraint: null
+    threshold_spec_constraint: 0.50
+    selection_metric: val_balanced_accuracy
+    selection_sens_constraint: null
+
+  B5:
+    loss: patient_balanced_ce
+    label_smoothing: 0.0
+    class_balance_weight: false
+    aggregation: median
+    threshold_strategy: max_balanced_accuracy
+    threshold_sens_constraint: null
+    selection_metric: val_balanced_accuracy
+    selection_sens_constraint: null
+
+  B6:
     loss: patient_balanced_ce
     label_smoothing: 0.0
     class_balance_weight: true
     aggregation: mean
     threshold_strategy: max_balanced_accuracy
-    threshold_sens_constraint: 0.90
+    threshold_sens_constraint: null
     selection_metric: val_balanced_accuracy
-    selection_sens_constraint: 0.90
+    selection_sens_constraint: null
 
-  B4:
+  B7:
     loss: patient_balanced_ce
     label_smoothing: 0.1
     class_balance_weight: false
     aggregation: mean
     threshold_strategy: max_balanced_accuracy
-    threshold_sens_constraint: 0.90
+    threshold_sens_constraint: null
     selection_metric: val_balanced_accuracy
-    selection_sens_constraint: 0.90
+    selection_sens_constraint: null
 
 # ── Evaluation ─────────────────────────────────────────
 evaluation:
@@ -126,7 +163,7 @@ evaluation:
 
 # ── Outputs ────────────────────────────────────────────
 outputs:
-  results_json: Results/Phase4/stability/phase4b_results.json
-  summary_csv: Results/Phase4/stability/phase4b_summary.csv
-  boxplot: Results/Phase4/stability/figures/phase4b_boxplot.png
-  report: Results/Phase4/stability/PHASE4B_REPORT.md
+  results_json: Results/Phase4/stability_v2/phase4b_results.json
+  summary_csv: Results/Phase4/stability_v2/phase4b_summary.csv
+  boxplot: Results/Phase4/stability_v2/figures/phase4b_boxplot.png
+  report: Results/Phase4/stability_v2/PHASE4B_REPORT.md

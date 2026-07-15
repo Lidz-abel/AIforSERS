@@ -37,6 +37,7 @@ def optimize_threshold(
     y_prob: np.ndarray,
     strategy: str = "max_balanced_accuracy",
     sens_constraint: float | None = None,
+    spec_constraint: float | None = None,
 ) -> dict:
     """Find optimal decision threshold on validation data.
 
@@ -47,6 +48,8 @@ def optimize_threshold(
                           "max_youden", "max_specificity"}.
         sens_constraint: if not None, only consider thresholds where sensitivity
                          >= sens_constraint.
+        spec_constraint: if not None, only consider thresholds where specificity
+                         >= spec_constraint.
 
     Returns:
         {threshold, sensitivity, specificity, balanced_accuracy, youden, accuracy}
@@ -67,7 +70,11 @@ def optimize_threshold(
         res = _threshold_result(y_true, y_pred, t)
 
         # Check sensitivity constraint
-        if sens_constraint is not None and res["sensitivity"] < sens_constraint:
+        if sens_constraint is not None and res["sensitivity"] is not None and res["sensitivity"] < sens_constraint:
+            continue
+
+        # Check specificity constraint
+        if spec_constraint is not None and res["specificity"] is not None and res["specificity"] < spec_constraint:
             continue
 
         if strategy == "max_accuracy":

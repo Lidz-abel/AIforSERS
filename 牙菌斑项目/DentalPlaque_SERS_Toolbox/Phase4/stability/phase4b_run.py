@@ -37,7 +37,7 @@ def load_config():
 
 
 def results_dir() -> Path:
-    return _toolbox / "Results" / "Phase4" / "stability"
+    return _toolbox / "Results" / "Phase4" / "stability_v2"
 
 
 def split_result_path(exp_id: str, split_seed: int) -> Path:
@@ -61,7 +61,7 @@ def save_split_result(exp_id: str, split_seed: int, result: dict):
         json.dump(result, f, indent=2, default=str)
 
 
-def run_one(cfg: dict, exp_id: str, split_seed: int) -> dict | None:
+def run_one(cfg: dict, exp_id: str, split_seed: int, model_seed: int | None = None) -> dict | None:
     """Call phase4b_train.py as subprocess.  Returns parsed result dict."""
     train_script = Path(__file__).resolve().parent / "phase4b_train.py"
     output_path = split_result_path(exp_id, split_seed)
@@ -72,6 +72,8 @@ def run_one(cfg: dict, exp_id: str, split_seed: int) -> dict | None:
         "--split_seed", str(split_seed),
         "--output", str(output_path),
     ]
+    if model_seed is not None:
+        cmd.extend(["--model_seed", str(model_seed)])
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=900)
         print(result.stdout)
@@ -127,7 +129,7 @@ def main():
 
             print(f"  [{exp_id}] split_seed={split_seed:02d} — running...", end=" ", flush=True)
             t0 = time.time()
-            result = run_one(cfg, exp_id, split_seed)
+            result = run_one(cfg, exp_id, split_seed, model_seed=split_seed + 1000)
             elapsed = time.time() - t0
 
             if result is not None:
@@ -213,8 +215,14 @@ def main():
             s = aggregated[exp_id]
             row = [exp_id, s["n_splits"]]
             for m in metric_names + prop_metrics:
-                row.append(s.get(f"{m}_mean", "NA"))
-                row.append(s.get(f"{m}_std", "NA"))
+                # metric_names (roc_auc, etc.) are nested dicts: s[m]["mean"]
+                # prop_metrics (sensitivity, etc.) are flat: s[f"{m}_mean"]
+                if m in metric_names and isinstance(s.get(m), dict):
+                    row.append(s[m].get("mean", "NA"))
+                    row.append(s[m].get("std", "NA"))
+                else:
+                    row.append(s.get(f"{m}_mean", "NA"))
+                    row.append(s.get(f"{m}_std", "NA"))
             writer.writerow(row)
     print(f"Summary CSV saved: {csv_path}")
 
