@@ -1,0 +1,157 @@
+gpu7 OOF tasks=[(0, 1), (0, 3), (1, 0), (1, 2), (1, 4), (2, 1), (2, 3), (3, 0), (3, 2), (3, 4), (4, 1), (4, 3)]
+exp_003_dual_view OOF fold=0 member=1 seed=11042 device=cuda train=32 val=9 locked=11
+epoch=001 train_loss=0.6898 val_nll=0.6622 val_auc=0.8500
+epoch=005 train_loss=0.6273 val_nll=0.5378 val_auc=0.8500
+epoch=010 train_loss=0.5915 val_nll=0.3146 val_auc=1.0000
+epoch=015 train_loss=0.2153 val_nll=0.0423 val_auc=1.0000
+epoch=020 train_loss=0.1239 val_nll=0.0376 val_auc=1.0000
+epoch=025 train_loss=0.0846 val_nll=0.0188 val_auc=1.0000
+epoch=030 train_loss=0.0592 val_nll=0.2505 val_auc=1.0000
+epoch=035 train_loss=0.0639 val_nll=0.0946 val_auc=1.0000
+epoch=040 train_loss=0.0581 val_nll=0.0042 val_auc=1.0000
+epoch=045 train_loss=0.0572 val_nll=0.1545 val_auc=1.0000
+epoch=050 train_loss=0.0570 val_nll=0.1545 val_auc=1.0000
+complete fold=0 member=1 epoch=22 nll=0.0030
+exp_003_dual_view OOF fold=0 member=3 seed=31042 device=cuda train=32 val=9 locked=11
+epoch=001 train_loss=0.6979 val_nll=0.7124 val_auc=0.8500
+epoch=005 train_loss=0.6588 val_nll=0.5209 val_auc=0.8500
+epoch=010 train_loss=0.3352 val_nll=0.2475 val_auc=1.0000
+epoch=015 train_loss=0.1541 val_nll=0.1768 val_auc=1.0000
+epoch=020 train_loss=0.0787 val_nll=0.5743 val_auc=1.0000
+epoch=025 train_loss=0.0695 val_nll=0.0330 val_auc=1.0000
+epoch=030 train_loss=0.1045 val_nll=0.2054 val_auc=1.0000
+epoch=035 train_loss=0.0657 val_nll=0.1893 val_auc=1.0000
+epoch=040 train_loss=0.0573 val_nll=0.2468 val_auc=1.0000
+epoch=045 train_loss=0.0579 val_nll=0.1913 val_auc=1.0000
+epoch=050 train_loss=0.0567 val_nll=0.1785 val_auc=1.0000
+epoch=055 train_loss=0.0567 val_nll=0.1874 val_auc=1.0000
+epoch=060 train_loss=0.0567 val_nll=0.1861 val_auc=1.0000
+epoch=065 train_loss=0.0566 val_nll=0.1860 val_auc=1.0000
+epoch=070 train_loss=0.0567 val_nll=0.1867 val_auc=1.0000
+complete fold=0 member=3 epoch=43 nll=0.0173
+exp_003_dual_view OOF fold=1 member=0 seed=1043 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6930 val_nll=0.6345 val_auc=0.9333
+epoch=005 train_loss=0.6300 val_nll=0.4129 val_auc=0.9333
+epoch=010 train_loss=0.3071 val_nll=0.7236 val_auc=0.9333
+epoch=015 train_loss=0.1058 val_nll=0.8425 val_auc=0.9333
+epoch=020 train_loss=0.0690 val_nll=0.7995 val_auc=0.8667
+epoch=025 train_loss=0.0576 val_nll=0.7616 val_auc=0.8667
+epoch=030 train_loss=0.0627 val_nll=0.7671 val_auc=0.8667
+epoch=035 train_loss=0.0570 val_nll=0.7212 val_auc=0.8667
+complete fold=1 member=0 epoch=9 nll=0.3349
+exp_003_dual_view OOF fold=1 member=2 seed=21043 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6859 val_nll=0.7301 val_auc=1.0000
+epoch=005 train_loss=0.6103 val_nll=0.3939 val_auc=0.9333
+epoch=010 train_loss=0.2856 val_nll=0.7342 val_auc=0.9333
+epoch=015 train_loss=0.0740 val_nll=0.6982 val_auc=0.9333
+epoch=020 train_loss=0.0586 val_nll=0.7826 val_auc=1.0000
+epoch=025 train_loss=0.0602 val_nll=0.7085 val_auc=0.9333
+epoch=030 train_loss=0.0591 val_nll=0.7498 val_auc=0.9333
+complete fold=1 member=2 epoch=3 nll=0.3532
+exp_003_dual_view OOF fold=1 member=4 seed=41043 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6922 val_nll=0.6241 val_auc=0.9333
+epoch=005 train_loss=0.5498 val_nll=0.4682 val_auc=0.9333
+epoch=010 train_loss=0.1342 val_nll=0.7503 val_auc=0.9333
+epoch=015 train_loss=0.0745 val_nll=0.7335 val_auc=0.8667
+epoch=020 train_loss=0.0619 val_nll=0.7374 val_auc=0.8000
+epoch=025 train_loss=0.0594 val_nll=0.7273 val_auc=0.8000
+epoch=030 train_loss=0.0566 val_nll=0.7158 val_auc=0.8000
+complete fold=1 member=4 epoch=4 nll=0.4023
+exp_003_dual_view OOF fold=2 member=1 seed=11044 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.7057 val_nll=0.6833 val_auc=0.4667
+epoch=005 train_loss=0.4741 val_nll=1.1500 val_auc=0.4000
+epoch=010 train_loss=0.1184 val_nll=2.2588 val_auc=0.6000
+epoch=015 train_loss=0.0610 val_nll=1.6358 val_auc=0.7333
+epoch=020 train_loss=0.0584 val_nll=1.5572 val_auc=0.7333
+epoch=025 train_loss=0.0577 val_nll=1.5233 val_auc=0.7333
+epoch=030 train_loss=0.0580 val_nll=1.5071 val_auc=0.7333
+complete fold=2 member=1 epoch=1 nll=0.6833
+exp_003_dual_view OOF fold=2 member=3 seed=31044 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6866 val_nll=0.6901 val_auc=0.4667
+epoch=005 train_loss=0.4864 val_nll=1.2977 val_auc=0.4667
+epoch=010 train_loss=0.1651 val_nll=2.0245 val_auc=0.6667
+epoch=015 train_loss=0.0709 val_nll=1.2013 val_auc=0.7333
+epoch=020 train_loss=0.0597 val_nll=1.6699 val_auc=0.8000
+epoch=025 train_loss=0.0580 val_nll=1.4402 val_auc=0.7333
+epoch=030 train_loss=0.0574 val_nll=1.2157 val_auc=0.7333
+complete fold=2 member=3 epoch=1 nll=0.6901
+exp_003_dual_view OOF fold=3 member=0 seed=1045 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.7161 val_nll=0.6543 val_auc=0.6667
+epoch=005 train_loss=0.5875 val_nll=0.5930 val_auc=0.7333
+epoch=010 train_loss=0.3924 val_nll=0.2947 val_auc=1.0000
+epoch=015 train_loss=0.1185 val_nll=0.5277 val_auc=0.9333
+epoch=020 train_loss=0.0573 val_nll=0.6649 val_auc=0.9333
+epoch=025 train_loss=0.0572 val_nll=0.6334 val_auc=0.9333
+epoch=030 train_loss=0.0571 val_nll=0.6484 val_auc=0.9333
+epoch=035 train_loss=0.0571 val_nll=0.9769 val_auc=0.9333
+epoch=040 train_loss=0.0569 val_nll=0.9414 val_auc=0.9333
+complete fold=3 member=0 epoch=10 nll=0.2947
+exp_003_dual_view OOF fold=3 member=2 seed=21045 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6712 val_nll=0.6083 val_auc=0.6667
+epoch=005 train_loss=0.5005 val_nll=0.5034 val_auc=0.8000
+epoch=010 train_loss=0.1852 val_nll=0.1959 val_auc=1.0000
+epoch=015 train_loss=0.0784 val_nll=0.2817 val_auc=1.0000
+epoch=020 train_loss=0.1432 val_nll=0.5135 val_auc=0.9333
+epoch=025 train_loss=0.0610 val_nll=0.5581 val_auc=0.9333
+epoch=030 train_loss=0.0919 val_nll=0.0706 val_auc=1.0000
+epoch=035 train_loss=0.0565 val_nll=0.8372 val_auc=0.9333
+epoch=040 train_loss=0.0566 val_nll=0.9435 val_auc=0.9333
+epoch=045 train_loss=0.0565 val_nll=1.0379 val_auc=0.9333
+complete fold=3 member=2 epoch=19 nll=0.0453
+exp_003_dual_view OOF fold=3 member=4 seed=41045 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6732 val_nll=0.6354 val_auc=0.6667
+epoch=005 train_loss=0.5447 val_nll=0.5135 val_auc=0.8000
+epoch=010 train_loss=0.0921 val_nll=0.8128 val_auc=0.9333
+epoch=015 train_loss=0.0575 val_nll=0.7107 val_auc=0.8667
+epoch=020 train_loss=0.0600 val_nll=0.6831 val_auc=0.9333
+epoch=025 train_loss=0.0578 val_nll=0.7813 val_auc=0.9333
+epoch=030 train_loss=0.0839 val_nll=0.7279 val_auc=0.9333
+epoch=035 train_loss=0.0567 val_nll=0.8051 val_auc=0.9333
+complete fold=3 member=4 epoch=8 nll=0.2950
+exp_003_dual_view OOF fold=4 member=1 seed=11046 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6760 val_nll=0.7555 val_auc=0.4375
+epoch=005 train_loss=0.4976 val_nll=0.8947 val_auc=0.3750
+epoch=010 train_loss=0.3833 val_nll=0.6978 val_auc=1.0000
+epoch=015 train_loss=0.1877 val_nll=0.1553 val_auc=1.0000
+epoch=020 train_loss=0.1398 val_nll=0.1258 val_auc=1.0000
+epoch=025 train_loss=0.0692 val_nll=0.0204 val_auc=1.0000
+epoch=030 train_loss=0.0585 val_nll=0.2997 val_auc=1.0000
+epoch=035 train_loss=0.0663 val_nll=0.5689 val_auc=1.0000
+epoch=040 train_loss=0.0573 val_nll=0.6525 val_auc=1.0000
+epoch=045 train_loss=0.0568 val_nll=0.7091 val_auc=1.0000
+epoch=050 train_loss=0.0567 val_nll=0.7902 val_auc=1.0000
+complete fold=4 member=1 epoch=23 nll=0.0026
+exp_003_dual_view OOF fold=4 member=3 seed=31046 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6648 val_nll=0.8390 val_auc=0.4375
+epoch=005 train_loss=0.5315 val_nll=1.0099 val_auc=0.4375
+epoch=010 train_loss=0.4300 val_nll=0.6272 val_auc=0.7500
+epoch=015 train_loss=0.2646 val_nll=1.0273 val_auc=1.0000
+epoch=020 train_loss=0.2475 val_nll=0.7738 val_auc=1.0000
+epoch=025 train_loss=0.0928 val_nll=1.2116 val_auc=1.0000
+epoch=030 train_loss=0.0596 val_nll=0.1233 val_auc=1.0000
+epoch=035 train_loss=0.0575 val_nll=0.3705 val_auc=1.0000
+epoch=040 train_loss=0.0572 val_nll=0.2146 val_auc=1.0000
+epoch=045 train_loss=0.0576 val_nll=0.2537 val_auc=1.0000
+epoch=050 train_loss=0.0586 val_nll=0.3292 val_auc=1.0000
+complete fold=4 member=3 epoch=21 nll=0.0138
+waiting for OOF aggregation: 1 remaining
+waiting for OOF aggregation: 1 remaining
+waiting for OOF aggregation: 1 remaining
+waiting for OOF aggregation: 1 remaining
+waiting for OOF aggregation: 1 remaining
+waiting for OOF aggregation: 1 remaining
+waiting for OOF aggregation: 1 remaining
+gpu7 final members=[1, 3]
+exp_003_dual_view final member=1 seed=11942 epochs=22 device=cuda
+epoch=001/22 train_loss=0.6780
+epoch=005/22 train_loss=0.5651
+epoch=010/22 train_loss=0.1426
+epoch=015/22 train_loss=0.1834
+epoch=020/22 train_loss=0.0713
+complete final member=1
+exp_003_dual_view final member=3 seed=31942 epochs=12 device=cuda
+epoch=001/12 train_loss=0.6630
+epoch=005/12 train_loss=0.5052
+epoch=010/12 train_loss=0.2451
+complete final member=3
+gpu7 complete

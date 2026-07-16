@@ -1,0 +1,33 @@
+{
+  "completed": true,
+  "leakage_overlap": 0,
+  "threshold": 0.42999999999999994,
+  "temperature": 1.3172304848049778,
+  "test_confidence_intervals_95": {
+    "auc_stratified_bootstrap": [
+      0.4285714285714286,
+      1.0
+    ],
+    "accuracy_wilson": [
+      0.5230138624217553,
+      0.9486333993289995
+    ],
+    "sensitivity_wilson": [
+      0.48686549668097007,
+      0.9743210440510253
+    ],
+    "specificity_wilson": [
+      0.3006360524426366,
+      0.9544139373553637
+    ]
+  },
+  "uncertainty_error_detection_auc": {
+    "sampling_uncertainty": 0.4444444444444444,
+    "aleatoric_uncertainty": 0.38888888888888895,
+    "epistemic_uncertainty": 0.16666666666666669
+  },
+  "misclassified_patient_ids": [
+    27,
+    51
+  ]
+}

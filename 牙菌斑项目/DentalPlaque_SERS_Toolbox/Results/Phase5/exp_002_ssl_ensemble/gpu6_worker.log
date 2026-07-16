@@ -1,0 +1,241 @@
+gpu6 SSL scopes=[0, 2, 4]
+SSL scope=0 patients=32 spectra=1172 locked_test=11
+ssl_epoch=001/60 loss=1.01816 recon=0.60347 contrast=4.14692
+ssl_epoch=005/60 loss=0.68917 recon=0.35175 contrast=3.37421
+ssl_epoch=010/60 loss=0.57614 recon=0.29061 contrast=2.85532
+ssl_epoch=015/60 loss=0.54347 recon=0.27615 contrast=2.67316
+ssl_epoch=020/60 loss=0.50479 recon=0.24627 contrast=2.58528
+ssl_epoch=025/60 loss=0.48564 recon=0.23268 contrast=2.52958
+ssl_epoch=030/60 loss=0.45809 recon=0.21358 contrast=2.44509
+ssl_epoch=035/60 loss=0.45381 recon=0.21730 contrast=2.36512
+ssl_epoch=040/60 loss=0.44730 recon=0.21615 contrast=2.31147
+ssl_epoch=045/60 loss=0.42686 recon=0.19850 contrast=2.28365
+ssl_epoch=050/60 loss=0.43485 recon=0.20861 contrast=2.26242
+ssl_epoch=055/60 loss=0.41070 recon=0.19166 contrast=2.19043
+ssl_epoch=060/60 loss=0.41291 recon=0.19345 contrast=2.19462
+SSL complete checkpoint=/data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase5/exp_002_ssl_ensemble/ssl_fold_0.pt
+SSL scope=2 patients=33 spectra=1277 locked_test=11
+ssl_epoch=001/60 loss=1.09633 recon=0.68416 contrast=4.12175
+ssl_epoch=005/60 loss=0.68175 recon=0.35821 contrast=3.23542
+ssl_epoch=010/60 loss=0.55570 recon=0.28125 contrast=2.74451
+ssl_epoch=015/60 loss=0.52262 recon=0.25743 contrast=2.65194
+ssl_epoch=020/60 loss=0.49716 recon=0.24199 contrast=2.55176
+ssl_epoch=025/60 loss=0.48589 recon=0.24031 contrast=2.45578
+ssl_epoch=030/60 loss=0.47089 recon=0.22857 contrast=2.42321
+ssl_epoch=035/60 loss=0.45609 recon=0.22805 contrast=2.28043
+ssl_epoch=040/60 loss=0.45505 recon=0.22735 contrast=2.27702
+ssl_epoch=045/60 loss=0.43963 recon=0.21317 contrast=2.26462
+ssl_epoch=050/60 loss=0.40901 recon=0.19934 contrast=2.09670
+ssl_epoch=055/60 loss=0.39782 recon=0.19527 contrast=2.02545
+ssl_epoch=060/60 loss=0.37445 recon=0.18188 contrast=1.92571
+SSL complete checkpoint=/data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase5/exp_002_ssl_ensemble/ssl_fold_2.pt
+SSL scope=4 patients=33 spectra=1327 locked_test=11
+ssl_epoch=001/60 loss=1.04396 recon=0.63100 contrast=4.12956
+ssl_epoch=005/60 loss=0.67425 recon=0.35006 contrast=3.24188
+ssl_epoch=010/60 loss=0.55861 recon=0.28492 contrast=2.73694
+ssl_epoch=015/60 loss=0.52752 recon=0.26456 contrast=2.62959
+ssl_epoch=020/60 loss=0.49808 recon=0.25143 contrast=2.46650
+ssl_epoch=025/60 loss=0.49768 recon=0.25757 contrast=2.40107
+ssl_epoch=030/60 loss=0.46580 recon=0.23215 contrast=2.33645
+ssl_epoch=035/60 loss=0.45717 recon=0.23055 contrast=2.26622
+ssl_epoch=040/60 loss=0.42160 recon=0.19499 contrast=2.26613
+ssl_epoch=045/60 loss=0.45034 recon=0.21499 contrast=2.35354
+ssl_epoch=050/60 loss=0.41628 recon=0.20931 contrast=2.06976
+ssl_epoch=055/60 loss=0.41919 recon=0.21307 contrast=2.06122
+ssl_epoch=060/60 loss=0.38073 recon=0.18196 contrast=1.98769
+SSL complete checkpoint=/data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase5/exp_002_ssl_ensemble/ssl_fold_4.pt
+waiting for SSL checkpoints: 1 remaining
+gpu6 OOF tasks=[(0, 0), (0, 2), (0, 4), (1, 1), (1, 3), (2, 0), (2, 2), (2, 4), (3, 1), (3, 3), (4, 0), (4, 2), (4, 4)]
+exp_002_ssl_ensemble OOF fold=0 member=0 seed=1042 device=cuda train=32 val=9 locked=11
+epoch=001 train_loss=0.6745 val_nll=0.6247 val_auc=0.9000
+epoch=005 train_loss=0.5997 val_nll=0.5079 val_auc=0.8500
+epoch=010 train_loss=0.5406 val_nll=1.0178 val_auc=0.9000
+epoch=015 train_loss=0.4707 val_nll=1.1605 val_auc=0.9000
+epoch=020 train_loss=0.1949 val_nll=0.6377 val_auc=0.9000
+epoch=025 train_loss=0.1762 val_nll=0.7039 val_auc=0.9000
+epoch=030 train_loss=0.0893 val_nll=0.4933 val_auc=1.0000
+epoch=035 train_loss=0.0607 val_nll=0.0873 val_auc=1.0000
+epoch=040 train_loss=0.0624 val_nll=0.2008 val_auc=1.0000
+epoch=045 train_loss=0.1614 val_nll=0.3932 val_auc=0.9500
+epoch=050 train_loss=0.0598 val_nll=0.3264 val_auc=1.0000
+epoch=055 train_loss=0.0587 val_nll=0.3249 val_auc=1.0000
+epoch=060 train_loss=0.0588 val_nll=0.1957 val_auc=1.0000
+epoch=065 train_loss=0.0589 val_nll=0.1542 val_auc=1.0000
+complete fold=0 member=0 epoch=36 nll=0.0693
+exp_002_ssl_ensemble OOF fold=0 member=2 seed=21042 device=cuda train=32 val=9 locked=11
+epoch=001 train_loss=0.6798 val_nll=0.6584 val_auc=0.7500
+epoch=005 train_loss=0.6591 val_nll=0.4976 val_auc=0.8500
+epoch=010 train_loss=0.5529 val_nll=0.6712 val_auc=0.9000
+epoch=015 train_loss=0.6215 val_nll=0.3531 val_auc=1.0000
+epoch=020 train_loss=0.2067 val_nll=0.0256 val_auc=1.0000
+epoch=025 train_loss=0.1317 val_nll=0.0043 val_auc=1.0000
+epoch=030 train_loss=0.0911 val_nll=0.1412 val_auc=1.0000
+epoch=035 train_loss=0.0664 val_nll=0.0037 val_auc=1.0000
+epoch=040 train_loss=0.0578 val_nll=0.0041 val_auc=1.0000
+epoch=045 train_loss=0.0575 val_nll=0.0054 val_auc=1.0000
+epoch=050 train_loss=0.0574 val_nll=0.0062 val_auc=1.0000
+epoch=055 train_loss=0.0599 val_nll=0.0078 val_auc=1.0000
+epoch=060 train_loss=0.0591 val_nll=0.0067 val_auc=1.0000
+epoch=065 train_loss=0.0568 val_nll=0.0064 val_auc=1.0000
+complete fold=0 member=2 epoch=35 nll=0.0037
+exp_002_ssl_ensemble OOF fold=0 member=4 seed=41042 device=cuda train=32 val=9 locked=11
+epoch=001 train_loss=0.6585 val_nll=0.4371 val_auc=0.8500
+epoch=005 train_loss=0.6312 val_nll=0.4585 val_auc=0.8500
+epoch=010 train_loss=0.5015 val_nll=0.2899 val_auc=0.9000
+epoch=015 train_loss=0.3568 val_nll=0.1604 val_auc=1.0000
+epoch=020 train_loss=0.1424 val_nll=0.0987 val_auc=1.0000
+epoch=025 train_loss=0.0869 val_nll=0.0221 val_auc=1.0000
+epoch=030 train_loss=0.0659 val_nll=0.0740 val_auc=1.0000
+epoch=035 train_loss=0.0590 val_nll=0.1511 val_auc=1.0000
+epoch=040 train_loss=0.0574 val_nll=0.0962 val_auc=1.0000
+epoch=045 train_loss=0.0571 val_nll=0.1266 val_auc=1.0000
+epoch=050 train_loss=0.0569 val_nll=0.1327 val_auc=1.0000
+complete fold=0 member=4 epoch=21 nll=0.0072
+exp_002_ssl_ensemble OOF fold=1 member=1 seed=11043 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.7074 val_nll=0.7032 val_auc=0.7333
+epoch=005 train_loss=0.5754 val_nll=0.6272 val_auc=0.9333
+epoch=010 train_loss=0.4212 val_nll=0.8891 val_auc=0.8667
+epoch=015 train_loss=0.2833 val_nll=1.3539 val_auc=0.6667
+epoch=020 train_loss=0.1745 val_nll=1.6122 val_auc=0.6667
+epoch=025 train_loss=0.1351 val_nll=1.1579 val_auc=0.8000
+epoch=030 train_loss=0.0933 val_nll=1.6113 val_auc=0.6667
+epoch=035 train_loss=0.0850 val_nll=1.2501 val_auc=0.8000
+complete fold=1 member=1 epoch=6 nll=0.4358
+exp_002_ssl_ensemble OOF fold=1 member=3 seed=31043 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.7164 val_nll=0.6639 val_auc=0.9333
+epoch=005 train_loss=0.6676 val_nll=0.4988 val_auc=0.9333
+epoch=010 train_loss=0.5975 val_nll=0.6194 val_auc=0.8667
+epoch=015 train_loss=0.2051 val_nll=1.2340 val_auc=0.8667
+epoch=020 train_loss=0.0672 val_nll=0.3193 val_auc=0.9333
+epoch=025 train_loss=0.0864 val_nll=0.4317 val_auc=0.8667
+epoch=030 train_loss=0.0631 val_nll=0.4361 val_auc=0.9333
+epoch=035 train_loss=0.0575 val_nll=0.5611 val_auc=0.9333
+epoch=040 train_loss=0.0646 val_nll=0.5333 val_auc=0.8667
+epoch=045 train_loss=0.0619 val_nll=0.5250 val_auc=0.8667
+epoch=050 train_loss=0.0604 val_nll=0.3058 val_auc=0.9333
+epoch=055 train_loss=0.0569 val_nll=0.2857 val_auc=0.9333
+epoch=060 train_loss=0.0571 val_nll=0.2928 val_auc=0.8667
+epoch=065 train_loss=0.0577 val_nll=0.2338 val_auc=1.0000
+epoch=070 train_loss=0.0578 val_nll=0.2940 val_auc=0.9333
+epoch=075 train_loss=0.0568 val_nll=0.2849 val_auc=0.9333
+epoch=080 train_loss=0.0568 val_nll=0.2392 val_auc=1.0000
+epoch=085 train_loss=0.0584 val_nll=0.2321 val_auc=1.0000
+epoch=090 train_loss=0.0599 val_nll=0.3361 val_auc=0.9333
+epoch=095 train_loss=0.0576 val_nll=0.2277 val_auc=1.0000
+complete fold=1 member=3 epoch=67 nll=0.2234
+exp_002_ssl_ensemble OOF fold=2 member=0 seed=1044 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6069 val_nll=0.9238 val_auc=0.4667
+epoch=005 train_loss=0.4594 val_nll=1.2221 val_auc=0.6000
+epoch=010 train_loss=0.3563 val_nll=1.3509 val_auc=0.6000
+epoch=015 train_loss=0.1453 val_nll=1.2596 val_auc=0.8000
+epoch=020 train_loss=0.0707 val_nll=0.8531 val_auc=0.8000
+epoch=025 train_loss=0.0576 val_nll=0.9366 val_auc=0.9333
+epoch=030 train_loss=0.1025 val_nll=1.1877 val_auc=0.8000
+epoch=035 train_loss=0.0571 val_nll=1.0297 val_auc=0.9333
+epoch=040 train_loss=0.0572 val_nll=0.9124 val_auc=0.9333
+epoch=045 train_loss=0.0569 val_nll=0.9470 val_auc=0.9333
+epoch=050 train_loss=0.0569 val_nll=0.9071 val_auc=0.9333
+complete fold=2 member=0 epoch=23 nll=0.7048
+exp_002_ssl_ensemble OOF fold=2 member=2 seed=21044 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.5588 val_nll=0.8828 val_auc=0.5333
+epoch=005 train_loss=0.4968 val_nll=1.1384 val_auc=0.6667
+epoch=010 train_loss=0.2554 val_nll=1.2209 val_auc=0.6667
+epoch=015 train_loss=0.0745 val_nll=1.3028 val_auc=0.8000
+epoch=020 train_loss=0.0586 val_nll=1.1249 val_auc=0.8000
+epoch=025 train_loss=0.0576 val_nll=0.9662 val_auc=0.8000
+epoch=030 train_loss=0.0576 val_nll=0.9219 val_auc=0.8000
+complete fold=2 member=2 epoch=2 nll=0.7181
+exp_002_ssl_ensemble OOF fold=2 member=4 seed=41044 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.5974 val_nll=0.6705 val_auc=0.5333
+epoch=005 train_loss=0.5414 val_nll=0.7556 val_auc=0.6667
+epoch=010 train_loss=0.2901 val_nll=1.9319 val_auc=0.6667
+epoch=015 train_loss=0.0663 val_nll=1.7884 val_auc=0.6667
+epoch=020 train_loss=0.0578 val_nll=1.5299 val_auc=0.6667
+epoch=025 train_loss=0.0573 val_nll=1.3931 val_auc=0.7333
+epoch=030 train_loss=0.0571 val_nll=1.3548 val_auc=0.7333
+complete fold=2 member=4 epoch=1 nll=0.6705
+exp_002_ssl_ensemble OOF fold=3 member=1 seed=11045 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6995 val_nll=0.6636 val_auc=0.6667
+epoch=005 train_loss=0.5962 val_nll=0.5689 val_auc=0.7333
+epoch=010 train_loss=0.4312 val_nll=0.7215 val_auc=0.8667
+epoch=015 train_loss=0.2448 val_nll=0.7350 val_auc=0.8667
+epoch=020 train_loss=0.0629 val_nll=0.8138 val_auc=0.7333
+epoch=025 train_loss=0.0597 val_nll=0.6902 val_auc=0.6667
+epoch=030 train_loss=0.0603 val_nll=0.6678 val_auc=0.7333
+epoch=035 train_loss=0.0574 val_nll=0.6421 val_auc=0.7333
+complete fold=3 member=1 epoch=8 nll=0.5421
+exp_002_ssl_ensemble OOF fold=3 member=3 seed=31045 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6296 val_nll=0.6242 val_auc=0.7333
+epoch=005 train_loss=0.6173 val_nll=0.8438 val_auc=0.8000
+epoch=010 train_loss=0.4795 val_nll=0.6058 val_auc=0.8667
+epoch=015 train_loss=0.2273 val_nll=1.1059 val_auc=0.8000
+epoch=020 train_loss=0.1600 val_nll=0.7268 val_auc=0.7333
+epoch=025 train_loss=0.0621 val_nll=0.7922 val_auc=0.9333
+epoch=030 train_loss=0.0577 val_nll=0.7659 val_auc=0.9333
+epoch=035 train_loss=0.0573 val_nll=0.7285 val_auc=0.9333
+epoch=040 train_loss=0.0569 val_nll=0.7205 val_auc=0.9333
+complete fold=3 member=3 epoch=12 nll=0.4842
+exp_002_ssl_ensemble OOF fold=4 member=0 seed=1046 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6653 val_nll=0.7932 val_auc=0.5000
+epoch=005 train_loss=0.4954 val_nll=0.7705 val_auc=0.6250
+epoch=010 train_loss=0.4029 val_nll=0.5423 val_auc=0.7500
+epoch=015 train_loss=0.2438 val_nll=1.0528 val_auc=1.0000
+epoch=020 train_loss=0.1507 val_nll=1.3093 val_auc=1.0000
+epoch=025 train_loss=0.0611 val_nll=0.3764 val_auc=0.9375
+epoch=030 train_loss=0.0646 val_nll=0.7505 val_auc=0.9375
+epoch=035 train_loss=0.0743 val_nll=0.4437 val_auc=0.9375
+epoch=040 train_loss=0.0583 val_nll=0.7330 val_auc=0.9375
+epoch=045 train_loss=0.0584 val_nll=1.0155 val_auc=0.8750
+epoch=050 train_loss=0.0593 val_nll=0.6873 val_auc=0.9375
+epoch=055 train_loss=0.0569 val_nll=0.4331 val_auc=0.9375
+complete fold=4 member=0 epoch=27 nll=0.1192
+exp_002_ssl_ensemble OOF fold=4 member=2 seed=21046 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.7065 val_nll=0.7107 val_auc=0.5000
+epoch=005 train_loss=0.5585 val_nll=0.6999 val_auc=0.5625
+epoch=010 train_loss=0.5249 val_nll=0.7887 val_auc=0.5625
+epoch=015 train_loss=0.3742 val_nll=0.4143 val_auc=1.0000
+epoch=020 train_loss=0.2500 val_nll=0.1005 val_auc=1.0000
+epoch=025 train_loss=0.1586 val_nll=0.0865 val_auc=1.0000
+epoch=030 train_loss=0.1840 val_nll=0.4633 val_auc=1.0000
+epoch=035 train_loss=0.0625 val_nll=0.0717 val_auc=1.0000
+epoch=040 train_loss=0.0707 val_nll=0.1295 val_auc=1.0000
+epoch=045 train_loss=0.0581 val_nll=0.1201 val_auc=1.0000
+epoch=050 train_loss=0.0586 val_nll=0.1078 val_auc=1.0000
+epoch=055 train_loss=0.0574 val_nll=0.0975 val_auc=1.0000
+epoch=060 train_loss=0.0581 val_nll=0.1105 val_auc=1.0000
+complete fold=4 member=2 epoch=31 nll=0.0364
+exp_002_ssl_ensemble OOF fold=4 member=4 seed=41046 device=cuda train=33 val=8 locked=11
+epoch=001 train_loss=0.6316 val_nll=0.7269 val_auc=0.5625
+epoch=005 train_loss=0.5394 val_nll=0.6635 val_auc=0.7500
+epoch=010 train_loss=0.3317 val_nll=0.4068 val_auc=0.9375
+epoch=015 train_loss=0.2351 val_nll=0.5496 val_auc=1.0000
+epoch=020 train_loss=0.1716 val_nll=0.4105 val_auc=0.9375
+epoch=025 train_loss=0.0587 val_nll=0.5802 val_auc=0.9375
+epoch=030 train_loss=0.0587 val_nll=1.0470 val_auc=0.9375
+epoch=035 train_loss=0.0581 val_nll=0.2001 val_auc=1.0000
+epoch=040 train_loss=0.0569 val_nll=0.1931 val_auc=1.0000
+epoch=045 train_loss=0.0568 val_nll=0.2087 val_auc=1.0000
+epoch=050 train_loss=0.0568 val_nll=0.2550 val_auc=1.0000
+epoch=055 train_loss=0.0569 val_nll=0.2271 val_auc=1.0000
+complete fold=4 member=4 epoch=28 nll=0.1356
+OOF ensemble AUC=0.9412 Acc=0.8537 BA=0.8235 uncertainty-AUC=0.7381
+gpu6 final members=[0, 2, 4]
+exp_002_ssl_ensemble final member=0 seed=1942 epochs=23 device=cuda
+epoch=001/23 train_loss=0.6681
+epoch=005/23 train_loss=0.5400
+epoch=010/23 train_loss=0.3675
+epoch=015/23 train_loss=0.2664
+epoch=020/23 train_loss=0.1225
+complete final member=0
+exp_002_ssl_ensemble final member=2 seed=21942 epochs=11 device=cuda
+epoch=001/11 train_loss=0.6180
+epoch=005/11 train_loss=0.5843
+epoch=010/11 train_loss=0.3486
+complete final member=2
+exp_002_ssl_ensemble final member=4 seed=41942 epochs=10 device=cuda
+epoch=001/10 train_loss=0.6160
+epoch=005/10 train_loss=0.4239
+epoch=010/10 train_loss=0.1117
+complete final member=4
+FINAL ensemble AUC=0.7500 Acc=0.8182 BA=0.8036
+gpu6 complete

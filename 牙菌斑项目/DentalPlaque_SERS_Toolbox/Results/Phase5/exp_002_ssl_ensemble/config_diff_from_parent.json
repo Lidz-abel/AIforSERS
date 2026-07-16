@@ -1,0 +1,227 @@
+[
+  {
+    "parameter": "experiment.change_reason",
+    "parent": "Phase4D produced two high-confidence errors and MC Dropout epistemic error-detection AUC of 0.167.",
+    "current": "P5-01 improved OOF accuracy and calibration but retained the same two legacy-holdout errors."
+  },
+  {
+    "parameter": "experiment.decision_rule",
+    "parent": "OOF accuracy must not decrease and ensemble epistemic error-detection AUC should exceed the baseline.",
+    "current": "OOF accuracy or balanced accuracy must improve without degrading a majority of folds."
+  },
+  {
+    "parameter": "experiment.expected_effect.accuracy",
+    "parent": "increase_or_stable",
+    "current": "increase"
+  },
+  {
+    "parameter": "experiment.expected_effect.calibration",
+    "parent": "improve",
+    "current": "stable_or_improve"
+  },
+  {
+    "parameter": "experiment.expected_effect.uncertainty",
+    "parent": "substantially_improve",
+    "current": "stable_or_improve"
+  },
+  {
+    "parameter": "experiment.hypothesis",
+    "parent": "Five independently initialized patient-level MIL models improve accuracy and epistemic error detection.",
+    "current": "Fold-local self-supervised spectral pretraining improves representations and corrects systematic high-confidence errors."
+  },
+  {
+    "parameter": "experiment.id",
+    "parent": "exp_001_ensemble",
+    "current": "exp_002_ssl_ensemble"
+  },
+  {
+    "parameter": "experiment.parent",
+    "parent": "exp_000_baseline",
+    "current": "exp_001_ensemble"
+  },
+  {
+    "parameter": "parameter_notes.aggregation",
+    "parent": "Mean predictive probabilities approximate Bayesian model averaging.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.bag_size",
+    "parent": "Sixteen spectra preserve patient heterogeneity while fitting grouped training in GPU memory.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.contrastive_weight",
+    "parent": null,
+    "current": "Kept secondary so reconstruction remains the dominant spectroscopy objective."
+  },
+  {
+    "parameter": "parameter_notes.full_reconstruction_weight",
+    "parent": null,
+    "current": "Retains global spectral shape while masked loss emphasizes missing intervals."
+  },
+  {
+    "parameter": "parameter_notes.kernel_sizes",
+    "parent": "Multi-scale receptive fields cover narrow Raman peaks and broader spectral patterns.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.log_var_bounds",
+    "parent": "Prevent the heteroscedastic head from escaping hard examples through unlimited variance.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.masked_denoising",
+    "parent": null,
+    "current": "Forces the convolutional backbone to model local Raman peak structure rather than labels."
+  },
+  {
+    "parameter": "parameter_notes.members",
+    "parent": "Five is the smallest conventional deep ensemble with useful between-model variance.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.nt_xent",
+    "parent": null,
+    "current": "Encourages stability to physically plausible noise, masking, and small wavenumber shifts."
+  },
+  {
+    "parameter": "parameter_notes.pretraining_reuse",
+    "parent": null,
+    "current": "All five members in one fold start from the same leakage-safe encoder; supervised randomness still differs."
+  },
+  {
+    "parameter": "parameter_notes.pretraining_scope",
+    "parent": null,
+    "current": "A separate encoder is pretrained using only the training patients of each OOF fold."
+  },
+  {
+    "parameter": "parameter_notes.seed_stride",
+    "parent": "Separates member random streams while preserving identical patient folds.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.spectra_per_patient_per_epoch",
+    "parent": null,
+    "current": "Equal patient contribution prevents acquisition count from becoming an SSL shortcut."
+  },
+  {
+    "parameter": "parameter_notes.temperature",
+    "parent": "Fitted only from cross-fitted OOF development predictions.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.test_status",
+    "parent": "The 11-patient holdout is already observed and cannot support a new confirmatory claim.",
+    "current": "The 11-patient holdout remains historical and is not used for pretraining or selection."
+  },
+  {
+    "parameter": "parameter_notes.threshold",
+    "parent": "Optimized only from calibrated OOF development predictions.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.train_bags_per_patient",
+    "parent": "Four bags are jointly optimized as one patient-level training item.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.train_repeats_per_patient",
+    "parent": "Dynamic resampling gives equal optimization weight to every patient.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.warmup_deterministic_epochs",
+    "parent": "Stabilizes class separation before optimizing aleatoric variance.",
+    "current": null
+  },
+  {
+    "parameter": "paths.results_dir",
+    "parent": "Results/Phase5/exp_001_ensemble",
+    "current": "Results/Phase5/exp_002_ssl_ensemble"
+  },
+  {
+    "parameter": "pretraining.batch_size",
+    "parent": null,
+    "current": 64
+  },
+  {
+    "parameter": "pretraining.contrastive_temperature",
+    "parent": null,
+    "current": 0.2
+  },
+  {
+    "parameter": "pretraining.contrastive_weight",
+    "parent": null,
+    "current": 0.1
+  },
+  {
+    "parameter": "pretraining.enabled",
+    "parent": null,
+    "current": true
+  },
+  {
+    "parameter": "pretraining.epochs",
+    "parent": null,
+    "current": 60
+  },
+  {
+    "parameter": "pretraining.full_reconstruction_weight",
+    "parent": null,
+    "current": 0.1
+  },
+  {
+    "parameter": "pretraining.gaussian_noise_std",
+    "parent": null,
+    "current": 0.02
+  },
+  {
+    "parameter": "pretraining.gradient_clip_norm",
+    "parent": null,
+    "current": 5.0
+  },
+  {
+    "parameter": "pretraining.learning_rate",
+    "parent": null,
+    "current": 0.001
+  },
+  {
+    "parameter": "pretraining.mask_fraction",
+    "parent": null,
+    "current": 0.15
+  },
+  {
+    "parameter": "pretraining.mask_width_max",
+    "parent": null,
+    "current": 24
+  },
+  {
+    "parameter": "pretraining.mask_width_min",
+    "parent": null,
+    "current": 8
+  },
+  {
+    "parameter": "pretraining.max_wavenumber_shift",
+    "parent": null,
+    "current": 2
+  },
+  {
+    "parameter": "pretraining.method",
+    "parent": null,
+    "current": "masked_denoising_plus_nt_xent"
+  },
+  {
+    "parameter": "pretraining.projection_dim",
+    "parent": null,
+    "current": 64
+  },
+  {
+    "parameter": "pretraining.spectra_per_patient_per_epoch",
+    "parent": null,
+    "current": 32
+  },
+  {
+    "parameter": "pretraining.weight_decay",
+    "parent": null,
+    "current": 0.0001
+  }
+]

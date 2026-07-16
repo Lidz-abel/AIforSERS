@@ -1,0 +1,107 @@
+experiment:
+  id: exp_003_dual_view
+  phase: Phase5
+  parent: exp_001_ensemble
+  hypothesis: A first-derivative view adds peak-shape information and improves patient
+    classification over intensity-only P5-01.
+  change_reason: P5-02 reconstruction SSL degraded discrimination; P5-03 targets Raman
+    peak morphology directly without pretraining.
+  expected_effect:
+    accuracy: increase_to_at_least_39_of_41
+    calibration: stable
+    uncertainty: stable
+  decision_rule: OOF accuracy must reach at least 39/41 while balanced accuracy does
+    not fall below P5-01.
+  test_status: legacy_observed_holdout
+seed: 42
+paths:
+  dataset_dir: Results/Phase3_QC/derived/dual_view_v1
+  results_dir: Results/Phase5/exp_003_dual_view
+representation:
+  channels:
+  - airpls_snv_intensity
+  - savgol_first_derivative_snv
+  source_dataset: Results/Phase3_QC/dataset
+  derivative:
+    method: savgol_filter
+    window_length: 7
+    polyorder: 3
+    deriv: 1
+    delta: median_wavenumber_spacing
+    mode: interp
+  derivative_normalization:
+    method: per_spectrum_snv
+    epsilon: 1.0e-08
+split:
+  outer_seed: 42
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  oof_folds: 5
+mcss:
+  bag_size: 16
+  train_bags_per_patient: 4
+  train_repeats_per_patient: 8
+  eval_bags_per_group: 16
+  eval_groups_per_patient: 8
+  sample_with_replacement: false
+  max_wavenumber_shift: 2
+  gaussian_noise_std: 0.01
+model:
+  in_channels: 2
+  kernel_sizes:
+  - 3
+  - 7
+  - 15
+  - 31
+  base_channels: 32
+  n_res_blocks: 2
+  embedding_dim: 128
+  attention_hidden: 64
+  dropout_rate: 0.35
+  group_norm_groups: 4
+  log_var_min: -6.0
+  log_var_max: 2.0
+training:
+  batch_size: 4
+  epochs: 160
+  learning_rate: 0.0007
+  weight_decay: 0.0001
+  warmup_deterministic_epochs: 12
+  aleatoric_samples: 8
+  variance_regularization: 0.0001
+  consistency_weight: 0.05
+  label_smoothing: 0.02
+  early_stopping_patience: 30
+  scheduler_patience: 10
+  scheduler_factor: 0.5
+  gradient_clip_norm: 5.0
+ensemble:
+  members: 5
+  seed_stride: 10000
+  aggregation: mean_probability
+  diversity_sources:
+  - initialization
+  - mcss_sampling
+  - augmentation
+  - dropout
+inference:
+  mc_dropout_samples: 30
+  aleatoric_samples: 16
+calibration:
+  temperature_min: 0.2
+  temperature_max: 5.0
+threshold:
+  strategy: max_accuracy
+parameter_notes:
+  intensity_channel: Preserves the accepted MATLAB-equivalent airPLS plus SNV representation.
+  derivative_channel: Highlights local peak slopes, widths, and small shape changes
+    while suppressing residual baseline.
+  derivative_snv: Puts derivative magnitude on a stable per-spectrum scale before
+    joint convolution.
+  in_channels: The only classifier architecture change from P5-01 is one additional
+    deterministic input channel.
+  paired_protocol: Patient folds, seeds, optimizer, MIL, ensemble, calibration, and
+    threshold match P5-01.
+  test_status: The 11-patient holdout is historical and cannot provide a new confirmatory
+    claim.

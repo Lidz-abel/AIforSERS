@@ -1,0 +1,267 @@
+===== Thu Jul 16 10:15:55 CST 2026 GPU6 start B4 =====
+===== 2026年 07月 16日 星期四 10:17:04 CST GPU6 start B4 =====
+============================================================
+Phase 4B: Stability Validation + Ablation Study
+============================================================
+Experiments: ['B4']
+Splits per experiment: 20
+Total runs: 20
+
+
+============================================================
+Experiment: B4
+============================================================
+  [B4] split_seed=00 — SKIPPED (already done)
+  [B4] split_seed=01 — SKIPPED (already done)
+  [B4] split_seed=02 — SKIPPED (already done)
+  [B4] split_seed=03 — running... Phase4B: exp=B4 split_seed=3 model_seed=1003
+  Completed in 9.5s
+  Test AUC=0.6429, BalAcc=0.6250, Sens=1.0000, Spec=0.2500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_03.json
+
+OK (13s) | AUC=0.643 BalAcc=0.625 Sens=1.000 Spec=0.250
+  [B4] split_seed=04 — running... Phase4B: exp=B4 split_seed=4 model_seed=1004
+  Completed in 9.7s
+  Test AUC=1.0000, BalAcc=0.7857, Sens=0.5714, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_04.json
+
+OK (13s) | AUC=1.000 BalAcc=0.786 Sens=0.571 Spec=1.000
+  [B4] split_seed=05 — running... Phase4B: exp=B4 split_seed=5 model_seed=1005
+  Completed in 10.5s
+  Test AUC=0.6429, BalAcc=0.5000, Sens=1.0000, Spec=0.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_05.json
+
+OK (14s) | AUC=0.643 BalAcc=0.500 Sens=1.000 Spec=0.000
+  [B4] split_seed=06 — running... Phase4B: exp=B4 split_seed=6 model_seed=1006
+  Completed in 13.1s
+  Test AUC=0.9643, BalAcc=0.8750, Sens=1.0000, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_06.json
+
+OK (16s) | AUC=0.964 BalAcc=0.875 Sens=1.000 Spec=0.750
+  [B4] split_seed=07 — running... Phase4B: exp=B4 split_seed=7 model_seed=1007
+  Completed in 15.1s
+  Test AUC=0.8929, BalAcc=0.8750, Sens=1.0000, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_07.json
+
+OK (18s) | AUC=0.893 BalAcc=0.875 Sens=1.000 Spec=0.750
+  [B4] split_seed=08 — running... Phase4B: exp=B4 split_seed=8 model_seed=1008
+  Completed in 13.1s
+  Test AUC=0.6071, BalAcc=0.5536, Sens=0.8571, Spec=0.2500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_08.json
+
+OK (16s) | AUC=0.607 BalAcc=0.554 Sens=0.857 Spec=0.250
+  [B4] split_seed=09 — running... Phase4B: exp=B4 split_seed=9 model_seed=1009
+  Completed in 15.1s
+  Test AUC=0.7500, BalAcc=0.6071, Sens=0.7143, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_09.json
+
+OK (18s) | AUC=0.750 BalAcc=0.607 Sens=0.714 Spec=0.500
+  [B4] split_seed=10 — running... Phase4B: exp=B4 split_seed=10 model_seed=1010
+  Completed in 11.1s
+  Test AUC=0.8214, BalAcc=0.6607, Sens=0.5714, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_10.json
+
+OK (14s) | AUC=0.821 BalAcc=0.661 Sens=0.571 Spec=0.750
+  [B4] split_seed=11 — running... Phase4B: exp=B4 split_seed=11 model_seed=1011
+  Completed in 12.7s
+  Test AUC=1.0000, BalAcc=0.8750, Sens=1.0000, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_11.json
+
+OK (16s) | AUC=1.000 BalAcc=0.875 Sens=1.000 Spec=0.750
+  [B4] split_seed=12 — running... Phase4B: exp=B4 split_seed=12 model_seed=1012
+  Completed in 16.4s
+  Test AUC=0.8929, BalAcc=0.8036, Sens=0.8571, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_12.json
+
+OK (20s) | AUC=0.893 BalAcc=0.804 Sens=0.857 Spec=0.750
+  [B4] split_seed=13 — running... Phase4B: exp=B4 split_seed=13 model_seed=1013
+  Completed in 9.8s
+  Test AUC=0.9286, BalAcc=0.6250, Sens=1.0000, Spec=0.2500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_13.json
+
+OK (13s) | AUC=0.929 BalAcc=0.625 Sens=1.000 Spec=0.250
+  [B4] split_seed=14 — running... Phase4B: exp=B4 split_seed=14 model_seed=1014
+  Completed in 14.2s
+  Test AUC=1.0000, BalAcc=0.8571, Sens=0.7143, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_14.json
+
+OK (17s) | AUC=1.000 BalAcc=0.857 Sens=0.714 Spec=1.000
+  [B4] split_seed=15 — running... Phase4B: exp=B4 split_seed=15 model_seed=1015
+  Completed in 12.2s
+  Test AUC=0.9286, BalAcc=0.7321, Sens=0.7143, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_15.json
+
+OK (15s) | AUC=0.929 BalAcc=0.732 Sens=0.714 Spec=0.750
+  [B4] split_seed=16 — running... Phase4B: exp=B4 split_seed=16 model_seed=1016
+  Completed in 10.0s
+  Test AUC=0.6071, BalAcc=0.6071, Sens=0.7143, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_16.json
+
+OK (13s) | AUC=0.607 BalAcc=0.607 Sens=0.714 Spec=0.500
+  [B4] split_seed=17 — running... Phase4B: exp=B4 split_seed=17 model_seed=1017
+  Completed in 15.2s
+  Test AUC=0.9643, BalAcc=0.8750, Sens=1.0000, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_17.json
+
+OK (18s) | AUC=0.964 BalAcc=0.875 Sens=1.000 Spec=0.750
+  [B4] split_seed=18 — running... Phase4B: exp=B4 split_seed=18 model_seed=1018
+  Completed in 13.8s
+  Test AUC=1.0000, BalAcc=1.0000, Sens=1.0000, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_18.json
+
+OK (17s) | AUC=1.000 BalAcc=1.000 Sens=1.000 Spec=1.000
+  [B4] split_seed=19 — running... Phase4B: exp=B4 split_seed=19 model_seed=1019
+  Completed in 12.1s
+  Test AUC=0.8929, BalAcc=0.9286, Sens=0.8571, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B4/split_19.json
+
+OK (15s) | AUC=0.893 BalAcc=0.929 Sens=0.857 Spec=1.000
+  B4: 20/20 completed in 268s
+
+============================================================
+Aggregating results...
+  B4: 20 splits, AUC=0.8714±0.1416, BalAcc=0.7643±0.1416
+
+Aggregated results saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/phase4b_results.json
+Summary CSV saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/phase4b_summary.csv
+
+Done.
+===== 2026年 07月 16日 星期四 10:21:31 CST GPU6 end B4 rc=0 =====
+===== 2026年 07月 16日 星期四 10:21:31 CST GPU6 start B6 =====
+============================================================
+Phase 4B: Stability Validation + Ablation Study
+============================================================
+Experiments: ['B6']
+Splits per experiment: 20
+Total runs: 20
+
+
+============================================================
+Experiment: B6
+============================================================
+  [B6] split_seed=00 — SKIPPED (already done)
+  [B6] split_seed=01 — running... Phase4B: exp=B6 split_seed=1 model_seed=1001
+  Completed in 14.4s
+  Test AUC=0.9286, BalAcc=0.7500, Sens=1.0000, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_01.json
+
+OK (18s) | AUC=0.929 BalAcc=0.750 Sens=1.000 Spec=0.500
+  [B6] split_seed=02 — running... Phase4B: exp=B6 split_seed=2 model_seed=1002
+  Completed in 10.6s
+  Test AUC=0.7857, BalAcc=0.7500, Sens=1.0000, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_02.json
+
+OK (14s) | AUC=0.786 BalAcc=0.750 Sens=1.000 Spec=0.500
+  [B6] split_seed=03 — running... Phase4B: exp=B6 split_seed=3 model_seed=1003
+  Completed in 14.6s
+  Test AUC=0.8214, BalAcc=0.6607, Sens=0.5714, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_03.json
+
+OK (18s) | AUC=0.821 BalAcc=0.661 Sens=0.571 Spec=0.750
+  [B6] split_seed=04 — running... Phase4B: exp=B6 split_seed=4 model_seed=1004
+  Completed in 9.6s
+  Test AUC=1.0000, BalAcc=0.7857, Sens=0.5714, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_04.json
+
+OK (13s) | AUC=1.000 BalAcc=0.786 Sens=0.571 Spec=1.000
+  [B6] split_seed=05 — running... Phase4B: exp=B6 split_seed=5 model_seed=1005
+  Completed in 10.2s
+  Test AUC=0.4643, BalAcc=0.3571, Sens=0.7143, Spec=0.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_05.json
+
+OK (13s) | AUC=0.464 BalAcc=0.357 Sens=0.714 Spec=0.000
+  [B6] split_seed=06 — running... Phase4B: exp=B6 split_seed=6 model_seed=1006
+  Completed in 15.8s
+  Test AUC=0.9643, BalAcc=0.8750, Sens=1.0000, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_06.json
+
+OK (19s) | AUC=0.964 BalAcc=0.875 Sens=1.000 Spec=0.750
+  [B6] split_seed=07 — running... Phase4B: exp=B6 split_seed=7 model_seed=1007
+  Completed in 16.1s
+  Test AUC=0.9643, BalAcc=0.9286, Sens=0.8571, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_07.json
+
+OK (19s) | AUC=0.964 BalAcc=0.929 Sens=0.857 Spec=1.000
+  [B6] split_seed=08 — running... Phase4B: exp=B6 split_seed=8 model_seed=1008
+  Completed in 13.7s
+  Test AUC=0.7500, BalAcc=0.6786, Sens=0.8571, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_08.json
+
+OK (17s) | AUC=0.750 BalAcc=0.679 Sens=0.857 Spec=0.500
+  [B6] split_seed=09 — running... Phase4B: exp=B6 split_seed=9 model_seed=1009
+  Completed in 15.1s
+  Test AUC=0.7500, BalAcc=0.6786, Sens=0.8571, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_09.json
+
+OK (18s) | AUC=0.750 BalAcc=0.679 Sens=0.857 Spec=0.500
+  [B6] split_seed=10 — running... Phase4B: exp=B6 split_seed=10 model_seed=1010
+  Completed in 11.3s
+  Test AUC=0.8571, BalAcc=0.6607, Sens=0.5714, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_10.json
+
+OK (14s) | AUC=0.857 BalAcc=0.661 Sens=0.571 Spec=0.750
+  [B6] split_seed=11 — running... Phase4B: exp=B6 split_seed=11 model_seed=1011
+  Completed in 12.5s
+  Test AUC=0.9643, BalAcc=0.8750, Sens=1.0000, Spec=0.7500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_11.json
+
+OK (16s) | AUC=0.964 BalAcc=0.875 Sens=1.000 Spec=0.750
+  [B6] split_seed=12 — running... Phase4B: exp=B6 split_seed=12 model_seed=1012
+  Completed in 14.6s
+  Test AUC=0.9286, BalAcc=0.9286, Sens=0.8571, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_12.json
+
+OK (18s) | AUC=0.929 BalAcc=0.929 Sens=0.857 Spec=1.000
+  [B6] split_seed=13 — running... Phase4B: exp=B6 split_seed=13 model_seed=1013
+  Completed in 10.6s
+  Test AUC=1.0000, BalAcc=0.6250, Sens=1.0000, Spec=0.2500
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_13.json
+
+OK (14s) | AUC=1.000 BalAcc=0.625 Sens=1.000 Spec=0.250
+  [B6] split_seed=14 — running... Phase4B: exp=B6 split_seed=14 model_seed=1014
+  Completed in 13.9s
+  Test AUC=1.0000, BalAcc=0.8571, Sens=0.7143, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_14.json
+
+OK (17s) | AUC=1.000 BalAcc=0.857 Sens=0.714 Spec=1.000
+  [B6] split_seed=15 — running... Phase4B: exp=B6 split_seed=15 model_seed=1015
+  Completed in 12.0s
+  Test AUC=0.8929, BalAcc=0.6786, Sens=0.8571, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_15.json
+
+OK (15s) | AUC=0.893 BalAcc=0.679 Sens=0.857 Spec=0.500
+  [B6] split_seed=16 — running... Phase4B: exp=B6 split_seed=16 model_seed=1016
+  Completed in 8.9s
+  Test AUC=0.6071, BalAcc=0.5357, Sens=0.5714, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_16.json
+
+OK (12s) | AUC=0.607 BalAcc=0.536 Sens=0.571 Spec=0.500
+  [B6] split_seed=17 — running... Phase4B: exp=B6 split_seed=17 model_seed=1017
+  Completed in 11.8s
+  Test AUC=0.8929, BalAcc=0.7500, Sens=1.0000, Spec=0.5000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_17.json
+
+OK (15s) | AUC=0.893 BalAcc=0.750 Sens=1.000 Spec=0.500
+  [B6] split_seed=18 — running... Phase4B: exp=B6 split_seed=18 model_seed=1018
+  Completed in 13.6s
+  Test AUC=1.0000, BalAcc=1.0000, Sens=1.0000, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_18.json
+
+OK (17s) | AUC=1.000 BalAcc=1.000 Sens=1.000 Spec=1.000
+  [B6] split_seed=19 — running... Phase4B: exp=B6 split_seed=19 model_seed=1019
+  Completed in 11.9s
+  Test AUC=0.9286, BalAcc=0.9286, Sens=0.8571, Spec=1.0000
+  Saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/splits/B6/split_19.json
+
+OK (15s) | AUC=0.929 BalAcc=0.929 Sens=0.857 Spec=1.000
+  B6: 20/20 completed in 300s
+
+============================================================
+Aggregating results...
+  B6: 20 splits, AUC=0.8750±0.1440, BalAcc=0.7589±0.1562
+
+Aggregated results saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/phase4b_results.json
+Summary CSV saved: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/stability_v2/phase4b_summary.csv
+
+Done.
+===== 2026年 07月 16日 星期四 10:26:32 CST GPU6 end B6 rc=0 =====

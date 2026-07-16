@@ -1,0 +1,41 @@
+{
+  "representation": {
+    "channels": [
+      "airpls_snv_intensity",
+      "savgol_first_derivative_snv"
+    ],
+    "source_dataset": "Results/Phase3_QC/dataset",
+    "derivative": {
+      "method": "savgol_filter",
+      "window_length": 7,
+      "polyorder": 3,
+      "deriv": 1,
+      "delta": "median_wavenumber_spacing",
+      "mode": "interp"
+    },
+    "derivative_normalization": {
+      "method": "per_spectrum_snv",
+      "epsilon": 1e-08
+    }
+  },
+  "config_source": "/data2/ldz/reference-kernels/AIforSERS/\u7259\u83cc\u6591\u9879\u76ee/DentalPlaque_SERS_Toolbox/Phase5/configs/exp_003_dual_view.yaml",
+  "source_dataset": "/data2/ldz/reference-kernels/AIforSERS/\u7259\u83cc\u6591\u9879\u76ee/DentalPlaque_SERS_Toolbox/Results/Phase3_QC/dataset/spectra.npz",
+  "source_sha256": "a0d82c25db89c9647793c9afa632c4e0f34cba867be578a716964fd14cd179f6",
+  "output_dataset": "/data2/ldz/reference-kernels/AIforSERS/\u7259\u83cc\u6591\u9879\u76ee/DentalPlaque_SERS_Toolbox/Results/Phase3_QC/derived/dual_view_v1/spectra.npz",
+  "output_sha256": "57fa039190a6d348b0c2d914822b775984e67373451b5f0a258a5dc7e854e1c6",
+  "shape": [
+    1970,
+    2,
+    732
+  ],
+  "dtype": "float32",
+  "wavenumber_delta": 1.969970703125,
+  "channel_mean": [
+    -7.889749409351055e-10,
+    9.832220454475404e-11
+  ],
+  "channel_std": [
+    1.0,
+    1.0
+  ]
+}

@@ -1,0 +1,91 @@
+experiment:
+  id: exp_001_ensemble
+  phase: Phase5
+  parent: exp_000_baseline
+  hypothesis: Five independently initialized patient-level MIL models improve accuracy and epistemic error detection.
+  change_reason: Phase4D produced two high-confidence errors and MC Dropout epistemic error-detection AUC of 0.167.
+  expected_effect:
+    accuracy: increase_or_stable
+    calibration: improve
+    uncertainty: substantially_improve
+  decision_rule: OOF accuracy must not decrease and ensemble epistemic error-detection AUC should exceed the baseline.
+  test_status: legacy_observed_holdout
+
+seed: 42
+paths:
+  dataset_dir: Results/Phase3_QC/dataset
+  results_dir: Results/Phase5/exp_001_ensemble
+
+split:
+  outer_seed: 42
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  oof_folds: 5
+
+mcss:
+  bag_size: 16
+  train_bags_per_patient: 4
+  train_repeats_per_patient: 8
+  eval_bags_per_group: 16
+  eval_groups_per_patient: 8
+  sample_with_replacement: false
+  max_wavenumber_shift: 2
+  gaussian_noise_std: 0.01
+
+model:
+  kernel_sizes: [3, 7, 15, 31]
+  base_channels: 32
+  n_res_blocks: 2
+  embedding_dim: 128
+  attention_hidden: 64
+  dropout_rate: 0.35
+  group_norm_groups: 4
+  log_var_min: -6.0
+  log_var_max: 2.0
+
+training:
+  batch_size: 4
+  epochs: 160
+  learning_rate: 0.0007
+  weight_decay: 0.0001
+  warmup_deterministic_epochs: 12
+  aleatoric_samples: 8
+  variance_regularization: 0.0001
+  consistency_weight: 0.05
+  label_smoothing: 0.02
+  early_stopping_patience: 30
+  scheduler_patience: 10
+  scheduler_factor: 0.5
+  gradient_clip_norm: 5.0
+
+ensemble:
+  members: 5
+  seed_stride: 10000
+  aggregation: mean_probability
+  diversity_sources: [initialization, mcss_sampling, augmentation, dropout]
+
+inference:
+  mc_dropout_samples: 30
+  aleatoric_samples: 16
+
+calibration:
+  temperature_min: 0.2
+  temperature_max: 5.0
+
+threshold:
+  strategy: max_accuracy
+
+parameter_notes:
+  bag_size: Sixteen spectra preserve patient heterogeneity while fitting grouped training in GPU memory.
+  train_bags_per_patient: Four bags are jointly optimized as one patient-level training item.
+  train_repeats_per_patient: Dynamic resampling gives equal optimization weight to every patient.
+  kernel_sizes: Multi-scale receptive fields cover narrow Raman peaks and broader spectral patterns.
+  log_var_bounds: Prevent the heteroscedastic head from escaping hard examples through unlimited variance.
+  warmup_deterministic_epochs: Stabilizes class separation before optimizing aleatoric variance.
+  members: Five is the smallest conventional deep ensemble with useful between-model variance.
+  seed_stride: Separates member random streams while preserving identical patient folds.
+  aggregation: Mean predictive probabilities approximate Bayesian model averaging.
+  temperature: Fitted only from cross-fitted OOF development predictions.
+  threshold: Optimized only from calibrated OOF development predictions.
+  test_status: The 11-patient holdout is already observed and cannot support a new confirmatory claim.

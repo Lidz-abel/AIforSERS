@@ -1,0 +1,59 @@
+seed: 42
+
+paths:
+  dataset_dir: Results/Phase3_QC/dataset
+  results_dir: Results/Phase4/mcss_hetero
+
+split:
+  outer_seed: 42
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  oof_folds: 5
+
+mcss:
+  bag_size: 16
+  train_bags_per_patient: 4
+  train_repeats_per_patient: 8
+  eval_bags_per_group: 16
+  eval_groups_per_patient: 8
+  sample_with_replacement: false
+  max_wavenumber_shift: 2
+  gaussian_noise_std: 0.01
+
+model:
+  kernel_sizes: [3, 7, 15, 31]
+  base_channels: 32
+  n_res_blocks: 2
+  embedding_dim: 128
+  attention_hidden: 64
+  dropout_rate: 0.35
+  group_norm_groups: 4
+  log_var_min: -6.0
+  log_var_max: 2.0
+
+training:
+  batch_size: 4
+  epochs: 160
+  learning_rate: 0.0007
+  weight_decay: 0.0001
+  warmup_deterministic_epochs: 12
+  aleatoric_samples: 8
+  variance_regularization: 0.0001
+  consistency_weight: 0.05
+  label_smoothing: 0.02
+  early_stopping_patience: 30
+  scheduler_patience: 10
+  scheduler_factor: 0.5
+  gradient_clip_norm: 5.0
+
+inference:
+  mc_dropout_samples: 30
+  aleatoric_samples: 16
+
+calibration:
+  temperature_min: 0.2
+  temperature_max: 5.0
+
+threshold:
+  strategy: max_accuracy

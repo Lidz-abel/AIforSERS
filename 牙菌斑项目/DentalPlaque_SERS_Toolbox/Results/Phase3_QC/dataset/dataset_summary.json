@@ -1,0 +1,33 @@
+{
+  "source_type": "raw_csv_matlab_preprocess_qc_filtered",
+  "normalization": "snv",
+  "n_patients": 52,
+  "n_spectra": 1970,
+  "n_wavenumber": 732,
+  "groups": {
+    "阳性+": {
+      "label": 1,
+      "n_patients": 31,
+      "n_spectra": 1549
+    },
+    "阴性-": {
+      "label": 0,
+      "n_patients": 21,
+      "n_spectra": 421
+    }
+  },
+  "wavenumber_min": 395.1099853515625,
+  "wavenumber_max": 1840.6199951171875,
+  "any_nan": false,
+  "any_inf": false,
+  "qc": {
+    "enabled": true,
+    "method": "matlab_config_technical_structural",
+    "n_spectra_before": 1970,
+    "n_spectra_after": 1970,
+    "n_spectra_removed": 0,
+    "pass_fraction": 1.0,
+    "n_patients_before": 52,
+    "n_patients_after": 52
+  }
+}

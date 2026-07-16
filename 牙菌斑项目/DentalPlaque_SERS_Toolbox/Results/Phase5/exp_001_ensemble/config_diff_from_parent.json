@@ -1,0 +1,127 @@
+[
+  {
+    "parameter": "ensemble.members",
+    "parent": 1,
+    "current": 5
+  },
+  {
+    "parameter": "experiment.change_reason",
+    "parent": "Establish a versioned comparison point before introducing a deep ensemble.",
+    "current": "Phase4D produced two high-confidence errors and MC Dropout epistemic error-detection AUC of 0.167."
+  },
+  {
+    "parameter": "experiment.decision_rule",
+    "parent": "Baseline artifacts and patient predictions must reproduce the Phase4D result exactly.",
+    "current": "OOF accuracy must not decrease and ensemble epistemic error-detection AUC should exceed the baseline."
+  },
+  {
+    "parameter": "experiment.expected_effect.accuracy",
+    "parent": "unchanged",
+    "current": "increase_or_stable"
+  },
+  {
+    "parameter": "experiment.expected_effect.calibration",
+    "parent": "unchanged",
+    "current": "improve"
+  },
+  {
+    "parameter": "experiment.expected_effect.uncertainty",
+    "parent": "unchanged",
+    "current": "substantially_improve"
+  },
+  {
+    "parameter": "experiment.hypothesis",
+    "parent": "Re-register the leakage-safe Phase4D model as the immutable Phase5 baseline.",
+    "current": "Five independently initialized patient-level MIL models improve accuracy and epistemic error detection."
+  },
+  {
+    "parameter": "experiment.id",
+    "parent": "exp_000_baseline",
+    "current": "exp_001_ensemble"
+  },
+  {
+    "parameter": "experiment.parent",
+    "parent": "Phase4D",
+    "current": "exp_000_baseline"
+  },
+  {
+    "parameter": "experiment.source_result",
+    "parent": "Results/Phase4/mcss_hetero/phase4d_final_results.json",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.aggregation",
+    "parent": null,
+    "current": "Mean predictive probabilities approximate Bayesian model averaging."
+  },
+  {
+    "parameter": "parameter_notes.bag_size",
+    "parent": null,
+    "current": "Sixteen spectra preserve patient heterogeneity while fitting grouped training in GPU memory."
+  },
+  {
+    "parameter": "parameter_notes.kernel_sizes",
+    "parent": null,
+    "current": "Multi-scale receptive fields cover narrow Raman peaks and broader spectral patterns."
+  },
+  {
+    "parameter": "parameter_notes.log_var_bounds",
+    "parent": null,
+    "current": "Prevent the heteroscedastic head from escaping hard examples through unlimited variance."
+  },
+  {
+    "parameter": "parameter_notes.members",
+    "parent": "One model defines the Phase4D baseline.",
+    "current": "Five is the smallest conventional deep ensemble with useful between-model variance."
+  },
+  {
+    "parameter": "parameter_notes.oof_folds",
+    "parent": "Produces one leakage-free development prediction per patient.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.outer_seed",
+    "parent": "Fixes patient membership so architecture comparisons use identical patients.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.seed_stride",
+    "parent": null,
+    "current": "Separates member random streams while preserving identical patient folds."
+  },
+  {
+    "parameter": "parameter_notes.temperature",
+    "parent": null,
+    "current": "Fitted only from cross-fitted OOF development predictions."
+  },
+  {
+    "parameter": "parameter_notes.test_status",
+    "parent": "The 11-patient holdout has already been observed and is historical evidence only.",
+    "current": "The 11-patient holdout is already observed and cannot support a new confirmatory claim."
+  },
+  {
+    "parameter": "parameter_notes.threshold",
+    "parent": null,
+    "current": "Optimized only from calibrated OOF development predictions."
+  },
+  {
+    "parameter": "parameter_notes.train_bags_per_patient",
+    "parent": null,
+    "current": "Four bags are jointly optimized as one patient-level training item."
+  },
+  {
+    "parameter": "parameter_notes.train_repeats_per_patient",
+    "parent": null,
+    "current": "Dynamic resampling gives equal optimization weight to every patient."
+  },
+  {
+    "parameter": "parameter_notes.warmup_deterministic_epochs",
+    "parent": null,
+    "current": "Stabilizes class separation before optimizing aleatoric variance."
+  },
+  {
+    "parameter": "paths.results_dir",
+    "parent": "Results/Phase5/exp_000_baseline",
+    "current": "Results/Phase5/exp_001_ensemble"
+  }
+]

@@ -1,0 +1,195 @@
+[
+  {
+    "parameter": "experiment.change_reason",
+    "parent": "Phase4D produced two high-confidence errors and MC Dropout epistemic error-detection AUC of 0.167.",
+    "current": "P5-02 reconstruction SSL degraded discrimination; P5-03 targets Raman peak morphology directly without pretraining."
+  },
+  {
+    "parameter": "experiment.decision_rule",
+    "parent": "OOF accuracy must not decrease and ensemble epistemic error-detection AUC should exceed the baseline.",
+    "current": "OOF accuracy must reach at least 39/41 while balanced accuracy does not fall below P5-01."
+  },
+  {
+    "parameter": "experiment.expected_effect.accuracy",
+    "parent": "increase_or_stable",
+    "current": "increase_to_at_least_39_of_41"
+  },
+  {
+    "parameter": "experiment.expected_effect.calibration",
+    "parent": "improve",
+    "current": "stable"
+  },
+  {
+    "parameter": "experiment.expected_effect.uncertainty",
+    "parent": "substantially_improve",
+    "current": "stable"
+  },
+  {
+    "parameter": "experiment.hypothesis",
+    "parent": "Five independently initialized patient-level MIL models improve accuracy and epistemic error detection.",
+    "current": "A first-derivative view adds peak-shape information and improves patient classification over intensity-only P5-01."
+  },
+  {
+    "parameter": "experiment.id",
+    "parent": "exp_001_ensemble",
+    "current": "exp_003_dual_view"
+  },
+  {
+    "parameter": "experiment.parent",
+    "parent": "exp_000_baseline",
+    "current": "exp_001_ensemble"
+  },
+  {
+    "parameter": "model.in_channels",
+    "parent": null,
+    "current": 2
+  },
+  {
+    "parameter": "parameter_notes.aggregation",
+    "parent": "Mean predictive probabilities approximate Bayesian model averaging.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.bag_size",
+    "parent": "Sixteen spectra preserve patient heterogeneity while fitting grouped training in GPU memory.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.derivative_channel",
+    "parent": null,
+    "current": "Highlights local peak slopes, widths, and small shape changes while suppressing residual baseline."
+  },
+  {
+    "parameter": "parameter_notes.derivative_snv",
+    "parent": null,
+    "current": "Puts derivative magnitude on a stable per-spectrum scale before joint convolution."
+  },
+  {
+    "parameter": "parameter_notes.in_channels",
+    "parent": null,
+    "current": "The only classifier architecture change from P5-01 is one additional deterministic input channel."
+  },
+  {
+    "parameter": "parameter_notes.intensity_channel",
+    "parent": null,
+    "current": "Preserves the accepted MATLAB-equivalent airPLS plus SNV representation."
+  },
+  {
+    "parameter": "parameter_notes.kernel_sizes",
+    "parent": "Multi-scale receptive fields cover narrow Raman peaks and broader spectral patterns.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.log_var_bounds",
+    "parent": "Prevent the heteroscedastic head from escaping hard examples through unlimited variance.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.members",
+    "parent": "Five is the smallest conventional deep ensemble with useful between-model variance.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.paired_protocol",
+    "parent": null,
+    "current": "Patient folds, seeds, optimizer, MIL, ensemble, calibration, and threshold match P5-01."
+  },
+  {
+    "parameter": "parameter_notes.seed_stride",
+    "parent": "Separates member random streams while preserving identical patient folds.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.temperature",
+    "parent": "Fitted only from cross-fitted OOF development predictions.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.test_status",
+    "parent": "The 11-patient holdout is already observed and cannot support a new confirmatory claim.",
+    "current": "The 11-patient holdout is historical and cannot provide a new confirmatory claim."
+  },
+  {
+    "parameter": "parameter_notes.threshold",
+    "parent": "Optimized only from calibrated OOF development predictions.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.train_bags_per_patient",
+    "parent": "Four bags are jointly optimized as one patient-level training item.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.train_repeats_per_patient",
+    "parent": "Dynamic resampling gives equal optimization weight to every patient.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.warmup_deterministic_epochs",
+    "parent": "Stabilizes class separation before optimizing aleatoric variance.",
+    "current": null
+  },
+  {
+    "parameter": "paths.dataset_dir",
+    "parent": "Results/Phase3_QC/dataset",
+    "current": "Results/Phase3_QC/derived/dual_view_v1"
+  },
+  {
+    "parameter": "paths.results_dir",
+    "parent": "Results/Phase5/exp_001_ensemble",
+    "current": "Results/Phase5/exp_003_dual_view"
+  },
+  {
+    "parameter": "representation.channels",
+    "parent": null,
+    "current": [
+      "airpls_snv_intensity",
+      "savgol_first_derivative_snv"
+    ]
+  },
+  {
+    "parameter": "representation.derivative.delta",
+    "parent": null,
+    "current": "median_wavenumber_spacing"
+  },
+  {
+    "parameter": "representation.derivative.deriv",
+    "parent": null,
+    "current": 1
+  },
+  {
+    "parameter": "representation.derivative.method",
+    "parent": null,
+    "current": "savgol_filter"
+  },
+  {
+    "parameter": "representation.derivative.mode",
+    "parent": null,
+    "current": "interp"
+  },
+  {
+    "parameter": "representation.derivative.polyorder",
+    "parent": null,
+    "current": 3
+  },
+  {
+    "parameter": "representation.derivative.window_length",
+    "parent": null,
+    "current": 7
+  },
+  {
+    "parameter": "representation.derivative_normalization.epsilon",
+    "parent": null,
+    "current": 1e-08
+  },
+  {
+    "parameter": "representation.derivative_normalization.method",
+    "parent": null,
+    "current": "per_spectrum_snv"
+  },
+  {
+    "parameter": "representation.source_dataset",
+    "parent": null,
+    "current": "Results/Phase3_QC/dataset"
+  }
+]

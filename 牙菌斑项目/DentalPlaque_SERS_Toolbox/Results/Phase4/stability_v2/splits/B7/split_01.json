@@ -1,0 +1,39 @@
+{
+  "exp_id": "B7",
+  "split_seed": 1,
+  "best_epoch": 32,
+  "best_val_score": 0.875,
+  "temperature": 0.9334920048713684,
+  "threshold": 0.4799999999999999,
+  "threshold_result": {
+    "threshold": 0.4799999999999999,
+    "sensitivity": 1.0,
+    "specificity": 0.75,
+    "balanced_accuracy": 0.875,
+    "youden": 0.75,
+    "accuracy": 0.9
+  },
+  "test_metrics": {
+    "roc_auc": 1.0,
+    "accuracy": 0.7272727272727273,
+    "balanced_accuracy": 0.625,
+    "sensitivity": {
+      "value": 1.0,
+      "ci_lower": 0.6456695649333126,
+      "ci_upper": 1.0
+    },
+    "specificity": {
+      "value": 0.25,
+      "ci_lower": 0.04558726080970055,
+      "ci_upper": 0.6993581574175981
+    },
+    "brier_score": 0.15019560334847223,
+    "ece": 0.21559720215472308
+  },
+  "n_train_patients": 31,
+  "n_val_patients": 10,
+  "n_test_patients": 11,
+  "n_train_spectra": 1186,
+  "n_val_spectra": 280,
+  "n_test_spectra": 504
+}

@@ -1,0 +1,60 @@
+seed: 42
+
+paths:
+  data_root: null
+  results_dir: Results/Phase3_QC
+  dataset_dir: Results/Phase3_QC/dataset
+  splits_dir: Results/Phase3_QC/splits
+
+source:
+  type: raw_csv_matlab_preprocess_qc_filtered
+  file_pattern: "SP_*.csv"
+  include_groups:
+    - "阳性+"
+    - "阴性-"
+  labels:
+    "阴性-": 0
+    "阳性+": 1
+
+csv:
+  wavenumber_column: 4
+  intensity_column: 8
+  row_start: 294
+  row_end: 1025
+  expected_points: 732
+
+preprocessing:
+  pipeline: matlab
+  savgol:
+    order: 3
+    window: 7
+  baseline:
+    method: airPLS
+    lambda: 1000
+    order: 2
+    wep: 0.05
+    p: 0.05
+    max_iter: 50
+  normalization: snv
+  save_raw: true
+
+qc:
+  enabled: true
+  method: matlab_config_technical_structural
+  technical:
+    snr_min: 5
+    saturation_value: 65535
+    saturation_frac: 0.02
+  structural:
+    min_peak_number: 4
+    min_mean_prominence: 0.02
+    find_peaks:
+      min_peak_prominence: 0.005
+      min_peak_distance: 8
+      min_peak_height: 0.01
+
+split:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  stratify: true

@@ -1,0 +1,55 @@
+gpu6 assigned OOF folds [0, 2, 4]
+Phase4D OOF fold=0 device=cuda train=32 val=9 locked_test=11
+epoch=001 train_loss=0.6832 val_nll=0.6845 val_auc=0.8500
+epoch=005 train_loss=0.6423 val_nll=0.5671 val_auc=0.8500
+epoch=010 train_loss=0.6007 val_nll=0.5668 val_auc=0.8500
+epoch=015 train_loss=0.5105 val_nll=0.5906 val_auc=0.9000
+epoch=020 train_loss=0.4454 val_nll=1.1729 val_auc=0.8500
+epoch=025 train_loss=0.4048 val_nll=0.7219 val_auc=0.8500
+epoch=030 train_loss=0.4474 val_nll=0.4014 val_auc=0.8500
+epoch=035 train_loss=0.3236 val_nll=0.4166 val_auc=0.9500
+epoch=040 train_loss=0.2540 val_nll=0.4082 val_auc=0.9000
+epoch=045 train_loss=0.1854 val_nll=0.9142 val_auc=0.8500
+epoch=050 train_loss=0.1535 val_nll=0.5177 val_auc=0.9000
+epoch=055 train_loss=0.1207 val_nll=1.1467 val_auc=0.8500
+OOF fold 0 complete: best_epoch=28 val_nll=0.3431 saved=/data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/mcss_hetero/oof_fold_0.json
+Phase4D OOF fold=2 device=cuda train=33 val=8 locked_test=11
+epoch=001 train_loss=0.6521 val_nll=0.7051 val_auc=0.5333
+epoch=005 train_loss=0.5553 val_nll=0.6668 val_auc=0.6667
+epoch=010 train_loss=0.4114 val_nll=1.0152 val_auc=0.7333
+epoch=015 train_loss=0.2388 val_nll=2.3482 val_auc=0.5333
+epoch=020 train_loss=0.1595 val_nll=1.3442 val_auc=0.9333
+epoch=025 train_loss=0.1091 val_nll=1.1085 val_auc=0.8667
+epoch=030 train_loss=0.0875 val_nll=2.1452 val_auc=0.6000
+epoch=035 train_loss=0.0602 val_nll=1.4171 val_auc=0.7333
+epoch=040 train_loss=0.0634 val_nll=1.3603 val_auc=0.8000
+epoch=045 train_loss=0.0589 val_nll=1.0427 val_auc=0.8667
+OOF fold 2 complete: best_epoch=18 val_nll=0.6369 saved=/data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/mcss_hetero/oof_fold_2.json
+Phase4D OOF fold=4 device=cuda train=33 val=8 locked_test=11
+epoch=001 train_loss=0.6873 val_nll=0.7369 val_auc=0.5000
+epoch=005 train_loss=0.5119 val_nll=0.7434 val_auc=0.6250
+epoch=010 train_loss=0.4556 val_nll=0.7622 val_auc=0.6250
+epoch=015 train_loss=0.3117 val_nll=0.9384 val_auc=1.0000
+epoch=020 train_loss=0.2271 val_nll=1.4129 val_auc=1.0000
+epoch=025 train_loss=0.1412 val_nll=0.6887 val_auc=1.0000
+epoch=030 train_loss=0.1127 val_nll=0.0770 val_auc=1.0000
+epoch=035 train_loss=0.1426 val_nll=0.5747 val_auc=1.0000
+epoch=040 train_loss=0.0630 val_nll=0.0299 val_auc=1.0000
+epoch=045 train_loss=0.1123 val_nll=0.5927 val_auc=1.0000
+epoch=050 train_loss=0.0622 val_nll=0.0076 val_auc=1.0000
+epoch=055 train_loss=0.0571 val_nll=0.0089 val_auc=1.0000
+epoch=060 train_loss=0.0677 val_nll=0.0084 val_auc=1.0000
+epoch=065 train_loss=0.0670 val_nll=0.0134 val_auc=1.0000
+epoch=070 train_loss=0.0576 val_nll=0.0282 val_auc=1.0000
+epoch=075 train_loss=0.0567 val_nll=0.0089 val_auc=1.0000
+epoch=080 train_loss=0.0576 val_nll=0.3988 val_auc=1.0000
+OOF fold 4 complete: best_epoch=54 val_nll=0.0074 saved=/data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/mcss_hetero/oof_fold_4.json
+Final training device=cuda development=41 locked_test=11 epochs=28
+epoch=001/28 train_loss=0.6911
+epoch=005/28 train_loss=0.5985
+epoch=010/28 train_loss=0.4384
+epoch=015/28 train_loss=0.2074
+epoch=020/28 train_loss=0.2806
+epoch=025/28 train_loss=0.1000
+FINAL Test AUC=0.7857 Acc=0.8182 BA=0.8036
+Saved final result: /data2/ldz/reference-kernels/AIforSERS/牙菌斑项目/DentalPlaque_SERS_Toolbox/Results/Phase4/mcss_hetero/phase4d_final_results.json

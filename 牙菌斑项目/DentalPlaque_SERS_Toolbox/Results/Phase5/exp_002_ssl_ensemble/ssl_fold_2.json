@@ -1,0 +1,401 @@
+{
+  "seed": 50044,
+  "patient_ids": [
+    0,
+    2,
+    3,
+    4,
+    6,
+    8,
+    9,
+    10,
+    12,
+    15,
+    16,
+    17,
+    18,
+    21,
+    22,
+    23,
+    24,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    36,
+    39,
+    40,
+    42,
+    43,
+    44,
+    46,
+    47,
+    48,
+    50
+  ],
+  "epochs": 60,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 1.0963315963745117,
+      "reconstruction_loss": 0.6841563148932024,
+      "contrastive_loss": 4.121752681154193
+    },
+    {
+      "epoch": 2,
+      "loss": 0.9163220723470052,
+      "reconstruction_loss": 0.5098362239924344,
+      "contrastive_loss": 4.064858414910057
+    },
+    {
+      "epoch": 3,
+      "loss": 0.7794599767887231,
+      "reconstruction_loss": 0.4149756702509793,
+      "contrastive_loss": 3.6448429425557456
+    },
+    {
+      "epoch": 4,
+      "loss": 0.6938224272294478,
+      "reconstruction_loss": 0.3560753211830602,
+      "contrastive_loss": 3.3774709123553652
+    },
+    {
+      "epoch": 5,
+      "loss": 0.6817529129259514,
+      "reconstruction_loss": 0.3582106783534541,
+      "contrastive_loss": 3.235422307794744
+    },
+    {
+      "epoch": 6,
+      "loss": 0.612142598990238,
+      "reconstruction_loss": 0.30648419080358563,
+      "contrastive_loss": 3.0565839608510337
+    },
+    {
+      "epoch": 7,
+      "loss": 0.5968148690281492,
+      "reconstruction_loss": 0.30124521707043506,
+      "contrastive_loss": 2.9556964960965244
+    },
+    {
+      "epoch": 8,
+      "loss": 0.5898822419571154,
+      "reconstruction_loss": 0.30046663320425787,
+      "contrastive_loss": 2.8941560369549375
+    },
+    {
+      "epoch": 9,
+      "loss": 0.5650374654567603,
+      "reconstruction_loss": 0.28370742183743103,
+      "contrastive_loss": 2.813300421743682
+    },
+    {
+      "epoch": 10,
+      "loss": 0.5557010751782041,
+      "reconstruction_loss": 0.28125012914339703,
+      "contrastive_loss": 2.744509393518621
+    },
+    {
+      "epoch": 11,
+      "loss": 0.542272712245132,
+      "reconstruction_loss": 0.27012032451051654,
+      "contrastive_loss": 2.721523819547711
+    },
+    {
+      "epoch": 12,
+      "loss": 0.5611236781784983,
+      "reconstruction_loss": 0.28969768683115643,
+      "contrastive_loss": 2.714259812326142
+    },
+    {
+      "epoch": 13,
+      "loss": 0.526851854541085,
+      "reconstruction_loss": 0.2604576882087823,
+      "contrastive_loss": 2.663941665129228
+    },
+    {
+      "epoch": 14,
+      "loss": 0.511988437536991,
+      "reconstruction_loss": 0.2505417764186859,
+      "contrastive_loss": 2.614466652725682
+    },
+    {
+      "epoch": 15,
+      "loss": 0.5226248087305011,
+      "reconstruction_loss": 0.2574307263800592,
+      "contrastive_loss": 2.6519407973144995
+    },
+    {
+      "epoch": 16,
+      "loss": 0.515065742261482,
+      "reconstruction_loss": 0.25966887763052277,
+      "contrastive_loss": 2.553968574061538
+    },
+    {
+      "epoch": 17,
+      "loss": 0.501841608322028,
+      "reconstruction_loss": 0.24606357289083075,
+      "contrastive_loss": 2.5577802585833
+    },
+    {
+      "epoch": 18,
+      "loss": 0.5154264930522803,
+      "reconstruction_loss": 0.25805526610576746,
+      "contrastive_loss": 2.573712211666685
+    },
+    {
+      "epoch": 19,
+      "loss": 0.502026642813827,
+      "reconstruction_loss": 0.24773321729717832,
+      "contrastive_loss": 2.5429342009804468
+    },
+    {
+      "epoch": 20,
+      "loss": 0.4971620160521883,
+      "reconstruction_loss": 0.2419861862153718,
+      "contrastive_loss": 2.55175831823638
+    },
+    {
+      "epoch": 21,
+      "loss": 0.48993513981501263,
+      "reconstruction_loss": 0.23872702591346973,
+      "contrastive_loss": 2.5120810812169854
+    },
+    {
+      "epoch": 22,
+      "loss": 0.49238091707229614,
+      "reconstruction_loss": 0.24264143904050192,
+      "contrastive_loss": 2.4973946990388813
+    },
+    {
+      "epoch": 23,
+      "loss": 0.47879228628042975,
+      "reconstruction_loss": 0.23143640115405573,
+      "contrastive_loss": 2.473558808818008
+    },
+    {
+      "epoch": 24,
+      "loss": 0.5038524270057678,
+      "reconstruction_loss": 0.2616974711418152,
+      "contrastive_loss": 2.4215495405775127
+    },
+    {
+      "epoch": 25,
+      "loss": 0.48589232293042267,
+      "reconstruction_loss": 0.2403141792976495,
+      "contrastive_loss": 2.4557814453587388
+    },
+    {
+      "epoch": 26,
+      "loss": 0.4664392290693341,
+      "reconstruction_loss": 0.22526147058515839,
+      "contrastive_loss": 2.411777554136334
+    },
+    {
+      "epoch": 27,
+      "loss": 0.48594013488653937,
+      "reconstruction_loss": 0.2427251600857937,
+      "contrastive_loss": 2.43214969924002
+    },
+    {
+      "epoch": 28,
+      "loss": 0.4884327415264014,
+      "reconstruction_loss": 0.24889472397890958,
+      "contrastive_loss": 2.3953800960020586
+    },
+    {
+      "epoch": 29,
+      "loss": 0.46990222009745514,
+      "reconstruction_loss": 0.23432631203622528,
+      "contrastive_loss": 2.3557590462944726
+    },
+    {
+      "epoch": 30,
+      "loss": 0.4708937099485686,
+      "reconstruction_loss": 0.22857246525359876,
+      "contrastive_loss": 2.4232124523683027
+    },
+    {
+      "epoch": 31,
+      "loss": 0.4602756825360385,
+      "reconstruction_loss": 0.2191253728938825,
+      "contrastive_loss": 2.4115029790184717
+    },
+    {
+      "epoch": 32,
+      "loss": 0.4632422815669667,
+      "reconstruction_loss": 0.22684660283001987,
+      "contrastive_loss": 2.3639567693074546
+    },
+    {
+      "epoch": 33,
+      "loss": 0.4540893652222373,
+      "reconstruction_loss": 0.21876871224605676,
+      "contrastive_loss": 2.353206490025376
+    },
+    {
+      "epoch": 34,
+      "loss": 0.44538113023295545,
+      "reconstruction_loss": 0.21415828303857284,
+      "contrastive_loss": 2.312228484587236
+    },
+    {
+      "epoch": 35,
+      "loss": 0.45608838579871436,
+      "reconstruction_loss": 0.2280455060077436,
+      "contrastive_loss": 2.280428799715909
+    },
+    {
+      "epoch": 36,
+      "loss": 0.4588646220438408,
+      "reconstruction_loss": 0.2223993855895418,
+      "contrastive_loss": 2.364652330225164
+    },
+    {
+      "epoch": 37,
+      "loss": 0.4461915601383556,
+      "reconstruction_loss": 0.2141523939190489,
+      "contrastive_loss": 2.3203916621930674
+    },
+    {
+      "epoch": 38,
+      "loss": 0.45081584923195117,
+      "reconstruction_loss": 0.2174217330686974,
+      "contrastive_loss": 2.3339411309271147
+    },
+    {
+      "epoch": 39,
+      "loss": 0.4676118420832085,
+      "reconstruction_loss": 0.23543034810008426,
+      "contrastive_loss": 2.321814901901014
+    },
+    {
+      "epoch": 40,
+      "loss": 0.45504904515815503,
+      "reconstruction_loss": 0.2273468655167204,
+      "contrastive_loss": 2.277021733197299
+    },
+    {
+      "epoch": 41,
+      "loss": 0.4515059229099389,
+      "reconstruction_loss": 0.2225123237479817,
+      "contrastive_loss": 2.2899359862009683
+    },
+    {
+      "epoch": 42,
+      "loss": 0.4440798687212395,
+      "reconstruction_loss": 0.21602329069917853,
+      "contrastive_loss": 2.2805657386779785
+    },
+    {
+      "epoch": 43,
+      "loss": 0.4674078045469342,
+      "reconstruction_loss": 0.24336014597704916,
+      "contrastive_loss": 2.24047661188877
+    },
+    {
+      "epoch": 44,
+      "loss": 0.44579609957608307,
+      "reconstruction_loss": 0.2213302683649641,
+      "contrastive_loss": 2.2446583256577
+    },
+    {
+      "epoch": 45,
+      "loss": 0.43963105570186267,
+      "reconstruction_loss": 0.21316954312902509,
+      "contrastive_loss": 2.264615109472564
+    },
+    {
+      "epoch": 46,
+      "loss": 0.4379997397914077,
+      "reconstruction_loss": 0.21571255362395084,
+      "contrastive_loss": 2.222871780395508
+    },
+    {
+      "epoch": 47,
+      "loss": 0.4459800223509471,
+      "reconstruction_loss": 0.21833212222113754,
+      "contrastive_loss": 2.276479002201196
+    },
+    {
+      "epoch": 48,
+      "loss": 0.43473200003306073,
+      "reconstruction_loss": 0.21252947142629913,
+      "contrastive_loss": 2.2220252752304077
+    },
+    {
+      "epoch": 49,
+      "loss": 0.41569046540693805,
+      "reconstruction_loss": 0.20010828746087622,
+      "contrastive_loss": 2.1558217893947256
+    },
+    {
+      "epoch": 50,
+      "loss": 0.40901446161848126,
+      "reconstruction_loss": 0.19934424216097052,
+      "contrastive_loss": 2.096702243342544
+    },
+    {
+      "epoch": 51,
+      "loss": 0.42181012305346405,
+      "reconstruction_loss": 0.20844503153454175,
+      "contrastive_loss": 2.1336508375225645
+    },
+    {
+      "epoch": 52,
+      "loss": 0.4133036389495387,
+      "reconstruction_loss": 0.20252717534701029,
+      "contrastive_loss": 2.107764565583431
+    },
+    {
+      "epoch": 53,
+      "loss": 0.43932358333558746,
+      "reconstruction_loss": 0.22693356510364648,
+      "contrastive_loss": 2.123900167869799
+    },
+    {
+      "epoch": 54,
+      "loss": 0.40296392007307574,
+      "reconstruction_loss": 0.19248094883832065,
+      "contrastive_loss": 2.104829622037483
+    },
+    {
+      "epoch": 55,
+      "loss": 0.3978183296593753,
+      "reconstruction_loss": 0.19527379897507754,
+      "contrastive_loss": 2.0254452806530576
+    },
+    {
+      "epoch": 56,
+      "loss": 0.4046957718603539,
+      "reconstruction_loss": 0.20536201831066248,
+      "contrastive_loss": 1.993337454217853
+    },
+    {
+      "epoch": 57,
+      "loss": 0.3766322181080327,
+      "reconstruction_loss": 0.18146307360042224,
+      "contrastive_loss": 1.951691454107111
+    },
+    {
+      "epoch": 58,
+      "loss": 0.3879826412056432,
+      "reconstruction_loss": 0.19198302608547788,
+      "contrastive_loss": 1.9599961223024311
+    },
+    {
+      "epoch": 59,
+      "loss": 0.38594896684993396,
+      "reconstruction_loss": 0.19881711855079187,
+      "contrastive_loss": 1.8713184558984004
+    },
+    {
+      "epoch": 60,
+      "loss": 0.37445195335330383,
+      "reconstruction_loss": 0.1818807070905512,
+      "contrastive_loss": 1.9257124012166804
+    }
+  ]
+}

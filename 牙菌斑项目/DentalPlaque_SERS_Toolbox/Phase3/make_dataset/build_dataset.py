@@ -5,6 +5,9 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from scipy import sparse
+from scipy.signal import find_peaks, savgol_filter
+from scipy.sparse.linalg import spsolve
 
 from utils import (
     ensure_dir,
@@ -19,6 +22,226 @@ from utils import (
     toolbox_root,
     write_json,
 )
+
+
+def airpls(
+    spectra: np.ndarray,
+    lambda_: float = 1e3,
+    order: int = 2,
+    wep: float = 0.05,
+    p: float = 0.05,
+    max_iter: int = 50,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Python port of the MATLAB airPLS implementation used by the toolbox."""
+    X = np.asarray(spectra, dtype=np.float64)
+    m, n = X.shape
+    edge_left = np.arange(int(np.ceil(n * wep)))
+    edge_right = np.arange(int(np.floor(n - n * wep)) - 1, n)
+    edge_idx = np.unique(np.concatenate([edge_left, edge_right]))
+
+    diff_mat = sparse.csc_matrix(np.diff(np.eye(n), n=order, axis=0))
+    penalty = lambda_ * (diff_mat.T @ diff_mat)
+    baselines = np.zeros_like(X)
+
+    for i in range(m):
+        weights = np.ones(n, dtype=np.float64)
+        x = X[i]
+        for j in range(1, max_iter + 1):
+            system = sparse.diags(weights, 0, shape=(n, n), format="csc") + penalty
+            baseline = spsolve(system, weights * x)
+            residual = x - baseline
+            neg_sum = abs(float(residual[residual < 0].sum()))
+            if neg_sum < 0.001 * float(np.abs(x).sum()):
+                break
+            weights[residual >= 0] = 0.0
+            weights[edge_idx] = p
+            neg_mask = residual < 0
+            weights[neg_mask] = np.exp(j * np.abs(residual[neg_mask]) / neg_sum)
+        baselines[i] = baseline
+
+    return (X - baselines).astype(np.float32), baselines.astype(np.float32)
+
+
+def preprocess_spectra(raw_spectra: np.ndarray, preprocess_cfg: dict) -> np.ndarray:
+    """Build training/QC spectra using either SNV-only or MATLAB-like preprocessing."""
+    pipeline = preprocess_cfg.get("pipeline", "snv_only").lower()
+    normalization = preprocess_cfg.get("normalization", "snv").lower()
+
+    if pipeline == "matlab":
+        sg_cfg = preprocess_cfg.get("savgol", {})
+        smooth = savgol_filter(
+            raw_spectra,
+            window_length=int(sg_cfg.get("window", 7)),
+            polyorder=int(sg_cfg.get("order", 3)),
+            axis=1,
+        )
+        baseline_cfg = preprocess_cfg.get("baseline", {})
+        method = baseline_cfg.get("method", "airPLS").lower()
+        if method != "airpls":
+            raise ValueError(f"Unsupported baseline method: {method}")
+        corrected, _ = airpls(
+            smooth,
+            lambda_=float(baseline_cfg.get("lambda", 1e3)),
+            order=int(baseline_cfg.get("order", 2)),
+            wep=float(baseline_cfg.get("wep", 0.05)),
+            p=float(baseline_cfg.get("p", 0.05)),
+            max_iter=int(baseline_cfg.get("max_iter", 50)),
+        )
+    elif pipeline in {"snv_only", "none"}:
+        corrected = raw_spectra.copy()
+    else:
+        raise ValueError(f"Unsupported preprocessing pipeline: {pipeline}")
+
+    if normalization == "snv":
+        return snv(corrected)
+    if normalization == "none":
+        return corrected.astype(np.float32)
+    raise ValueError(f"Unsupported normalization: {normalization}")
+
+
+def apply_qc(
+    spectra: np.ndarray,
+    raw_spectra: np.ndarray,
+    qc_cfg: dict,
+) -> dict[str, np.ndarray]:
+    """Apply MATLAB-style technical and structural QC to processed spectra."""
+    tech_cfg = qc_cfg.get("technical", {})
+    struct_cfg = qc_cfg.get("structural", {})
+    peak_cfg = struct_cfg.get("find_peaks", {})
+
+    snr_min = float(tech_cfg.get("snr_min", 5.0))
+    saturation_value = float(tech_cfg.get("saturation_value", 65535.0))
+    saturation_frac_max = float(tech_cfg.get("saturation_frac", 0.02))
+
+    min_peak_number = int(struct_cfg.get("min_peak_number", 4))
+    min_mean_prominence = float(struct_cfg.get("min_mean_prominence", 0.02))
+    peak_prominence = float(peak_cfg.get("min_peak_prominence", 0.005))
+    peak_distance = int(peak_cfg.get("min_peak_distance", 8))
+    peak_height = float(peak_cfg.get("min_peak_height", 0.01))
+
+    n_spec, n_points = spectra.shape
+    passed = np.ones(n_spec, dtype=bool)
+    snr = np.zeros(n_spec, dtype=np.float32)
+    saturation = np.zeros(n_spec, dtype=np.float32)
+    peak_number = np.zeros(n_spec, dtype=np.int32)
+    mean_prominence = np.zeros(n_spec, dtype=np.float32)
+    fail_reason = np.full(n_spec, "", dtype=object)
+
+    for i in range(n_spec):
+        s_proc = spectra[i]
+        s_raw = raw_spectra[i]
+
+        if not np.isfinite(s_proc).all() or not np.isfinite(s_raw).all():
+            passed[i] = False
+            fail_reason[i] = "NaN/Inf"
+            continue
+
+        signal = float(np.max(s_proc) - np.min(s_proc))
+        noise = float(np.std(np.diff(s_proc)))
+        snr[i] = signal / (noise + np.finfo(np.float32).eps)
+        if snr[i] < snr_min:
+            passed[i] = False
+            fail_reason[i] = f"Low SNR ({snr[i]:.1f})"
+            continue
+
+        saturation[i] = float(np.sum(s_raw >= saturation_value) / n_points)
+        if saturation[i] > saturation_frac_max:
+            passed[i] = False
+            fail_reason[i] = f"Saturated ({saturation[i] * 100:.1f}%)"
+            continue
+
+        _, props = find_peaks(
+            s_proc,
+            prominence=peak_prominence,
+            distance=peak_distance,
+            height=peak_height,
+        )
+        prominences = props.get("prominences", np.asarray([], dtype=np.float32))
+        peak_number[i] = int(len(prominences))
+        mean_prominence[i] = float(np.mean(prominences)) if len(prominences) else 0.0
+
+        if peak_number[i] < min_peak_number:
+            passed[i] = False
+            fail_reason[i] = f"NPeaks={peak_number[i]} (<{min_peak_number})"
+            continue
+
+        if mean_prominence[i] < min_mean_prominence:
+            passed[i] = False
+            fail_reason[i] = (
+                f"MeanProm={mean_prominence[i]:.4f} (<{min_mean_prominence:.3f})"
+            )
+
+    return {
+        "pass": passed,
+        "snr": snr,
+        "saturation": saturation,
+        "peak_number": peak_number,
+        "mean_prominence": mean_prominence,
+        "fail_reason": fail_reason,
+    }
+
+
+def filter_dataset_by_qc(
+    patient_rows: list[dict],
+    spectrum_rows: list[dict],
+    X: np.ndarray,
+    X_raw: np.ndarray,
+    y: np.ndarray,
+    patient_index: np.ndarray,
+    spectrum_ids: list[str],
+    qc_result: dict[str, np.ndarray],
+) -> tuple[list[dict], list[dict], np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Filter spectra by QC pass mask and compact patient/spectrum indices."""
+    keep = qc_result["pass"]
+    n_patients_raw = len(patient_rows)
+    kept_counts = np.bincount(patient_index[keep], minlength=n_patients_raw)
+    raw_counts = np.bincount(patient_index, minlength=n_patients_raw)
+    keep_patient = kept_counts > 0
+
+    old_to_new = {}
+    new_patient_rows = []
+    for old_idx, row in enumerate(patient_rows):
+        if not keep_patient[old_idx]:
+            continue
+        new_idx = len(new_patient_rows)
+        old_to_new[old_idx] = new_idx
+        new_row = dict(row)
+        new_row["patient_index"] = new_idx
+        new_row["n_spectra_raw"] = int(raw_counts[old_idx])
+        new_row["n_spectra"] = int(kept_counts[old_idx])
+        new_row["n_spectra_removed_qc"] = int(raw_counts[old_idx] - kept_counts[old_idx])
+        new_row["qc_pass_fraction"] = float(kept_counts[old_idx] / raw_counts[old_idx])
+        new_patient_rows.append(new_row)
+
+    kept_indices = np.flatnonzero(keep)
+    new_spectrum_rows = []
+    new_patient_index = np.zeros(len(kept_indices), dtype=np.int64)
+    new_spectrum_ids = []
+    for new_spec_idx, old_spec_idx in enumerate(kept_indices):
+        old_row = spectrum_rows[int(old_spec_idx)]
+        old_pid = int(old_row["patient_index"])
+        new_pid = old_to_new[old_pid]
+        new_row = dict(old_row)
+        new_row["spectrum_index"] = new_spec_idx
+        new_row["patient_index"] = new_pid
+        new_row["qc_snr"] = float(qc_result["snr"][old_spec_idx])
+        new_row["qc_saturation"] = float(qc_result["saturation"][old_spec_idx])
+        new_row["qc_peak_number"] = int(qc_result["peak_number"][old_spec_idx])
+        new_row["qc_mean_prominence"] = float(qc_result["mean_prominence"][old_spec_idx])
+        new_row["qc_pass"] = True
+        new_spectrum_rows.append(new_row)
+        new_patient_index[new_spec_idx] = new_pid
+        new_spectrum_ids.append(spectrum_ids[int(old_spec_idx)])
+
+    return (
+        new_patient_rows,
+        new_spectrum_rows,
+        X[keep],
+        X_raw[keep],
+        y[keep],
+        new_patient_index,
+        np.asarray(new_spectrum_ids, dtype=object),
+    )
 
 
 def build_dataset(config_path: Path | None = None) -> dict:
@@ -118,18 +341,58 @@ def build_dataset(config_path: Path | None = None) -> dict:
 
     X_raw = np.vstack(spectra_raw).astype(np.float32)
     normalization = cfg["preprocessing"].get("normalization", "none").lower()
-    if normalization == "snv":
-        X = snv(X_raw)
-    elif normalization == "none":
-        X = X_raw.copy()
-    else:
-        raise ValueError(f"Unsupported normalization: {normalization}")
+    X = preprocess_spectra(X_raw, cfg["preprocessing"])
 
     y = np.asarray(spectrum_labels, dtype=np.int64)
     patient_index = np.asarray(spectrum_patient_indices, dtype=np.int64)
-    patient_uids_arr = np.asarray(patient_uids, dtype=object)
-    spectrum_ids_arr = np.asarray(spectrum_ids, dtype=object)
 
+    qc_summary = None
+    if cfg.get("qc", {}).get("enabled", False):
+        qc_result = apply_qc(X, X_raw, cfg["qc"])
+        qc_report = pd.DataFrame(spectrum_rows)
+        qc_report["qc_pass"] = qc_result["pass"]
+        qc_report["qc_snr"] = qc_result["snr"]
+        qc_report["qc_saturation"] = qc_result["saturation"]
+        qc_report["qc_peak_number"] = qc_result["peak_number"]
+        qc_report["qc_mean_prominence"] = qc_result["mean_prominence"]
+        qc_report["qc_fail_reason"] = qc_result["fail_reason"]
+        qc_report.to_csv(dataset_dir / "spectrum_qc_report.csv", index=False, encoding="utf-8-sig")
+
+        n_before = int(len(y))
+        (
+            patient_rows,
+            spectrum_rows,
+            X,
+            X_raw,
+            y,
+            patient_index,
+            spectrum_ids_arr,
+        ) = filter_dataset_by_qc(
+            patient_rows,
+            spectrum_rows,
+            X,
+            X_raw,
+            y,
+            patient_index,
+            spectrum_ids,
+            qc_result,
+        )
+        n_after = int(len(y))
+        qc_summary = {
+            "enabled": True,
+            "method": cfg["qc"].get("method", "technical_structural"),
+            "n_spectra_before": n_before,
+            "n_spectra_after": n_after,
+            "n_spectra_removed": n_before - n_after,
+            "pass_fraction": float(n_after / n_before) if n_before else 0.0,
+            "n_patients_before": int(len(np.unique(spectrum_patient_indices))),
+            "n_patients_after": int(len(patient_rows)),
+        }
+    else:
+        spectrum_ids_arr = np.asarray(spectrum_ids, dtype=object)
+        qc_summary = {"enabled": False}
+
+    patient_uids_arr = np.asarray([row["patient_uid"] for row in patient_rows], dtype=object)
     patient_df = pd.DataFrame(patient_rows)
     spectrum_df = pd.DataFrame(spectrum_rows)
 
@@ -166,6 +429,7 @@ def build_dataset(config_path: Path | None = None) -> dict:
         "wavenumber_max": float(reference_wn[-1]),
         "any_nan": bool(np.isnan(X).any()),
         "any_inf": bool(np.isinf(X).any()),
+        "qc": qc_summary,
     }
     write_json(dataset_dir / "dataset_summary.json", summary)
     return summary
@@ -183,4 +447,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
