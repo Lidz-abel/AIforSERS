@@ -1,0 +1,52 @@
+experiment:
+  id: exp_004_heterogeneous
+  phase: Phase5
+  parent: exp_001_ensemble
+  hypothesis: Fixed equal-weight fusion of complementary intensity and derivative ensembles reaches 95 percent OOF accuracy.
+  change_reason: P5-01 and P5-03 each achieved 38/41 but made disjoint OOF errors.
+  expected_effect:
+    accuracy: reach_at_least_39_of_41
+    calibration: preserve_or_improve_brier
+    uncertainty: improve_with_architecture_disagreement
+  decision_rule: OOF accuracy must reach at least 39/41 with balanced accuracy at least 0.94.
+  test_status: legacy_observed_holdout
+
+seed: 42
+paths:
+  dataset_dir: Results/Phase3_QC/dataset
+  results_dir: Results/Phase5/exp_004_heterogeneous
+
+components:
+  - experiment_id: exp_001_ensemble
+    result_dir: Results/Phase5/exp_001_ensemble
+    expected_config_sha256: 5fb3b6d1f0984de311f0a000f9673b6c0455b37e63f8670d3f13929f4026c40a
+    representation: airpls_snv_intensity
+    members: 5
+    weight: 0.5
+  - experiment_id: exp_003_dual_view
+    result_dir: Results/Phase5/exp_003_dual_view
+    expected_config_sha256: 365acdadbef61523013669439a6eeef4dd828d7f82d705378c55e916647783cc
+    representation: intensity_plus_first_derivative
+    members: 5
+    weight: 0.5
+
+fusion:
+  level: patient_probability
+  input: raw_member_predictive_probability
+  weighting: fixed_equal
+  fit_component_weights: false
+  calibration: temperature_scaling_on_oof_only
+  threshold: max_accuracy_on_oof_only
+  uncertainty:
+    within_architecture: mean_member_variance
+    between_architecture: weighted_architecture_mean_variance
+    total_epistemic: variance_across_all_ten_members
+  bootstrap_repeats: 10000
+  bootstrap_seed: 42
+
+parameter_notes:
+  fixed_equal: Weight was specified before formal P5-04 execution and is not fitted to the legacy holdout.
+  raw_probability: Components are fused before P5-04-specific calibration to avoid mixing component temperatures.
+  architecture_disagreement: Captures representation uncertainty not visible to members sharing one architecture.
+  component_hashes: Prevent silently substituting retrained or modified P5-01/P5-03 artifacts.
+  test_status: The 11-patient holdout is historical and cannot establish confirmatory 95 percent accuracy.

@@ -1,0 +1,81 @@
+experiment:
+  id: exp_005_clinical_explainability
+  phase: Phase5
+  parent: exp_004_heterogeneous
+  hypothesis: OOF Integrated Gradients and representation-aware OOD scores can provide
+    faithful Raman explanations and safer review prompts without changing P5-04 predictions.
+  change_reason: P5-04 reached 39/41 internally but retained two consensus errors
+    in the historical holdout.
+  expected_effect:
+    classification: exactly_reproduce_p5_04
+    interpretability: stable_raman_intervals
+    reliability: identify_more_errors_with_uncertainty_or_ood
+  decision_rule: Preserve every P5-04 prediction; pass faithfulness and stability
+    checks before reporting peak assignments.
+  test_status: legacy_observed_holdout
+seed: 42
+paths:
+  dataset_dir: Results/Phase3_QC/dataset
+  dual_dataset_dir: Results/Phase3_QC/derived/dual_view_v1
+  results_dir: Results/Phase5/exp_005_clinical_explainability
+  peak_assignments: Functions/Utils/peakAssignments.m
+  phase2_peak_statistics: Results/Phase2/PeakStatistics.xlsx
+parent_model:
+  experiment_id: exp_004_heterogeneous
+  result_dir: Results/Phase5/exp_004_heterogeneous
+  expected_config_sha256: 2b0909acc55fc821bc0a18d75fe008e9fc29e38635f891ebc426ec7a51e558e0
+  frozen: true
+architectures:
+  intensity:
+    experiment_id: exp_001_ensemble
+    result_dir: Results/Phase5/exp_001_ensemble
+    dataset_dir: Results/Phase3_QC/dataset
+    weight: 0.5
+    members: 5
+  dual_view:
+    experiment_id: exp_003_dual_view
+    result_dir: Results/Phase5/exp_003_dual_view
+    dataset_dir: Results/Phase3_QC/derived/dual_view_v1
+    weight: 0.5
+    members: 5
+attribution:
+  method: expected_integrated_gradients
+  integration_steps: 24
+  gradient_step_batch: 6
+  baseline_spectra: 2
+  mcss_bags_per_patient: 2
+  bag_size: 16
+  random_masks: 5
+  deletion_fraction: 0.1
+  smooth_window: 7
+  top_interval_count: 10
+  peak_min_distance_cm1: 8.0
+  assignment_tolerance_cm1: 10.0
+  deterministic_seed: 42005
+ood:
+  embedding_bags_per_patient: 2
+  knn_neighbors: 5
+  variance_floor: 0.01
+  review_quantile: 0.8
+stability:
+  top_fraction: 0.1
+  jaccard_target: 0.5
+  spearman_target: 0.6
+  direction_consistency_target: 0.7
+review:
+  total_epistemic_quantile: 0.8
+  use_probability_margin: false
+  rule: high_total_epistemic_or_high_ood
+parameter_notes:
+  oof_explanations: Each development patient is explained only by models whose training
+    fold excluded that patient.
+  expected_ig: Two training-spectrum baselines and two independent MCSS bags reduce
+    dependence on one reference or sampling location.
+  integration_steps: Twenty-four steps are used with convergence and faithfulness
+    checks for the ten-model patient ensemble.
+  faithfulness: Top-attribution deletion is compared with five deterministic random
+    masks of equal size.
+  ood: Fold-local embedding kNN and diagonal class-conditional distance are standardized
+    against training-patient distances.
+  peak_mapping: Local project Raman assignments and Phase2 peak statistics are descriptive
+    associations, not causal claims.

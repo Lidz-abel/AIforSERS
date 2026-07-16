@@ -1,0 +1,399 @@
+[
+  {
+    "parameter": "architectures.dual_view.dataset_dir",
+    "parent": null,
+    "current": "Results/Phase3_QC/derived/dual_view_v1"
+  },
+  {
+    "parameter": "architectures.dual_view.experiment_id",
+    "parent": null,
+    "current": "exp_003_dual_view"
+  },
+  {
+    "parameter": "architectures.dual_view.members",
+    "parent": null,
+    "current": 5
+  },
+  {
+    "parameter": "architectures.dual_view.result_dir",
+    "parent": null,
+    "current": "Results/Phase5/exp_003_dual_view"
+  },
+  {
+    "parameter": "architectures.dual_view.weight",
+    "parent": null,
+    "current": 0.5
+  },
+  {
+    "parameter": "architectures.intensity.dataset_dir",
+    "parent": null,
+    "current": "Results/Phase3_QC/dataset"
+  },
+  {
+    "parameter": "architectures.intensity.experiment_id",
+    "parent": null,
+    "current": "exp_001_ensemble"
+  },
+  {
+    "parameter": "architectures.intensity.members",
+    "parent": null,
+    "current": 5
+  },
+  {
+    "parameter": "architectures.intensity.result_dir",
+    "parent": null,
+    "current": "Results/Phase5/exp_001_ensemble"
+  },
+  {
+    "parameter": "architectures.intensity.weight",
+    "parent": null,
+    "current": 0.5
+  },
+  {
+    "parameter": "attribution.assignment_tolerance_cm1",
+    "parent": null,
+    "current": 10.0
+  },
+  {
+    "parameter": "attribution.bag_size",
+    "parent": null,
+    "current": 16
+  },
+  {
+    "parameter": "attribution.baseline_spectra",
+    "parent": null,
+    "current": 2
+  },
+  {
+    "parameter": "attribution.deletion_fraction",
+    "parent": null,
+    "current": 0.1
+  },
+  {
+    "parameter": "attribution.deterministic_seed",
+    "parent": null,
+    "current": 42005
+  },
+  {
+    "parameter": "attribution.gradient_step_batch",
+    "parent": null,
+    "current": 6
+  },
+  {
+    "parameter": "attribution.integration_steps",
+    "parent": null,
+    "current": 24
+  },
+  {
+    "parameter": "attribution.mcss_bags_per_patient",
+    "parent": null,
+    "current": 2
+  },
+  {
+    "parameter": "attribution.method",
+    "parent": null,
+    "current": "expected_integrated_gradients"
+  },
+  {
+    "parameter": "attribution.peak_min_distance_cm1",
+    "parent": null,
+    "current": 8.0
+  },
+  {
+    "parameter": "attribution.random_masks",
+    "parent": null,
+    "current": 5
+  },
+  {
+    "parameter": "attribution.smooth_window",
+    "parent": null,
+    "current": 7
+  },
+  {
+    "parameter": "attribution.top_interval_count",
+    "parent": null,
+    "current": 10
+  },
+  {
+    "parameter": "components",
+    "parent": [
+      {
+        "experiment_id": "exp_001_ensemble",
+        "result_dir": "Results/Phase5/exp_001_ensemble",
+        "expected_config_sha256": "5fb3b6d1f0984de311f0a000f9673b6c0455b37e63f8670d3f13929f4026c40a",
+        "representation": "airpls_snv_intensity",
+        "members": 5,
+        "weight": 0.5
+      },
+      {
+        "experiment_id": "exp_003_dual_view",
+        "result_dir": "Results/Phase5/exp_003_dual_view",
+        "expected_config_sha256": "365acdadbef61523013669439a6eeef4dd828d7f82d705378c55e916647783cc",
+        "representation": "intensity_plus_first_derivative",
+        "members": 5,
+        "weight": 0.5
+      }
+    ],
+    "current": null
+  },
+  {
+    "parameter": "experiment.change_reason",
+    "parent": "P5-01 and P5-03 each achieved 38/41 but made disjoint OOF errors.",
+    "current": "P5-04 reached 39/41 internally but retained two consensus errors in the historical holdout."
+  },
+  {
+    "parameter": "experiment.decision_rule",
+    "parent": "OOF accuracy must reach at least 39/41 with balanced accuracy at least 0.94.",
+    "current": "Preserve every P5-04 prediction; pass faithfulness and stability checks before reporting peak assignments."
+  },
+  {
+    "parameter": "experiment.expected_effect.accuracy",
+    "parent": "reach_at_least_39_of_41",
+    "current": null
+  },
+  {
+    "parameter": "experiment.expected_effect.calibration",
+    "parent": "preserve_or_improve_brier",
+    "current": null
+  },
+  {
+    "parameter": "experiment.expected_effect.classification",
+    "parent": null,
+    "current": "exactly_reproduce_p5_04"
+  },
+  {
+    "parameter": "experiment.expected_effect.interpretability",
+    "parent": null,
+    "current": "stable_raman_intervals"
+  },
+  {
+    "parameter": "experiment.expected_effect.reliability",
+    "parent": null,
+    "current": "identify_more_errors_with_uncertainty_or_ood"
+  },
+  {
+    "parameter": "experiment.expected_effect.uncertainty",
+    "parent": "improve_with_architecture_disagreement",
+    "current": null
+  },
+  {
+    "parameter": "experiment.hypothesis",
+    "parent": "Fixed equal-weight fusion of complementary intensity and derivative ensembles reaches 95 percent OOF accuracy.",
+    "current": "OOF Integrated Gradients and representation-aware OOD scores can provide faithful Raman explanations and safer review prompts without changing P5-04 predictions."
+  },
+  {
+    "parameter": "experiment.id",
+    "parent": "exp_004_heterogeneous",
+    "current": "exp_005_clinical_explainability"
+  },
+  {
+    "parameter": "experiment.parent",
+    "parent": "exp_001_ensemble",
+    "current": "exp_004_heterogeneous"
+  },
+  {
+    "parameter": "fusion.bootstrap_repeats",
+    "parent": 10000,
+    "current": null
+  },
+  {
+    "parameter": "fusion.bootstrap_seed",
+    "parent": 42,
+    "current": null
+  },
+  {
+    "parameter": "fusion.calibration",
+    "parent": "temperature_scaling_on_oof_only",
+    "current": null
+  },
+  {
+    "parameter": "fusion.fit_component_weights",
+    "parent": false,
+    "current": null
+  },
+  {
+    "parameter": "fusion.input",
+    "parent": "raw_member_predictive_probability",
+    "current": null
+  },
+  {
+    "parameter": "fusion.level",
+    "parent": "patient_probability",
+    "current": null
+  },
+  {
+    "parameter": "fusion.threshold",
+    "parent": "max_accuracy_on_oof_only",
+    "current": null
+  },
+  {
+    "parameter": "fusion.uncertainty.between_architecture",
+    "parent": "weighted_architecture_mean_variance",
+    "current": null
+  },
+  {
+    "parameter": "fusion.uncertainty.total_epistemic",
+    "parent": "variance_across_all_ten_members",
+    "current": null
+  },
+  {
+    "parameter": "fusion.uncertainty.within_architecture",
+    "parent": "mean_member_variance",
+    "current": null
+  },
+  {
+    "parameter": "fusion.weighting",
+    "parent": "fixed_equal",
+    "current": null
+  },
+  {
+    "parameter": "ood.embedding_bags_per_patient",
+    "parent": null,
+    "current": 2
+  },
+  {
+    "parameter": "ood.knn_neighbors",
+    "parent": null,
+    "current": 5
+  },
+  {
+    "parameter": "ood.review_quantile",
+    "parent": null,
+    "current": 0.8
+  },
+  {
+    "parameter": "ood.variance_floor",
+    "parent": null,
+    "current": 0.01
+  },
+  {
+    "parameter": "parameter_notes.architecture_disagreement",
+    "parent": "Captures representation uncertainty not visible to members sharing one architecture.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.component_hashes",
+    "parent": "Prevent silently substituting retrained or modified P5-01/P5-03 artifacts.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.expected_ig",
+    "parent": null,
+    "current": "Two training-spectrum baselines and two independent MCSS bags reduce dependence on one reference or sampling location."
+  },
+  {
+    "parameter": "parameter_notes.faithfulness",
+    "parent": null,
+    "current": "Top-attribution deletion is compared with five deterministic random masks of equal size."
+  },
+  {
+    "parameter": "parameter_notes.fixed_equal",
+    "parent": "Weight was specified before formal P5-04 execution and is not fitted to the legacy holdout.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.integration_steps",
+    "parent": null,
+    "current": "Twenty-four steps are used with convergence and faithfulness checks for the ten-model patient ensemble."
+  },
+  {
+    "parameter": "parameter_notes.ood",
+    "parent": null,
+    "current": "Fold-local embedding kNN and diagonal class-conditional distance are standardized against training-patient distances."
+  },
+  {
+    "parameter": "parameter_notes.oof_explanations",
+    "parent": null,
+    "current": "Each development patient is explained only by models whose training fold excluded that patient."
+  },
+  {
+    "parameter": "parameter_notes.peak_mapping",
+    "parent": null,
+    "current": "Local project Raman assignments and Phase2 peak statistics are descriptive associations, not causal claims."
+  },
+  {
+    "parameter": "parameter_notes.raw_probability",
+    "parent": "Components are fused before P5-04-specific calibration to avoid mixing component temperatures.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.test_status",
+    "parent": "The 11-patient holdout is historical and cannot establish confirmatory 95 percent accuracy.",
+    "current": null
+  },
+  {
+    "parameter": "parent_model.expected_config_sha256",
+    "parent": null,
+    "current": "2b0909acc55fc821bc0a18d75fe008e9fc29e38635f891ebc426ec7a51e558e0"
+  },
+  {
+    "parameter": "parent_model.experiment_id",
+    "parent": null,
+    "current": "exp_004_heterogeneous"
+  },
+  {
+    "parameter": "parent_model.frozen",
+    "parent": null,
+    "current": true
+  },
+  {
+    "parameter": "parent_model.result_dir",
+    "parent": null,
+    "current": "Results/Phase5/exp_004_heterogeneous"
+  },
+  {
+    "parameter": "paths.dual_dataset_dir",
+    "parent": null,
+    "current": "Results/Phase3_QC/derived/dual_view_v1"
+  },
+  {
+    "parameter": "paths.peak_assignments",
+    "parent": null,
+    "current": "Functions/Utils/peakAssignments.m"
+  },
+  {
+    "parameter": "paths.phase2_peak_statistics",
+    "parent": null,
+    "current": "Results/Phase2/PeakStatistics.xlsx"
+  },
+  {
+    "parameter": "paths.results_dir",
+    "parent": "Results/Phase5/exp_004_heterogeneous",
+    "current": "Results/Phase5/exp_005_clinical_explainability"
+  },
+  {
+    "parameter": "review.rule",
+    "parent": null,
+    "current": "high_total_epistemic_or_high_ood"
+  },
+  {
+    "parameter": "review.total_epistemic_quantile",
+    "parent": null,
+    "current": 0.8
+  },
+  {
+    "parameter": "review.use_probability_margin",
+    "parent": null,
+    "current": false
+  },
+  {
+    "parameter": "stability.direction_consistency_target",
+    "parent": null,
+    "current": 0.7
+  },
+  {
+    "parameter": "stability.jaccard_target",
+    "parent": null,
+    "current": 0.5
+  },
+  {
+    "parameter": "stability.spearman_target",
+    "parent": null,
+    "current": 0.6
+  },
+  {
+    "parameter": "stability.top_fraction",
+    "parent": null,
+    "current": 0.1
+  }
+]

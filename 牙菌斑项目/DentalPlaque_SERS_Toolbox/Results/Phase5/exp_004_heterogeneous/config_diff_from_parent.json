@@ -1,0 +1,434 @@
+[
+  {
+    "parameter": "calibration.temperature_max",
+    "parent": 5.0,
+    "current": null
+  },
+  {
+    "parameter": "calibration.temperature_min",
+    "parent": 0.2,
+    "current": null
+  },
+  {
+    "parameter": "components",
+    "parent": null,
+    "current": [
+      {
+        "experiment_id": "exp_001_ensemble",
+        "result_dir": "Results/Phase5/exp_001_ensemble",
+        "expected_config_sha256": "5fb3b6d1f0984de311f0a000f9673b6c0455b37e63f8670d3f13929f4026c40a",
+        "representation": "airpls_snv_intensity",
+        "members": 5,
+        "weight": 0.5
+      },
+      {
+        "experiment_id": "exp_003_dual_view",
+        "result_dir": "Results/Phase5/exp_003_dual_view",
+        "expected_config_sha256": "365acdadbef61523013669439a6eeef4dd828d7f82d705378c55e916647783cc",
+        "representation": "intensity_plus_first_derivative",
+        "members": 5,
+        "weight": 0.5
+      }
+    ]
+  },
+  {
+    "parameter": "ensemble.aggregation",
+    "parent": "mean_probability",
+    "current": null
+  },
+  {
+    "parameter": "ensemble.diversity_sources",
+    "parent": [
+      "initialization",
+      "mcss_sampling",
+      "augmentation",
+      "dropout"
+    ],
+    "current": null
+  },
+  {
+    "parameter": "ensemble.members",
+    "parent": 5,
+    "current": null
+  },
+  {
+    "parameter": "ensemble.seed_stride",
+    "parent": 10000,
+    "current": null
+  },
+  {
+    "parameter": "experiment.change_reason",
+    "parent": "Phase4D produced two high-confidence errors and MC Dropout epistemic error-detection AUC of 0.167.",
+    "current": "P5-01 and P5-03 each achieved 38/41 but made disjoint OOF errors."
+  },
+  {
+    "parameter": "experiment.decision_rule",
+    "parent": "OOF accuracy must not decrease and ensemble epistemic error-detection AUC should exceed the baseline.",
+    "current": "OOF accuracy must reach at least 39/41 with balanced accuracy at least 0.94."
+  },
+  {
+    "parameter": "experiment.expected_effect.accuracy",
+    "parent": "increase_or_stable",
+    "current": "reach_at_least_39_of_41"
+  },
+  {
+    "parameter": "experiment.expected_effect.calibration",
+    "parent": "improve",
+    "current": "preserve_or_improve_brier"
+  },
+  {
+    "parameter": "experiment.expected_effect.uncertainty",
+    "parent": "substantially_improve",
+    "current": "improve_with_architecture_disagreement"
+  },
+  {
+    "parameter": "experiment.hypothesis",
+    "parent": "Five independently initialized patient-level MIL models improve accuracy and epistemic error detection.",
+    "current": "Fixed equal-weight fusion of complementary intensity and derivative ensembles reaches 95 percent OOF accuracy."
+  },
+  {
+    "parameter": "experiment.id",
+    "parent": "exp_001_ensemble",
+    "current": "exp_004_heterogeneous"
+  },
+  {
+    "parameter": "experiment.parent",
+    "parent": "exp_000_baseline",
+    "current": "exp_001_ensemble"
+  },
+  {
+    "parameter": "fusion.bootstrap_repeats",
+    "parent": null,
+    "current": 10000
+  },
+  {
+    "parameter": "fusion.bootstrap_seed",
+    "parent": null,
+    "current": 42
+  },
+  {
+    "parameter": "fusion.calibration",
+    "parent": null,
+    "current": "temperature_scaling_on_oof_only"
+  },
+  {
+    "parameter": "fusion.fit_component_weights",
+    "parent": null,
+    "current": false
+  },
+  {
+    "parameter": "fusion.input",
+    "parent": null,
+    "current": "raw_member_predictive_probability"
+  },
+  {
+    "parameter": "fusion.level",
+    "parent": null,
+    "current": "patient_probability"
+  },
+  {
+    "parameter": "fusion.threshold",
+    "parent": null,
+    "current": "max_accuracy_on_oof_only"
+  },
+  {
+    "parameter": "fusion.uncertainty.between_architecture",
+    "parent": null,
+    "current": "weighted_architecture_mean_variance"
+  },
+  {
+    "parameter": "fusion.uncertainty.total_epistemic",
+    "parent": null,
+    "current": "variance_across_all_ten_members"
+  },
+  {
+    "parameter": "fusion.uncertainty.within_architecture",
+    "parent": null,
+    "current": "mean_member_variance"
+  },
+  {
+    "parameter": "fusion.weighting",
+    "parent": null,
+    "current": "fixed_equal"
+  },
+  {
+    "parameter": "inference.aleatoric_samples",
+    "parent": 16,
+    "current": null
+  },
+  {
+    "parameter": "inference.mc_dropout_samples",
+    "parent": 30,
+    "current": null
+  },
+  {
+    "parameter": "mcss.bag_size",
+    "parent": 16,
+    "current": null
+  },
+  {
+    "parameter": "mcss.eval_bags_per_group",
+    "parent": 16,
+    "current": null
+  },
+  {
+    "parameter": "mcss.eval_groups_per_patient",
+    "parent": 8,
+    "current": null
+  },
+  {
+    "parameter": "mcss.gaussian_noise_std",
+    "parent": 0.01,
+    "current": null
+  },
+  {
+    "parameter": "mcss.max_wavenumber_shift",
+    "parent": 2,
+    "current": null
+  },
+  {
+    "parameter": "mcss.sample_with_replacement",
+    "parent": false,
+    "current": null
+  },
+  {
+    "parameter": "mcss.train_bags_per_patient",
+    "parent": 4,
+    "current": null
+  },
+  {
+    "parameter": "mcss.train_repeats_per_patient",
+    "parent": 8,
+    "current": null
+  },
+  {
+    "parameter": "model.attention_hidden",
+    "parent": 64,
+    "current": null
+  },
+  {
+    "parameter": "model.base_channels",
+    "parent": 32,
+    "current": null
+  },
+  {
+    "parameter": "model.dropout_rate",
+    "parent": 0.35,
+    "current": null
+  },
+  {
+    "parameter": "model.embedding_dim",
+    "parent": 128,
+    "current": null
+  },
+  {
+    "parameter": "model.group_norm_groups",
+    "parent": 4,
+    "current": null
+  },
+  {
+    "parameter": "model.kernel_sizes",
+    "parent": [
+      3,
+      7,
+      15,
+      31
+    ],
+    "current": null
+  },
+  {
+    "parameter": "model.log_var_max",
+    "parent": 2.0,
+    "current": null
+  },
+  {
+    "parameter": "model.log_var_min",
+    "parent": -6.0,
+    "current": null
+  },
+  {
+    "parameter": "model.n_res_blocks",
+    "parent": 2,
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.aggregation",
+    "parent": "Mean predictive probabilities approximate Bayesian model averaging.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.architecture_disagreement",
+    "parent": null,
+    "current": "Captures representation uncertainty not visible to members sharing one architecture."
+  },
+  {
+    "parameter": "parameter_notes.bag_size",
+    "parent": "Sixteen spectra preserve patient heterogeneity while fitting grouped training in GPU memory.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.component_hashes",
+    "parent": null,
+    "current": "Prevent silently substituting retrained or modified P5-01/P5-03 artifacts."
+  },
+  {
+    "parameter": "parameter_notes.fixed_equal",
+    "parent": null,
+    "current": "Weight was specified before formal P5-04 execution and is not fitted to the legacy holdout."
+  },
+  {
+    "parameter": "parameter_notes.kernel_sizes",
+    "parent": "Multi-scale receptive fields cover narrow Raman peaks and broader spectral patterns.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.log_var_bounds",
+    "parent": "Prevent the heteroscedastic head from escaping hard examples through unlimited variance.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.members",
+    "parent": "Five is the smallest conventional deep ensemble with useful between-model variance.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.raw_probability",
+    "parent": null,
+    "current": "Components are fused before P5-04-specific calibration to avoid mixing component temperatures."
+  },
+  {
+    "parameter": "parameter_notes.seed_stride",
+    "parent": "Separates member random streams while preserving identical patient folds.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.temperature",
+    "parent": "Fitted only from cross-fitted OOF development predictions.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.test_status",
+    "parent": "The 11-patient holdout is already observed and cannot support a new confirmatory claim.",
+    "current": "The 11-patient holdout is historical and cannot establish confirmatory 95 percent accuracy."
+  },
+  {
+    "parameter": "parameter_notes.threshold",
+    "parent": "Optimized only from calibrated OOF development predictions.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.train_bags_per_patient",
+    "parent": "Four bags are jointly optimized as one patient-level training item.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.train_repeats_per_patient",
+    "parent": "Dynamic resampling gives equal optimization weight to every patient.",
+    "current": null
+  },
+  {
+    "parameter": "parameter_notes.warmup_deterministic_epochs",
+    "parent": "Stabilizes class separation before optimizing aleatoric variance.",
+    "current": null
+  },
+  {
+    "parameter": "paths.results_dir",
+    "parent": "Results/Phase5/exp_001_ensemble",
+    "current": "Results/Phase5/exp_004_heterogeneous"
+  },
+  {
+    "parameter": "split.oof_folds",
+    "parent": 5,
+    "current": null
+  },
+  {
+    "parameter": "split.outer_seed",
+    "parent": 42,
+    "current": null
+  },
+  {
+    "parameter": "split.test_ratio",
+    "parent": 0.2,
+    "current": null
+  },
+  {
+    "parameter": "split.train_ratio",
+    "parent": 0.6,
+    "current": null
+  },
+  {
+    "parameter": "split.val_ratio",
+    "parent": 0.2,
+    "current": null
+  },
+  {
+    "parameter": "threshold.strategy",
+    "parent": "max_accuracy",
+    "current": null
+  },
+  {
+    "parameter": "training.aleatoric_samples",
+    "parent": 8,
+    "current": null
+  },
+  {
+    "parameter": "training.batch_size",
+    "parent": 4,
+    "current": null
+  },
+  {
+    "parameter": "training.consistency_weight",
+    "parent": 0.05,
+    "current": null
+  },
+  {
+    "parameter": "training.early_stopping_patience",
+    "parent": 30,
+    "current": null
+  },
+  {
+    "parameter": "training.epochs",
+    "parent": 160,
+    "current": null
+  },
+  {
+    "parameter": "training.gradient_clip_norm",
+    "parent": 5.0,
+    "current": null
+  },
+  {
+    "parameter": "training.label_smoothing",
+    "parent": 0.02,
+    "current": null
+  },
+  {
+    "parameter": "training.learning_rate",
+    "parent": 0.0007,
+    "current": null
+  },
+  {
+    "parameter": "training.scheduler_factor",
+    "parent": 0.5,
+    "current": null
+  },
+  {
+    "parameter": "training.scheduler_patience",
+    "parent": 10,
+    "current": null
+  },
+  {
+    "parameter": "training.variance_regularization",
+    "parent": 0.0001,
+    "current": null
+  },
+  {
+    "parameter": "training.warmup_deterministic_epochs",
+    "parent": 12,
+    "current": null
+  },
+  {
+    "parameter": "training.weight_decay",
+    "parent": 0.0001,
+    "current": null
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "classification_reproduced": true,
+  "n_oof_patients": 41,
+  "n_test_patients": 11,
+  "review_thresholds": {
+    "combined_ood": 1.1462900935869231,
+    "total_epistemic": 0.0571445984316005
+  },
+  "oof_ood_error_detection_auc": 0.7564102564102564,
+  "oof_combined_review_error_detection_auc": 0.7628205128205129,
+  "faithfulness": {
+    "mean_top_deletion_drop": 0.2035399231933364,
+    "mean_random_deletion_drop": 0.03187337864116514,
+    "wilcoxon_statistic": 785.0,
+    "wilcoxon_pvalue": 2.4155679057003e-07
+  },
+  "stability": {
+    "mean_spearman": 0.3294477985965113,
+    "mean_top_jaccard": 0.28071512629215645,
+    "mean_direction_consistency": 0.7608753758770465
+  },
+  "review": {
+    "oof_flagged": 13,
+    "oof_errors_flagged": 1,
+    "test_flagged": 2,
+    "test_errors_flagged": 0
+  }
+}

@@ -1,0 +1,34 @@
+position,assignment,category
+670.0,Guanine (ring breathing),Nucleic Acid
+730.0,Adenine (ring breathing),Nucleic Acid
+785.0,"DNA/RNA (O-P-O backbone, cytosine, uracil)",Nucleic Acid
+810.0,RNA (O-P-O stretching),Nucleic Acid
+1095.0,"PO₂⁻ symmetric stretch (DNA/RNA, phospholipid)",Nucleic Acid / Lipid
+620.0,Phenylalanine (C-C twisting),Protein
+643.0,Tyrosine (C-C twisting),Protein
+828.0,Tyrosine (ring breathing),Protein
+853.0,Proline / Tyrosine (C-C stretch),Protein
+1002.0,Phenylalanine (symmetric ring breathing),Protein
+1033.0,Phenylalanine (C-H in-plane bend),Protein
+1128.0,C-N stretching (protein backbone),Protein
+1209.0,"Amide III (C-N stretch, N-H bend)",Protein
+1260.0,Amide III (α-helix),Protein
+1332.0,"CH₂/CH₃ deformation (protein, lipid)",Protein / Lipid
+1450.0,"CH₂ scissoring (protein, lipid)",Protein / Lipid
+1552.0,"Amide II (N-H bend, C-N stretch)",Protein
+1608.0,Phenylalanine / Tyrosine (C=C ring),Protein
+1660.0,"Amide I (α-helix, C=O stretch)",Protein
+1064.0,C-C stretching (lipid acyl chains),Lipid
+1080.0,C-C stretching (lipid),Lipid
+1130.0,C-C trans conformation (lipid),Lipid
+1301.0,CH₂ twist (lipid acyl chain),Lipid
+1438.0,CH₂ deformation (lipid),Lipid
+478.0,Glycogen / Starch (C-C-O deformation),Carbohydrate (EPS)
+890.0,C-O-C glycosidic bond (polysaccharide),Carbohydrate (EPS)
+935.0,C-O-C glycosidic link / Proline,Carbohydrate (EPS)
+1078.0,C-O stretching (carbohydrate),Carbohydrate (EPS)
+1160.0,C-O-C asymmetric (polysaccharide),Carbohydrate (EPS)
+1378.0,"COO⁻ symmetric stretch (EPS, biofilm matrix)",Carbohydrate (EPS)
+750.0,Tryptophan (indole ring),Protein
+960.0,C=C deformation (lipid unsaturation),Lipid
+1583.0,"Heme (C=C stretching, ν₁₉)",Porphyrin

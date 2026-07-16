@@ -1,0 +1,55 @@
+{
+  "experiment_id": "exp_005_clinical_explainability",
+  "parent": "exp_004_heterogeneous",
+  "status": "complete",
+  "created_at_utc": "2026-07-16T06:41:01.083246+00:00",
+  "config_source": "/data2/ldz/reference-kernels/AIforSERS/\u7259\u83cc\u6591\u9879\u76ee/DentalPlaque_SERS_Toolbox/Phase5/configs/exp_005_clinical_explainability.yaml",
+  "config_sha256": "c02d0a7337e3b7e483e71b542923e7cf69d482f89ff15f668e2f6388efc440e9",
+  "dataset_path": "/data2/ldz/reference-kernels/AIforSERS/\u7259\u83cc\u6591\u9879\u76ee/DentalPlaque_SERS_Toolbox/Results/Phase3_QC/dataset/spectra.npz",
+  "dataset_sha256": "a0d82c25db89c9647793c9afa632c4e0f34cba867be578a716964fd14cd179f6",
+  "git_commit": "6685052587c21464630df43db011f8a92336480e",
+  "git_dirty": true,
+  "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+  "platform": "Linux-5.19.0-47-generic-x86_64-with-glibc2.36",
+  "torch": "2.12.0+cu126",
+  "cuda_runtime": "12.6",
+  "cuda_available": false,
+  "parent_result": "/data2/ldz/reference-kernels/AIforSERS/\u7259\u83cc\u6591\u9879\u76ee/DentalPlaque_SERS_Toolbox/Results/Phase5/exp_004_heterogeneous/final_results.json",
+  "prediction_policy": "P5-04 predictions are immutable",
+  "execution": {
+    "coordinator_cuda_available": false,
+    "gpu_workers": {
+      "intensity": "CUDA_VISIBLE_DEVICES=6 / NVIDIA GeForce RTX 3090",
+      "dual_view": "CUDA_VISIBLE_DEVICES=7 / NVIDIA GeForce RTX 3090"
+    },
+    "worker_cuda_verified": true
+  },
+  "explainability_summary": {
+    "classification_reproduced": true,
+    "n_oof_patients": 41,
+    "n_test_patients": 11,
+    "review_thresholds": {
+      "combined_ood": 1.1462900935869231,
+      "total_epistemic": 0.0571445984316005
+    },
+    "oof_ood_error_detection_auc": 0.7564102564102564,
+    "oof_combined_review_error_detection_auc": 0.7628205128205129,
+    "faithfulness": {
+      "mean_top_deletion_drop": 0.2035399231933364,
+      "mean_random_deletion_drop": 0.03187337864116514,
+      "wilcoxon_statistic": 785.0,
+      "wilcoxon_pvalue": 2.4155679057003e-07
+    },
+    "stability": {
+      "mean_spearman": 0.3294477985965113,
+      "mean_top_jaccard": 0.28071512629215645,
+      "mean_direction_consistency": 0.7608753758770465
+    },
+    "review": {
+      "oof_flagged": 13,
+      "oof_errors_flagged": 1,
+      "test_flagged": 2,
+      "test_errors_flagged": 0
+    }
+  }
+}
